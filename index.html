@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' type='text/css' href='style.css'>
+    <link rel='icon' type='image/x-icon' href='favicon.ico'>
+    <title>Game</title>
+</head>
+<body>
+<div id='wrapper'>
+    <canvas id='renderer'></canvas>
+    <div id='gui'></div>
+</div>
+<script src='js/boot.js' type='module'></script>
+<script type='module'>
+    import {boot} from "./js/boot.js";
+
+    boot(document.getElementById('renderer'), document.getElementById('gui'), 30);
+</script>
+</body>
+</html>
