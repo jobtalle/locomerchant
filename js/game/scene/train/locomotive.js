@@ -9,8 +9,8 @@ export class Locomotive {
     static SUSPENSION_HEIGHT = Wagon.SUSPENSION_HEIGHT;
     static SUSPENSION_STIFFNESS = .01;
     static SUSPENSION_DAMPING = .1;
-    static BOILER_WIDTH = 300;
-    static BOILER_HEIGHT = 200;
+    static FLOOR = 30;
+    static FURNACE_WIDTH = 120;
 
     constructor(engine, position, width, height) {
         const bodyPosition = new Vector(
@@ -31,21 +31,36 @@ export class Locomotive {
         this.wheelSmallRight = new Wheel(
             new Vector(position.x - Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
             Locomotive.WHEEL_RADIUS_SMALL);
+        this.boilerWidth = this.width * .5 - Locomotive.FURNACE_WIDTH * .5;
 
-        const floor = Matter.Bodies.rectangle(
-            bodyPosition.x,
-            bodyPosition.y,
-            width,
-            height);
-        const boiler = Matter.Bodies.rectangle(
-            position.x + width - Locomotive.BOILER_WIDTH * .5,
-            position.y + height - Locomotive.BOILER_HEIGHT * .5,
-            Locomotive.BOILER_WIDTH,
-            Locomotive.BOILER_HEIGHT);
+        const parts = [
+            // Floor
+            Matter.Bodies.rectangle(
+                bodyPosition.x,
+                bodyPosition.y + height * .5 - Locomotive.FLOOR * .5,
+                width,
+                Locomotive.FLOOR),
+            // Boiler
+            Matter.Bodies.rectangle(
+                bodyPosition.x + width * .5 - this.boilerWidth * .5,
+                bodyPosition.y - Locomotive.FLOOR * .5,
+                this.boilerWidth,
+                height - Locomotive.FLOOR),
+            // Cabin
+            Matter.Bodies.rectangle(
+                bodyPosition.x - width * .5 + this.boilerWidth * .5,
+                bodyPosition.y - Locomotive.FLOOR * .5,
+                this.boilerWidth,
+                height - Locomotive.FLOOR),
+        ];
 
         this.body = Matter.Body.create({
-            parts: [floor]
+            parts: parts
         });
+
+        this.centerShift = new Vector(
+            this.body.position.x - bodyPosition.x,
+            this.body.position.y - bodyPosition.y);
 
         this.bodySpringLeft = Matter.Constraint.create({
             pointA: new Vector(
@@ -86,11 +101,13 @@ export class Locomotive {
             Utils.lerp(this.body.positionPrev.x, this.body.position.x, time),
             Utils.lerp(this.body.positionPrev.y, this.body.position.y, time));
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
-        context.translate(this.width * -.5, this.height * -.5);
+        context.translate(this.width * -.5 - this.centerShift.x, this.height * -.5 - this.centerShift.y);
 
         context.fillStyle = "#fff";
         context.beginPath();
-        context.rect(0, 0, this.width, this.height);
+        context.rect(0, this.height - Locomotive.FLOOR, this.width, Locomotive.FLOOR);
+        context.rect(this.width - this.boilerWidth, 0, this.boilerWidth, this.height - Locomotive.FLOOR);
+        context.rect(0, 0, this.boilerWidth, this.height - Locomotive.FLOOR);
         context.fill();
 
         context.restore();
