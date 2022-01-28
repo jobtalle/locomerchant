@@ -3,12 +3,13 @@ import {Utils} from "../../../math/utils.js";
 export class Item {
     static BURN_RATE = .01;
 
-    constructor(engine, position, width, height, fuel = 0) {
+    constructor(engine, position, width, height, fuel = 1) {
         this.engine = engine;
         this.width = width;
         this.height = height;
         this.fuel = fuel;
-        this.burning = false;
+        this.burning = Math.random() < .5;
+        this.locomotive = null;
 
         this.body = Matter.Bodies.rectangle(position.x, position.y, width, height, {
             collisionFilter: {
@@ -17,6 +18,18 @@ export class Item {
         });
 
         Matter.Composite.add(engine.world, [this.body]);
+    }
+
+    enterFurnace(locomotive) {
+        this.locomotive = locomotive;
+
+        locomotive.furnaceItems.push(this);
+    }
+
+    leaveFurnace() {
+        this.locomotive.furnaceItems.splice(this.locomotive.furnaceItems.indexOf(this), 1);
+
+        this.locomotive = null;
     }
 
     update() {
@@ -36,7 +49,7 @@ export class Item {
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
         context.translate(this.width * -.5, this.height * -.5);
 
-        context.fillStyle = "#9a4d4d";
+        context.fillStyle = this.burning ? "#f00" : "#9a4d4d";
         context.beginPath();
         context.rect(0, 0, this.width, this.height);
         context.fill();
@@ -45,6 +58,9 @@ export class Item {
     }
 
     destroy() {
+        if (this.locomotive)
+            this.leaveFurnace(this.locomotive);
+
         Matter.World.remove(this.engine.world, [this.body]);
     }
 }

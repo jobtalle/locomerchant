@@ -39,8 +39,17 @@ export class Locomotive {
         this.leverAnglePrevious = this.leverAngle;
         this.leverAngleTarget = this.leverAngle;
         this.leverPosition = new Vector(Locomotive.LEVER_X, this.height - Locomotive.FLOOR);
+        this.furnaceItems = [];
 
         const parts = [
+            this.furnace = Matter.Bodies.rectangle(
+                bodyPosition.x,
+                bodyPosition.y,
+                Locomotive.FURNACE_WIDTH,
+                height,
+                {
+                    isSensor: true
+                }),
             // Floor
             Matter.Bodies.rectangle(
                 bodyPosition.x,
@@ -120,6 +129,8 @@ export class Locomotive {
         this.wheelDriveRight.update();
         this.wheelSmallLeft.update();
         this.wheelSmallRight.update();
+
+        console.log(this.furnaceItems);
 
         this.leverAnglePrevious = this.leverAngle;
         this.leverAngle += (this.leverAngleTarget - this.leverAngle) * .7;

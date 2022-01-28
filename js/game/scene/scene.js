@@ -58,12 +58,43 @@ export class Scene {
 
             this.itemDragging = this.findItem(event.body);
             this.items.splice(this.items.indexOf(this.itemDragging), 1);
+
+            if (this.itemDragging.locomotive)
+                this.itemDragging.leaveFurnace();
         });
         Matter.Events.on(mouseConstraint, "enddrag", event => {
             event.body.collisionFilter.category = 2;
 
             this.items.push(this.itemDragging);
             this.itemDragging = null;
+        });
+        Matter.Events.on(this.engine, "collisionStart", event => {
+            const pairs = event.pairs;
+
+            for (let pair = 0, pairCount = pairs.length; pair < pairCount; ++pair) {
+                let item = null;
+
+                if (pairs[pair].bodyA === this.locomotive.furnace)
+                    item = this.findItem(pairs[pair].bodyB);
+                else if (pairs[pair].bodyB === this.locomotive.furnace)
+                    item = this.findItem(pairs[pair].bodyA);
+
+                item?.enterFurnace(this.locomotive);
+            }
+        });
+        Matter.Events.on(this.engine, "collisionEnd", event => {
+            const pairs = event.pairs;
+
+            for (let pair = 0, pairCount = pairs.length; pair < pairCount; ++pair) {
+                let item = null;
+
+                if (pairs[pair].bodyA === this.locomotive.furnace)
+                    item = this.findItem(pairs[pair].bodyB);
+                else if (pairs[pair].bodyB === this.locomotive.furnace)
+                    item = this.findItem(pairs[pair].bodyA);
+
+                item?.leaveFurnace();
+            }
         });
 
         for (let i = 0; i < 100; ++i)
@@ -89,12 +120,12 @@ export class Scene {
         for (const item of this.items)
             if (item.body === body)
                 return item;
+
+        return null;
     }
 
     update(delta) {
         Matter.Engine.update(this.engine, delta);
-
-        // console.log(this.engine.world.bodies.length);
 
         this.wagonA.update();
         this.wagonB.update();
