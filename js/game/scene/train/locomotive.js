@@ -144,14 +144,16 @@ export class Locomotive {
     }
 
     updateVelocity() {
-        const friction = .999;
-        const brakeStrength = .02;
+        const friction = .998;
+        const brakeStrength = .005;
+        const brakeBase = .04;
         const accelerate = 1 - Math.min(1, -this.leverAngle / (Math.PI * .5));
         const brake = Math.max(0, (-this.leverAngle - Math.PI * .5) / (Math.PI * .25));
 
         this.velocity *= friction;
-        this.velocity += this.heat * .04 * accelerate;
-        this.velocity -= this.velocity * brake * brakeStrength;
+        this.velocity += Math.pow(this.heat, .8) * .02 * accelerate;
+
+        this.velocity = Math.max(0, this.velocity - (this.velocity * brakeStrength + brakeBase) * brake);
     }
 
     move(delta) {
@@ -171,7 +173,7 @@ export class Locomotive {
         this.leverAngle += (this.leverAngleTarget - this.leverAngle) * .7;
 
         this.heatPrevious = this.heat;
-        this.heat += (this.heatTarget - this.heat) * .01;
+        this.heat += (this.heatTarget - this.heat) * .002;
 
         const burning = this.furnaceBurning();
         this.heatTarget = 0;
