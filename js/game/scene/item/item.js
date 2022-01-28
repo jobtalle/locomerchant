@@ -9,7 +9,7 @@ export class Item {
         this.height = height;
         this.fuel = fuel;
         this.fuelDensity = fuelDensity;
-        this.burning = Math.random() < .5;
+        this.burning = false;
         this.burnable = fuel !== 0;
         this.locomotive = null;
 

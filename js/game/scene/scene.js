@@ -97,12 +97,7 @@ export class Scene {
             }
         });
 
-        for (let i = 0; i < 100; ++i)
-            this.items.push(new Item(
-                this.engine,
-                new Vector(width * Math.random(), height * Math.random()),
-                10 + Math.random() * 60,
-                10 + Math.random() * 60));
+        this.initialize();
 
         // this.engineRenderer = Matter.Render.create({
         //     element: document.getElementById("gui"),
@@ -125,6 +120,37 @@ export class Scene {
         this.items = [];
 
         this.locomotive.reset();
+
+        this.initialize();
+    }
+
+    initialize() {
+        for (let i = 0; i < 3; ++i) {
+            const item = new Item(
+                this.engine,
+                new Vector(
+                    this.locomotive.body.position.x - 30 + 60 * Math.random(),
+                    this.locomotive.body.position.y - i * 30),
+                50,
+                50,
+                25);
+
+            item.burning = true;
+
+            this.items.push(item);
+        }
+
+        const initial = 4;
+
+        for (let i = 0; i < initial; ++i)
+            this.items.push(new Item(
+                this.engine,
+                new Vector(
+                    this.wagonB.body.position.x - 100 + 200 * i / (initial - 1),
+                    this.wagonB.body.position.y - this.wagonB.height),
+                50,
+                50,
+                25));
     }
 
     scroll(amount) {

@@ -116,7 +116,7 @@ export class Locomotive {
         this.furnaceItems = [];
         this.velocity = 0;
         this.heat = 0;
-        this.leverAngle = Math.PI * -.5;
+        this.leverAngle = this.leverAngleTarget = Math.PI * -.5;
     }
 
     furnaceBurning() {
