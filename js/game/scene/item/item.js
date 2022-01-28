@@ -3,7 +3,7 @@ import {Utils} from "../../../math/utils.js";
 export class Item {
     static BURN_RATE = .01;
 
-    constructor(engine, position, width, height, fuel = 1) {
+    constructor(engine, position, width, height, fuel = 2) {
         this.engine = engine;
         this.width = width;
         this.height = height;
@@ -28,8 +28,8 @@ export class Item {
 
     leaveFurnace() {
         this.locomotive.furnaceItems.splice(this.locomotive.furnaceItems.indexOf(this), 1);
-
         this.locomotive = null;
+        this.burning = false;
     }
 
     update() {

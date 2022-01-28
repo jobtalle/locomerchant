@@ -107,6 +107,13 @@ export class Locomotive {
         Matter.Composite.add(engine.world, [this.body, this.bodySpringLeft, this.bodySpringRight]);
     }
 
+    furnaceBurning() {
+        for (const item of this.furnaceItems) if (item.burning)
+            return true;
+
+        return false;
+    }
+
     pullLever(position) {
         const c = Math.cos(this.body.angle);
         const s = Math.sin(this.body.angle);
@@ -130,10 +137,13 @@ export class Locomotive {
         this.wheelSmallLeft.update();
         this.wheelSmallRight.update();
 
-        console.log(this.furnaceItems);
-
         this.leverAnglePrevious = this.leverAngle;
         this.leverAngle += (this.leverAngleTarget - this.leverAngle) * .7;
+
+        const burning = this.furnaceBurning();
+
+        for (const item of this.furnaceItems)
+            item.burning = burning;
     }
 
     render(context, time) {
