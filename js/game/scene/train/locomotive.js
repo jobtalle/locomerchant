@@ -152,8 +152,9 @@ export class Locomotive {
 
         this.velocity *= friction;
         this.velocity += Math.pow(this.heat, .8) * .02 * accelerate;
-
         this.velocity = Math.max(0, this.velocity - (this.velocity * brakeStrength + brakeBase) * brake);
+
+        for (const item of this.furnaceItems) if (item.burning) item.burn(accelerate);
     }
 
     move(delta) {

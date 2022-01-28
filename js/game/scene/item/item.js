@@ -2,6 +2,7 @@ import {Utils} from "../../../math/utils.js";
 
 export class Item {
     static BURN_RATE = .01;
+    static BURN_RATE_EXTRA = .015;
 
     constructor(engine, position, width, height, fuel = 15, fuelDensity = 1) {
         this.engine = engine;
@@ -40,6 +41,10 @@ export class Item {
         }
 
         return false;
+    }
+
+    burn(rate) {
+        this.fuel -= Item.BURN_RATE_EXTRA * rate;
     }
 
     render(context, time) {
