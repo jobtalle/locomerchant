@@ -44,6 +44,7 @@ export class Locomotive {
         this.heat = 0;
         this.heatPrevious = this.heat;
         this.heatTarget = this.heat;
+        this.velocity = 0;
 
         const parts = [
             this.furnace = Matter.Bodies.rectangle(
@@ -111,6 +112,13 @@ export class Locomotive {
         Matter.Composite.add(engine.world, [this.body, this.bodySpringLeft, this.bodySpringRight]);
     }
 
+    reset() {
+        this.furnaceItems = [];
+        this.velocity = 0;
+        this.heat = 0;
+        this.leverAngle = Math.PI * -.5;
+    }
+
     furnaceBurning() {
         for (const item of this.furnaceItems) if (item.burning)
             return true;
@@ -145,13 +153,13 @@ export class Locomotive {
         this.leverAngle += (this.leverAngleTarget - this.leverAngle) * .7;
 
         this.heatPrevious = this.heat;
-        this.heat += (this.heatTarget - this.heat) * .03;
+        this.heat += (this.heatTarget - this.heat) * .01;
 
         const burning = this.furnaceBurning();
         this.heatTarget = 0;
 
         for (const item of this.furnaceItems) {
-            item.burning = burning;
+            item.burning = item.burnable && burning;
 
             if (burning)
                 this.heatTarget += item.body.mass * item.fuelDensity;
@@ -192,7 +200,7 @@ export class Locomotive {
         context.arc(0, 0, Locomotive.LEVER_LENGTH * .8, -Math.PI, 0);
         context.fill();
 
-        context.rotate(-Math.PI + Math.PI * this.heat / Locomotive.HEAT_MAX);
+        context.rotate(-Math.PI + Math.PI * Utils.lerp(this.heatPrevious, this.heat, time) / Locomotive.HEAT_MAX);
 
         context.fillStyle = "#d33333";
         context.beginPath();

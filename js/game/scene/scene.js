@@ -116,6 +116,21 @@ export class Scene {
         // Matter.Render.run(this.engineRenderer);
     }
 
+    reset() {
+        this.itemDragging?.destroy();
+
+        for (const item of this.items)
+            item.destroy();
+
+        this.items = [];
+
+        this.locomotive.reset();
+    }
+
+    scroll(amount) {
+
+    }
+
     findItem(body) {
         for (const item of this.items)
             if (item.body === body)

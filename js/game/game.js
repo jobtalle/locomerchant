@@ -12,6 +12,10 @@ export class Game {
         this.transform = null;
     }
 
+    reset() {
+        this.scene.reset();
+    }
+
     resize(width, height) {
         const scale = height / Game.HEIGHT;
 
