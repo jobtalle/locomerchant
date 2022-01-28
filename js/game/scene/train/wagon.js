@@ -48,6 +48,8 @@ export class Wagon {
             parts: parts
         });
 
+        this.yShift = this.body.position.y - bodyPosition.y;
+
         this.bodySpringLeft = Matter.Constraint.create({
             pointA: new Vector(
                 bodyPosition.x - width * .5,
@@ -85,7 +87,7 @@ export class Wagon {
             Utils.lerp(this.body.positionPrev.x, this.body.position.x, time),
             Utils.lerp(this.body.positionPrev.y, this.body.position.y, time));
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
-        context.translate(this.width * -.5, this.height * -.5);
+        context.translate(this.width * -.5, this.height * -.5 -this.yShift);
 
         context.fillStyle = "#fff";
         context.beginPath();
