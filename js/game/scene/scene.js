@@ -103,9 +103,8 @@ export class Scene {
         this.itemDragging?.update();
 
         for (let item = this.items.length; item-- > 0;) {
-            this.items[item].update();
-
-            if (this.items[item].body.position.y > this.height + Scene.DESTROY_UNDER ||
+            if (this.items[item].update() ||
+                this.items[item].body.position.y > this.height + Scene.DESTROY_UNDER ||
                 this.items[item].body.position.y < -Scene.DESTROY_ABOVE) {
                 this.items[item].destroy();
                 this.items.splice(item, 1);
@@ -117,12 +116,12 @@ export class Scene {
         context.fillStyle = "rgb(181,190,201)";
         context.fillRect(0, 0, this.width, this.height);
 
+        for (const item of this.items)
+            item.render(context, time);
+
         this.wagonA.render(context, time);
         this.wagonB.render(context, time);
         this.locomotive.render(context, time);
-
-        for (const item of this.items)
-            item.render(context, time);
 
         context.strokeStyle = "#8d7272";
         context.lineWidth = 4;

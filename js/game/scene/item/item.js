@@ -1,10 +1,14 @@
 import {Utils} from "../../../math/utils.js";
 
 export class Item {
-    constructor(engine, position, width, height) {
+    static BURN_RATE = .01;
+
+    constructor(engine, position, width, height, fuel = 0) {
         this.engine = engine;
         this.width = width;
         this.height = height;
+        this.fuel = fuel;
+        this.burning = false;
 
         this.body = Matter.Bodies.rectangle(position.x, position.y, width, height, {
             collisionFilter: {
@@ -16,7 +20,12 @@ export class Item {
     }
 
     update() {
+        if (this.burning) {
+            if ((this.fuel -= Item.BURN_RATE) < 0)
+                return true;
+        }
 
+        return false;
     }
 
     render(context, time) {
