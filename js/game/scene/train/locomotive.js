@@ -143,6 +143,24 @@ export class Locomotive {
         this.leverAngleTarget = angle;
     }
 
+    updateVelocity() {
+        const friction = .999;
+        const brakeStrength = .02;
+        const accelerate = 1 - Math.min(1, -this.leverAngle / (Math.PI * .5));
+        const brake = Math.max(0, (-this.leverAngle - Math.PI * .5) / (Math.PI * .25));
+
+        this.velocity *= friction;
+        this.velocity += this.heat * .04 * accelerate;
+        this.velocity -= this.velocity * brake * brakeStrength;
+    }
+
+    move(delta) {
+        this.wheelDriveLeft.move(delta);
+        this.wheelDriveRight.move(delta);
+        this.wheelSmallLeft.move(delta);
+        this.wheelSmallRight.move(delta);
+    }
+
     update() {
         this.wheelDriveLeft.update();
         this.wheelDriveRight.update();
@@ -164,6 +182,8 @@ export class Locomotive {
             if (burning)
                 this.heatTarget += item.body.mass * item.fuelDensity;
         }
+
+        this.updateVelocity();
     }
 
     render(context, time) {

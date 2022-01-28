@@ -78,6 +78,11 @@ export class Wagon {
         Matter.Composite.add(engine.world, [this.body, this.bodySpringLeft, this.bodySpringRight]);
     }
 
+    move(delta) {
+        this.wheelLeft.move(delta);
+        this.wheelRight.move(delta);
+    }
+
     update() {
         this.wheelLeft.update();
         this.wheelRight.update();

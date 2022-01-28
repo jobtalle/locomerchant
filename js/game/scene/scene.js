@@ -2,12 +2,14 @@ import {Wagon} from "./train/wagon.js";
 import {Vector} from "../../math/vector.js";
 import {Item} from "./item/item.js";
 import {Locomotive} from "./train/locomotive.js";
+import {LayerSpawner} from "./layer/layerSpawner.js";
 
 export class Scene {
     static TAIL = 3000;
     static TRACKS_Y = 850;
     static DESTROY_UNDER = 200;
     static DESTROY_ABOVE = 1500;
+    static DESTROY_LEFT = 2000;
 
     constructor(mouse, width, height) {
         this.width = width;
@@ -19,6 +21,9 @@ export class Scene {
         this.items = [];
         this.itemDragging = null;
         this.pulling = 0;
+
+        this.layerSpawner = new LayerSpawner();
+        this.layersBack = [];
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -153,8 +158,11 @@ export class Scene {
                 25));
     }
 
-    scroll(amount) {
+    move(delta) {
+        this.layersBack.push(...this.layerSpawner.move(delta, this.width, this.height));
 
+        for (const layer of this.layersBack)
+            layer.move(delta);
     }
 
     findItem(body) {
@@ -167,6 +175,13 @@ export class Scene {
 
     update(delta) {
         Matter.Engine.update(this.engine, delta);
+
+        for (let layer = this.layersBack.length; layer-- > 0;) {
+            if (this.layersBack[layer].x + this.layersBack[layer].width < -Scene.DESTROY_LEFT)
+                this.layersBack.splice(layer, 1);
+            else
+                this.layersBack[layer].update();
+        }
 
         this.wagonA.update();
         this.wagonB.update();
@@ -182,11 +197,19 @@ export class Scene {
                 this.items.splice(item, 1);
             }
         }
+
+        this.wagonA.move(this.locomotive.velocity);
+        this.wagonB.move(this.locomotive.velocity);
+        this.locomotive.move(this.locomotive.velocity);
+        this.move(this.locomotive.velocity);
     }
 
     render(context, time) {
         context.fillStyle = "rgb(181,190,201)";
         context.fillRect(0, 0, this.width, this.height);
+
+        for (let layer = 0, layerCount = this.layersBack.length; layer < layerCount; ++layer)
+            this.layersBack[layer].render(context, time);
 
         for (const item of this.items)
             item.render(context, time);
@@ -195,12 +218,11 @@ export class Scene {
         this.wagonB.render(context, time);
         this.locomotive.render(context, time);
 
-        context.strokeStyle = "#8d7272";
+        context.fillStyle = "#8d7272";
         context.lineWidth = 4;
         context.beginPath();
-        context.moveTo(this.width, Scene.TRACKS_Y);
-        context.lineTo(this.width - Scene.TAIL, Scene.TRACKS_Y);
-        context.stroke();
+        context.rect(this.width - Scene.TAIL, Scene.TRACKS_Y, Scene.TAIL + this.width, this.height);
+        context.fill();
 
         this.itemDragging?.render(context, time);
     }
