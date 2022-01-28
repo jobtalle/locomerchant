@@ -3,11 +3,12 @@ import {Utils} from "../../../math/utils.js";
 export class Item {
     static BURN_RATE = .01;
 
-    constructor(engine, position, width, height, fuel = 2) {
+    constructor(engine, position, width, height, fuel = 2, fuelDensity = 1) {
         this.engine = engine;
         this.width = width;
         this.height = height;
         this.fuel = fuel;
+        this.fuelDensity = fuelDensity;
         this.burning = Math.random() < .5;
         this.locomotive = null;
 

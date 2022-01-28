@@ -14,6 +14,7 @@ export class Locomotive {
     static LEVER_LENGTH = 100;
     static LEVER_WIDTH = 40;
     static LEVER_X = 100;
+    static HEAT_MAX = 25;
 
     constructor(engine, position, width, height) {
         const bodyPosition = new Vector(
@@ -40,6 +41,9 @@ export class Locomotive {
         this.leverAngleTarget = this.leverAngle;
         this.leverPosition = new Vector(Locomotive.LEVER_X, this.height - Locomotive.FLOOR);
         this.furnaceItems = [];
+        this.heat = 0;
+        this.heatPrevious = this.heat;
+        this.heatTarget = this.heat;
 
         const parts = [
             this.furnace = Matter.Bodies.rectangle(
@@ -140,10 +144,18 @@ export class Locomotive {
         this.leverAnglePrevious = this.leverAngle;
         this.leverAngle += (this.leverAngleTarget - this.leverAngle) * .7;
 
-        const burning = this.furnaceBurning();
+        this.heatPrevious = this.heat;
+        this.heat += (this.heatTarget - this.heat) * .03;
 
-        for (const item of this.furnaceItems)
+        const burning = this.furnaceBurning();
+        this.heatTarget = 0;
+
+        for (const item of this.furnaceItems) {
             item.burning = burning;
+
+            if (burning)
+                this.heatTarget += item.body.mass * item.fuelDensity;
+        }
     }
 
     render(context, time) {
@@ -168,6 +180,23 @@ export class Locomotive {
         context.fillStyle = "#3a8c5f";
         context.beginPath();
         context.rect(0, -Locomotive.LEVER_WIDTH * .5, Locomotive.LEVER_LENGTH, Locomotive.LEVER_WIDTH);
+        context.fill();
+
+        context.restore();
+
+        context.save();
+        context.translate(this.width * .8, this.height * .5);
+
+        context.fillStyle = "#b69a3d";
+        context.beginPath();
+        context.arc(0, 0, Locomotive.LEVER_LENGTH * .8, -Math.PI, 0);
+        context.fill();
+
+        context.rotate(-Math.PI + Math.PI * this.heat / Locomotive.HEAT_MAX);
+
+        context.fillStyle = "#d33333";
+        context.beginPath();
+        context.rect(0, -Locomotive.LEVER_WIDTH * .25, Locomotive.LEVER_LENGTH * .8, Locomotive.LEVER_WIDTH * .5);
         context.fill();
 
         context.restore();
