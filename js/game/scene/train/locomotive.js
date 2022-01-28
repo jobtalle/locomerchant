@@ -4,13 +4,16 @@ import {Utils} from "../../../math/utils.js";
 import {Wheel} from "./wheel.js";
 
 export class Locomotive {
-    static WHEEL_RADIUS_DRIVE = Wagon.WHEEL_RADIUS * 1.2;
-    static WHEEL_RADIUS_SMALL = Locomotive.WHEEL_RADIUS_DRIVE * .5;
+    static WHEEL_RADIUS_DRIVE = Wagon.WHEEL_RADIUS;
+    static WHEEL_RADIUS_SMALL = Locomotive.WHEEL_RADIUS_DRIVE * .6;
     static SUSPENSION_HEIGHT = Wagon.SUSPENSION_HEIGHT;
     static SUSPENSION_STIFFNESS = .01;
     static SUSPENSION_DAMPING = .1;
     static FLOOR = 30;
     static FURNACE_WIDTH = 120;
+    static LEVER_LENGTH = 100;
+    static LEVER_WIDTH = 40;
+    static LEVER_X = 100;
 
     constructor(engine, position, width, height) {
         const bodyPosition = new Vector(
@@ -32,6 +35,10 @@ export class Locomotive {
             new Vector(position.x - Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
             Locomotive.WHEEL_RADIUS_SMALL);
         this.boilerWidth = this.width * .5 - Locomotive.FURNACE_WIDTH * .5;
+        this.leverAngle = Math.PI * -.5;
+        this.leverAnglePrevious = this.leverAngle;
+        this.leverAngleTarget = this.leverAngle;
+        this.leverPosition = new Vector(Locomotive.LEVER_X, this.height - Locomotive.FLOOR);
 
         const parts = [
             // Floor
@@ -43,19 +50,22 @@ export class Locomotive {
             // Boiler
             Matter.Bodies.rectangle(
                 bodyPosition.x + width * .5 - this.boilerWidth * .5,
-                bodyPosition.y - Locomotive.FLOOR * .5,
+                bodyPosition.y,
                 this.boilerWidth,
-                height - Locomotive.FLOOR),
+                height),
             // Cabin
-            Matter.Bodies.rectangle(
+            this.cabin = Matter.Bodies.rectangle(
                 bodyPosition.x - width * .5 + this.boilerWidth * .5,
-                bodyPosition.y - Locomotive.FLOOR * .5,
+                bodyPosition.y,
                 this.boilerWidth,
-                height - Locomotive.FLOOR),
+                height),
         ];
 
         this.body = Matter.Body.create({
-            parts: parts
+            parts: parts,
+            collisionFilter: {
+                group: -1
+            }
         });
 
         this.centerShift = new Vector(
@@ -88,11 +98,31 @@ export class Locomotive {
         Matter.Composite.add(engine.world, [this.body, this.bodySpringLeft, this.bodySpringRight]);
     }
 
+    pullLever(position) {
+        const c = Math.cos(this.body.angle);
+        const s = Math.sin(this.body.angle);
+        const lpx = this.body.position.x - c * this.width * .5 + s * this.height * .5 + c * this.leverPosition.x - s * this.leverPosition.y;
+        const lpy = this.body.position.y - s * this.width * .5 - c * this.height * .5 + s * this.leverPosition.x + c * this.leverPosition.y;
+
+        let angle = Math.atan2(position.y - lpy, position.x - lpx);
+
+        if (angle > 0 && angle < Math.PI * .5)
+            angle = 0;
+
+        if (angle >= Math.PI * .5 || angle < Math.PI * -.75)
+            angle = Math.PI * -.75;
+
+        this.leverAngleTarget = angle;
+    }
+
     update() {
         this.wheelDriveLeft.update();
         this.wheelDriveRight.update();
         this.wheelSmallLeft.update();
         this.wheelSmallRight.update();
+
+        this.leverAnglePrevious = this.leverAngle;
+        this.leverAngle += (this.leverAngleTarget - this.leverAngle) * .7;
     }
 
     render(context, time) {
@@ -109,6 +139,17 @@ export class Locomotive {
         context.rect(this.width - this.boilerWidth, 0, this.boilerWidth, this.height - Locomotive.FLOOR);
         context.rect(0, 0, this.boilerWidth, this.height - Locomotive.FLOOR);
         context.fill();
+
+        context.save();
+        context.translate(this.leverPosition.x, this.leverPosition.y);
+        context.rotate(Utils.lerp(this.leverAnglePrevious, this.leverAngle, time));
+
+        context.fillStyle = "#3a8c5f";
+        context.beginPath();
+        context.rect(0, -Locomotive.LEVER_WIDTH * .5, Locomotive.LEVER_LENGTH, Locomotive.LEVER_WIDTH);
+        context.fill();
+
+        context.restore();
 
         context.restore();
 

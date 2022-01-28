@@ -17,6 +17,8 @@ export class Scene {
         this.wagonB = new Wagon(this.engine, new Vector(width - 900, Scene.TRACKS_Y), 400, 150);
         this.locomotive = new Locomotive(this.engine, new Vector(width - 200, Scene.TRACKS_Y), 600, 200);
         this.items = [];
+        this.itemDragging = null;
+        this.pulling = 0;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -29,11 +31,39 @@ export class Scene {
         });
 
         Matter.Composite.add(this.engine.world, [mouseConstraint]);
+        Matter.Events.on(mouseConstraint, "mousedown", event => {
+            if (Matter.Query.point([this.locomotive.cabin], event.mouse.position).length) {
+                this.pulling = 1;
+
+                mouseConstraint.collisionFilter.mask = 0x04;
+            }
+        });
+        Matter.Events.on(mouseConstraint, "mousemove", event => {
+            switch (this.pulling) {
+                case 1:
+                    this.locomotive.pullLever(event.mouse.position);
+
+                    break;
+            }
+        });
+        Matter.Events.on(mouseConstraint, "mouseup", () => {
+            if (this.pulling) {
+                mouseConstraint.collisionFilter.mask = 0x02;
+
+                this.pulling = 0;
+            }
+        });
         Matter.Events.on(mouseConstraint, "startdrag", event => {
             event.body.collisionFilter.category = 0;
+
+            this.itemDragging = this.findItem(event.body);
+            this.items.splice(this.items.indexOf(this.itemDragging), 1);
         });
         Matter.Events.on(mouseConstraint, "enddrag", event => {
             event.body.collisionFilter.category = 2;
+
+            this.items.push(this.itemDragging);
+            this.itemDragging = null;
         });
 
         for (let i = 0; i < 100; ++i)
@@ -55,6 +85,12 @@ export class Scene {
         // Matter.Render.run(this.engineRenderer);
     }
 
+    findItem(body) {
+        for (const item of this.items)
+            if (item.body === body)
+                return item;
+    }
+
     update(delta) {
         Matter.Engine.update(this.engine, delta);
 
@@ -63,6 +99,8 @@ export class Scene {
         this.wagonA.update();
         this.wagonB.update();
         this.locomotive.update();
+
+        this.itemDragging?.update();
 
         for (let item = this.items.length; item-- > 0;) {
             this.items[item].update();
@@ -92,5 +130,7 @@ export class Scene {
         context.moveTo(this.width, Scene.TRACKS_Y);
         context.lineTo(this.width - Scene.TAIL, Scene.TRACKS_Y);
         context.stroke();
+
+        this.itemDragging?.render(context, time);
     }
 }
