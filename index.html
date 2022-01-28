@@ -11,11 +11,13 @@
     <canvas id='renderer'></canvas>
     <div id='gui'></div>
 </div>
+<script src='js/lib/matter.min.js'></script>
+<script src='js/lib/howler.min.js'></script>
 <script src='js/boot.js' type='module'></script>
 <script type='module'>
     import {boot} from "./js/boot.js";
 
-    boot(document.getElementById('renderer'), document.getElementById('gui'), 30);
+    boot(document.getElementById('renderer'), document.getElementById('gui'), 40);
 </script>
 </body>
 </html>
