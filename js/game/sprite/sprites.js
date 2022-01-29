@@ -11,4 +11,5 @@ export class Sprites {
         new Sprite("art/items/A_Common_r_coal_07.png"),
         new Sprite("art/items/A_Common_r_coal_08.png"),
         new Sprite("art/items/A_Common_r_coal_09.png")];
+    static WAGON_WHEEL = new Sprite("art/train/Train_wagon_wheel_open.png");
 }

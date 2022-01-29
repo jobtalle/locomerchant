@@ -1,9 +1,10 @@
 import {Utils} from "../../../math/utils.js";
 
 export class Wheel {
-    constructor(position, radius) {
+    constructor(position, radius, sprite) {
         this.position = position;
         this.radius = radius;
+        this.sprite = sprite;
         this.rotation = Math.random() * Math.PI * 2;
         this.rotationPrevious = this.rotation;
     }
@@ -26,17 +27,7 @@ export class Wheel {
         context.translate(this.position.x, this.position.y);
         context.rotate(Utils.lerp(this.rotationPrevious, this.rotation, time));
 
-        context.fillStyle = "#7288b4";
-        context.beginPath();
-        context.arc(0, 0, this.radius, 0, Math.PI * 2);
-        context.fill();
-
-        context.strokeStyle = "#1f6a98";
-        context.lineWidth = 4;
-        context.beginPath();
-        context.moveTo(-this.radius * .9, 0);
-        context.lineTo(this.radius * .9, 0);
-        context.stroke();
+        this.sprite.draw(context, -this.radius, -this.radius);
 
         context.restore();
     }

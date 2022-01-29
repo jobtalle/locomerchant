@@ -2,6 +2,7 @@ import {Vector} from "../../../math/vector.js";
 import {Wagon} from "./wagon.js";
 import {Utils} from "../../../math/utils.js";
 import {Wheel} from "./wheel.js";
+import {Sprites} from "../../sprite/sprites.js";
 
 export class Locomotive {
     static WHEEL_RADIUS_DRIVE = Wagon.WHEEL_RADIUS;
@@ -25,16 +26,20 @@ export class Locomotive {
         this.height = height;
         this.wheelDriveLeft = new Wheel(
             new Vector(position.x - width + Locomotive.WHEEL_RADIUS_DRIVE, position.y - Locomotive.WHEEL_RADIUS_DRIVE),
-            Locomotive.WHEEL_RADIUS_DRIVE);
+            Locomotive.WHEEL_RADIUS_DRIVE,
+            Sprites.WAGON_WHEEL);
         this.wheelDriveRight = new Wheel(
             new Vector(position.x - width + 4 * Locomotive.WHEEL_RADIUS_DRIVE, position.y - Locomotive.WHEEL_RADIUS_DRIVE),
-            Locomotive.WHEEL_RADIUS_DRIVE);
+            Locomotive.WHEEL_RADIUS_DRIVE,
+            Sprites.WAGON_WHEEL);
         this.wheelSmallLeft = new Wheel(
             new Vector(position.x - 4 * Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
-            Locomotive.WHEEL_RADIUS_SMALL);
+            Locomotive.WHEEL_RADIUS_SMALL,
+            Sprites.WAGON_WHEEL);
         this.wheelSmallRight = new Wheel(
             new Vector(position.x - Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
-            Locomotive.WHEEL_RADIUS_SMALL);
+            Locomotive.WHEEL_RADIUS_SMALL,
+            Sprites.WAGON_WHEEL);
         this.boilerWidth = this.width * .5 - Locomotive.FURNACE_WIDTH * .5;
         this.leverAngle = Math.PI * -.5;
         this.leverAnglePrevious = this.leverAngle;

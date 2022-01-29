@@ -1,6 +1,7 @@
 import {Wheel} from "./wheel.js";
 import {Vector} from "../../../math/vector.js";
 import {Utils} from "../../../math/utils.js";
+import {Sprites} from "../../sprite/sprites.js";
 
 export class Wagon {
     static WHEEL_RADIUS = 60;
@@ -14,10 +15,12 @@ export class Wagon {
     constructor(engine, position, width, height) {
         this.wheelRight = new Wheel(
             new Vector(position.x - Wagon.WHEEL_RADIUS, position.y - Wagon.WHEEL_RADIUS),
-            Wagon.WHEEL_RADIUS);
+            Wagon.WHEEL_RADIUS,
+            Sprites.WAGON_WHEEL);
         this.wheelLeft = new Wheel(
             new Vector(position.x - width + Wagon.WHEEL_RADIUS, position.y - Wagon.WHEEL_RADIUS),
-            Wagon.WHEEL_RADIUS);
+            Wagon.WHEEL_RADIUS,
+            Sprites.WAGON_WHEEL);
         this.width = width;
         this.height = height;
 
