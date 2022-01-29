@@ -3,7 +3,7 @@ import {Vector} from "../../../math/vector.js";
 
 export class Smoke {
     static FREQUENCY = 10;
-    static MAX_POINTS = 50;
+    static MAX_POINTS = 30;
 
     constructor(origin) {
         this.origin = origin;
@@ -11,13 +11,37 @@ export class Smoke {
         this.points = [];
     }
 
-    update() {
+    move(delta) {
+        for (const point of this.points) {
+            point.position.x -= delta;
+            point.position.y -= delta * .3;
+        }
+    }
+
+    initialize() {
+        for (let i = 0; i < 200; ++i)
+            this.update(0, 0);
+    }
+
+    update(heat, velocity) {
         if (--this.countdown === 0) {
             this.countdown = Smoke.FREQUENCY;
 
+            const up = -4;
+            const angle = Math.atan2(velocity * .01, up) - Math.PI * .5;
+            const side = heat * .5;
+            const sl = side * Math.pow(Math.random(), .88);
+            const sr = side * Math.pow(Math.random(), .88);
+
             this.points.push(
-                new SmokePoint(this.origin.copy(), new Vector(-Math.random() - .3, -2)),
-                new SmokePoint(this.origin.copy(), new Vector(Math.random() + .3, -2)));
+                new SmokePoint(this.origin.copy(),
+                    new Vector(
+                        Math.cos(angle) * up + Math.cos(angle + Math.PI * .5) * sl,
+                        Math.sin(angle) * up + Math.sin(angle + Math.PI * .5) * sl)),
+                new SmokePoint(this.origin.copy(),
+                    new Vector(
+                        Math.cos(angle) * up + Math.cos(angle - Math.PI * .5) * sr,
+                        Math.sin(angle) * up + Math.sin(angle - Math.PI * .5) * sr)));
 
             if (this.points.length > Smoke.MAX_POINTS) {
                 this.points.shift();
@@ -31,9 +55,21 @@ export class Smoke {
 
     render(context, time) {
         const steps = this.points.length >> 1;
+        const gradient = context.createRadialGradient(
+            this.origin.x, this.origin.y, 0,
+            this.origin.x, this.origin.y, 700);
 
-        context.fillStyle = "#fff";
+        gradient.addColorStop(0, "#fff");
+        gradient.addColorStop(1, "rgba(255,255,255,0)");
+
+        context.fillStyle = gradient;
         context.beginPath();
+
+        for (let step = steps; step-- > 0;) {
+            context.lineTo(
+                this.points[1 + step * 2].getX(time),
+                this.points[1 + step * 2].getY(time));
+        }
 
         for (let step = 0; step < steps; ++step) {
             context.lineTo(
@@ -41,11 +77,7 @@ export class Smoke {
                 this.points[step * 2].getY(time));
         }
 
-        for (let step = steps; step-- > 0;) {
-            context.lineTo(
-                this.points[1 + step * 2].getX(time),
-                this.points[1 + step * 2].getY(time));
-        }
+        context.lineTo(this.origin.x, this.origin.y);
 
         context.closePath();
         context.fill();

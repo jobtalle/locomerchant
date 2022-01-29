@@ -60,7 +60,7 @@ export class Locomotive {
         this.beamDerivative = 0;
         this.smoke = new Smoke(new Vector(
             this.wheelSmallLeft.position.x + 28,
-            this.wheelSmallLeft.position.y - 400));
+            this.wheelSmallLeft.position.y - 430));
 
         const parts = [
             this.furnace = Matter.Bodies.rectangle(
@@ -126,6 +126,12 @@ export class Locomotive {
         });
 
         Matter.Composite.add(engine.world, [this.body, this.bodySpringLeft, this.bodySpringRight]);
+
+        this.initialize();
+    }
+
+    initialize() {
+        this.smoke.initialize();
     }
 
     reset() {
@@ -212,6 +218,7 @@ export class Locomotive {
         this.wheelDriveRight.move(delta);
         this.wheelSmallLeft.move(delta);
         this.wheelSmallRight.move(delta);
+        this.smoke.move(delta);
     }
 
     update() {
@@ -219,7 +226,7 @@ export class Locomotive {
         this.wheelDriveRight.update();
         this.wheelSmallLeft.update();
         this.wheelSmallRight.update();
-        this.smoke.update();
+        this.smoke.update(this.heat, this.velocity);
 
         this.leverAnglePrevious = this.leverAngle;
         this.leverAngle += (this.leverAngleTarget - this.leverAngle) * .7;

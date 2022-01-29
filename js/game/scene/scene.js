@@ -133,6 +133,8 @@ export class Scene {
     }
 
     initialize() {
+        this.locomotive.initialize();
+
         for (let i = 0; i < 3; ++i) {
             const item = new ItemCoal(
                 this.engine,
