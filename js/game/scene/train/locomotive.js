@@ -51,6 +51,7 @@ export class Locomotive {
         this.heatPrevious = this.heat;
         this.heatTarget = this.heat;
         this.velocity = 0;
+        this.brakePrevious = 0;
 
         const parts = [
             this.furnace = Matter.Bodies.rectangle(
@@ -123,6 +124,9 @@ export class Locomotive {
         this.velocity = 0;
         this.heat = 0;
         this.leverAngle = this.leverAngleTarget = Math.PI * -.5;
+
+        Sounds.WHEELS_ACCELERATE.stop();
+        Sounds.WHEELS_BRAKE.stop();
     }
 
     accelerate(delta) {
@@ -165,10 +169,31 @@ export class Locomotive {
         this.velocity += Math.pow(this.heat, .8) * .02 * accelerate;
         this.velocity = Math.max(0, this.velocity - (this.velocity * brakeStrength + brakeBase) * brake);
 
-        if (this.velocity === 0 && velocityPrevious !== 0)
+        if (this.velocity === 0 && velocityPrevious !== 0) {
             Sounds.TRAIN_STOP.play();
+            Sounds.WHEELS_ACCELERATE.stop();
+            Sounds.WHEELS_BRAKE.stop();
+        }
+
+        if (this.velocity > 0) {
+            if (velocityPrevious === 0)
+                Sounds.WHEELS_ACCELERATE.play();
+
+            Sounds.WHEELS_ACCELERATE.setVolume(Math.min(1, this.velocity / 15));
+        }
+
+        if (brake > 0 && this.velocity > 0) {
+            if (this.brakePrevious === 0)
+                Sounds.WHEELS_BRAKE.play();
+
+            Sounds.WHEELS_BRAKE.setVolume(brake * brake);
+        }
+        else
+            Sounds.WHEELS_BRAKE.stop();
 
         for (const item of this.furnaceItems) if (item.burning) item.burn(accelerate);
+
+        this.brakePrevious = brake;
     }
 
     move(delta) {

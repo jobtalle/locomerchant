@@ -1,4 +1,5 @@
 import {SFX} from "./sfx.js";
+import {Loop} from "./loop.js";
 
 export class Sounds {
     static TRAIN_STOP = new SFX(["audio/Train_Stop.wav"]);
@@ -15,5 +16,7 @@ export class Sounds {
         "audio/Object_Burn-003.wav",
         "audio/Object_Burn-004.wav",
         "audio/Object_Burn-005.wav"
-    ])
+    ]);
+    static WHEELS_ACCELERATE = new Loop("audio/Wheels_Forward_LP.mp3");
+    static WHEELS_BRAKE = new Loop("audio/Wheels_Break_LP.mp3");
 }
