@@ -188,7 +188,7 @@ export class Scene {
 
         acceleration += this.locomotive.velocity;
 
-        const accelerationForce = new Vector(acceleration * -.004, 0);
+        const accelerationForce = new Vector(acceleration * -.006, 0);
 
         this.itemDragging?.update();
 
