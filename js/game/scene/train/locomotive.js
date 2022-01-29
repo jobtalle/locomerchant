@@ -35,11 +35,11 @@ export class Locomotive {
         this.wheelSmallLeft = new Wheel(
             new Vector(position.x - 4 * Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
             Locomotive.WHEEL_RADIUS_SMALL,
-            Sprites.WAGON_WHEEL);
+            Sprites.LOCOMOTIVE_WHEEL_SMALL);
         this.wheelSmallRight = new Wheel(
             new Vector(position.x - Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
             Locomotive.WHEEL_RADIUS_SMALL,
-            Sprites.WAGON_WHEEL);
+            Sprites.LOCOMOTIVE_WHEEL_SMALL);
         this.boilerWidth = this.width * .5 - Locomotive.FURNACE_WIDTH * .5;
         this.leverAngle = Math.PI * -.5;
         this.leverAnglePrevious = this.leverAngle;
