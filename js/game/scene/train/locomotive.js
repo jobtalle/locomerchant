@@ -6,7 +6,7 @@ import {Sprites} from "../../sprite/sprites.js";
 
 export class Locomotive {
     static WHEEL_RADIUS_DRIVE = Wagon.WHEEL_RADIUS;
-    static WHEEL_RADIUS_SMALL = Locomotive.WHEEL_RADIUS_DRIVE * .6;
+    static WHEEL_RADIUS_SMALL = 36.5;
     static SUSPENSION_HEIGHT = Wagon.SUSPENSION_HEIGHT;
     static SUSPENSION_STIFFNESS = .01;
     static SUSPENSION_DAMPING = .1;

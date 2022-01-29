@@ -4,7 +4,7 @@ import {Utils} from "../../../math/utils.js";
 import {Sprites} from "../../sprite/sprites.js";
 
 export class Wagon {
-    static WHEEL_RADIUS = 60;
+    static WHEEL_RADIUS = 59.5;
     static SPRING_HEIGHT = 100;
     static SPRING_CENTER = .7;
     static SUSPENSION_HEIGHT = 50;
