@@ -3,6 +3,6 @@ import {Sprites} from "../../sprite/sprites.js";
 
 export class ItemTwig extends Item {
     constructor(engine, position) {
-        super(engine, position, Sprites.TWIG, 63, 93, 10, 1, "rectangle");
+        super(engine, position, Sprites.TWIG, 36, 101, 10, 1, "rectangle");
     }
 }
