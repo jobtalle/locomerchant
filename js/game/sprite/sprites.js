@@ -34,6 +34,9 @@ export class Sprites {
     static WAGON_WHEEL = [
         new Sprite("art/train/Train_wagon_wheel_open_1.png"),
         new Sprite("art/train/Train_wagon_wheel_open_2.png")];
+    static LOCOMOTIVE_WHEEL_BIG = [
+        new Sprite("art/train/Train_engine_bigwheel_1.png"),
+        new Sprite("art/train/Train_engine_bigwheel_2.png")];
     static WAGON_CARRIAGE = new Sprite("art/train/Train_wagon_carriage_1.png");
     static WAGON_BACKBOARD = new Sprite("art/train/Train_wagon_backboard_1.png");
     static LOCOMOTIVE = new Sprite("art/train/Train_engine_Main_1.png");

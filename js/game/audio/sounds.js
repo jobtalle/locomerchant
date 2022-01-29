@@ -27,4 +27,12 @@ export class Sounds {
         "audio/Wheels_TrackTransition-005.wav",
         "audio/Wheels_TrackTransition-006.wav"
     ]);
+    static ENGINE_PUFF = new SFX([
+        "audio/Smoke_Puff-001.wav",
+        "audio/Smoke_Puff-002.wav",
+        "audio/Smoke_Puff-003.wav",
+        "audio/Smoke_Puff-004.wav",
+        "audio/Smoke_Puff-005.wav",
+        "audio/Smoke_Puff-005.wav"
+    ]);
 }

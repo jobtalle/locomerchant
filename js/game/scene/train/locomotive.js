@@ -6,7 +6,7 @@ import {Sprites} from "../../sprite/sprites.js";
 import {Sounds} from "../../audio/sounds.js";
 
 export class Locomotive {
-    static WHEEL_RADIUS_DRIVE = Wagon.WHEEL_RADIUS;
+    static WHEEL_RADIUS_DRIVE = 70.5;
     static WHEEL_RADIUS_SMALL = 36.5;
     static SUSPENSION_HEIGHT = Wagon.SUSPENSION_HEIGHT;
     static SUSPENSION_STIFFNESS = .01;
@@ -30,11 +30,13 @@ export class Locomotive {
         this.wheelDriveLeft = new Wheel(
             new Vector(position.x - width + 1.5 * Locomotive.WHEEL_RADIUS_DRIVE, position.y - Locomotive.WHEEL_RADIUS_DRIVE),
             Locomotive.WHEEL_RADIUS_DRIVE,
-            Sprites.WAGON_WHEEL);
+            Sprites.LOCOMOTIVE_WHEEL_BIG,
+            0);
         this.wheelDriveRight = new Wheel(
             new Vector(position.x - width + 4 * Locomotive.WHEEL_RADIUS_DRIVE, position.y - Locomotive.WHEEL_RADIUS_DRIVE),
             Locomotive.WHEEL_RADIUS_DRIVE,
-            Sprites.WAGON_WHEEL);
+            Sprites.LOCOMOTIVE_WHEEL_BIG,
+            0);
         this.wheelSmallLeft = new Wheel(
             new Vector(position.x - 5.5 * Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
             Locomotive.WHEEL_RADIUS_SMALL,

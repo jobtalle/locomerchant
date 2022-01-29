@@ -1,11 +1,11 @@
 import {Utils} from "../../../math/utils.js";
 
 export class Wheel {
-    constructor(position, radius, sprite) {
+    constructor(position, radius, sprite, rotation = Math.random() * Math.PI * 2) {
         this.position = position;
         this.radius = radius;
         this.sprite = sprite;
-        this.rotation = Math.random() * Math.PI * 2;
+        this.rotation = rotation;
         this.rotationPrevious = this.rotation;
     }
 
