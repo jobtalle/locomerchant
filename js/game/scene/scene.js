@@ -1,11 +1,11 @@
 import {Wagon} from "./train/wagon.js";
 import {Vector} from "../../math/vector.js";
 import {Locomotive} from "./train/locomotive.js";
-import {Scenery} from "./scenery/scenery.js";
 import {ItemCoal} from "./item/itemCoal.js";
 import {ItemLog} from "./item/itemLog.js";
 import {Sounds} from "../audio/sounds.js";
 import {ItemTwig} from "./item/itemTwig.js";
+import {SceneryForest} from "./scenery/sceneryForest.js";
 
 export class Scene {
     static TAIL = 3000;
@@ -24,7 +24,7 @@ export class Scene {
         this.items = [];
         this.itemDragging = null;
         this.pulling = 0;
-        this.scenery = new Scenery(width, height);
+        this.scenery = new SceneryForest(width, height);
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,

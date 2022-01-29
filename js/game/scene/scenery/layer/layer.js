@@ -1,15 +1,20 @@
 import {Utils} from "../../../../math/utils.js";
 
 export class Layer {
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, sprite, depth) {
         this.x = this.xPrevious = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.sprite = sprite;
+        this.depth = depth;
     }
 
     move(delta) {
-        this.x -= delta;
+        if (this.depth > 0)
+            this.x -= delta * this.depth;
+        else
+            this.x -= delta * (1 - this.depth * 4);
     }
 
     update() {

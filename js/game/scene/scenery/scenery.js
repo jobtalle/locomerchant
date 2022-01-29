@@ -1,14 +1,12 @@
-import {LayerSpawner} from "./layer/layerSpawner.js";
 import {Scene} from "../scene.js";
 
 export class Scenery {
     static INITIALIZE_DELTA = 50;
 
-    constructor(width, height) {
+    constructor(width, height, spawners) {
         this.width = width;
         this.height = height;
-        this.layerSpawnerBack = new LayerSpawner();
-        this.layerSpawnerFront = new LayerSpawner();
+        this.spawners = spawners;
         this.layersBack = [];
         this.layersFront = [];
     }
@@ -21,8 +19,22 @@ export class Scenery {
     }
 
     move(delta) {
-        this.layersBack.push(...this.layerSpawnerBack.move(delta, this.width, this.height));
-        this.layersFront.push(...this.layerSpawnerFront.move(delta, this.width, this.height));
+        const newLayers = [];
+
+        for (const spawner of this.spawners)
+            newLayers.push(...spawner.move(delta, this.width, this.height));
+
+        if (newLayers.length > 0) {
+            for (const layer of newLayers) {
+                if (layer.depth >= 0)
+                    this.layersBack.push(layer);
+                else
+                    this.layersFront.push(layer);
+            }
+
+            this.layersBack.sort((a, b) => a.depth - b.depth);
+            this.layersFront.sort((a, b) => a.depth - b.depth);
+        }
 
         for (const layer of this.layersBack)
             layer.move(delta);
