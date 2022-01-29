@@ -6,7 +6,7 @@ export class LayerSpawner {
         this.intervalMin = intervalMin;
         this.intervalMax = intervalMax;
         this.countdown = this.makeInterval();
-        this.sprite = sprite;
+        this.sprites = Array.isArray(sprite) ? sprite : [sprite];
         this.width = width;
         this.height = height;
         this.depth = depth;
@@ -21,10 +21,11 @@ export class LayerSpawner {
 
         if (this.countdown < 0) {
             const shift = this.countdown;
+            const sprite = this.sprites[Math.floor(Math.random() * this.sprites.length)];
 
             this.countdown += this.makeInterval();
 
-            return [new Layer(x + shift, height - this.height, this.width, this.height, this.sprite, this.depth)];
+            return [new Layer(x + shift, height - this.height, this.width, this.height, sprite, this.depth)];
         }
 
         return [];

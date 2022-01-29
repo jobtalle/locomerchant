@@ -40,7 +40,7 @@ export class Scenery {
             }
 
             this.layersBack.sort((a, b) => a.depth - b.depth);
-            this.layersFront.sort((a, b) => a.depth - b.depth);
+            this.layersFront.sort((a, b) => b.depth - a.depth);
         }
     }
 

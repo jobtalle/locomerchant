@@ -48,5 +48,21 @@ export class Sprites {
     static LOCOMOTIVE_BEAM_3 = new Sprite("art/train/Train_engine_steam_system_4.png");
     static LOCOMOTIVE_CYLINDER = new Sprite("art/train/Train_engine_steam_system_1.png");
     static BIOME_EYVIND_BACKGROUND = new Sprite("art/biomes/eyvind/Eyvind_Layer7_BG.png");
+    static BIOME_EYVIND_LAYER_B1 = [
+        new Sprite("art/biomes/eyvind/Eyvind_layer4_Grass1.png"),
+        new Sprite("art/biomes/eyvind/Eyvind_layer4_Grass2.png")];
+    static BIOME_EYVIND_LAYER_B2_A = new Sprite("art/biomes/eyvind/Eyvind_Layer5_Tree.png");
+    static BIOME_EYVIND_LAYER_B2_B = new Sprite("art/biomes/eyvind/Eyvind_Layer5_Tree2.png");
+    static BIOME_EYVIND_LAYER_B2_C = new Sprite("art/biomes/eyvind/Eyvind_Layer5_Tree3.png");
+    static BIOME_EYVIND_LAYER_B3_A = new Sprite("art/biomes/eyvind/Eyvind_Layer6_Tree1.png");
+    static BIOME_EYVIND_LAYER_B3_B = new Sprite("art/biomes/eyvind/Eyvind_Layer6_Tree2.png");
+    static BIOME_EYVIND_LAYER_B3_C = new Sprite("art/biomes/eyvind/Eyvind_Layer6_Tree3.png");
+    static BIOME_EYVIND_LAYER_B3_D = new Sprite("art/biomes/eyvind/Eyvind_Layer6_Tree4.png");
     static BIOME_EYVIND_GROUND = new Sprite("art/biomes/eyvind/Eyvind_layer3_Mainground.png");
+    static BIOME_EYVIND_LAYER_F1_A = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_1.png");
+    static BIOME_EYVIND_LAYER_F1_B = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_2.png");
+    static BIOME_EYVIND_LAYER_F1_C = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_3.png");
+    static BIOME_EYVIND_LAYER_F1_D = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_4.png");
+    static BIOME_EYVIND_LAYER_F1_E = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_5.png");
+    static BIOME_EYVIND_LAYER_F1_F = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_6.png");
 }
