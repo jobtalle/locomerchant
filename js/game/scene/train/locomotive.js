@@ -3,13 +3,14 @@ import {Wagon} from "./wagon.js";
 import {Utils} from "../../../math/utils.js";
 import {Wheel} from "./wheel.js";
 import {Sprites} from "../../sprite/sprites.js";
+import {Audio} from "../../audio/audio.js";
 
 export class Locomotive {
     static WHEEL_RADIUS_DRIVE = Wagon.WHEEL_RADIUS;
     static WHEEL_RADIUS_SMALL = 36.5;
     static SUSPENSION_HEIGHT = Wagon.SUSPENSION_HEIGHT;
     static SUSPENSION_STIFFNESS = .01;
-    static SUSPENSION_DAMPING = .1;
+    static SUSPENSION_DAMPING = .07;
     static FLOOR = 50;
     static FURNACE_WIDTH = 120;
     static LEVER_LENGTH = 100;
@@ -158,10 +159,14 @@ export class Locomotive {
         const brakeBase = .04;
         const accelerate = 1 - Math.min(1, -this.leverAngle / (Math.PI * .5));
         const brake = Math.max(0, (-this.leverAngle - Math.PI * .5) / (Math.PI * .25));
+        const velocityPrevious = this.velocity;
 
         this.velocity *= friction;
         this.velocity += Math.pow(this.heat, .8) * .02 * accelerate;
         this.velocity = Math.max(0, this.velocity - (this.velocity * brakeStrength + brakeBase) * brake);
+
+        if (this.velocity === 0 && velocityPrevious !== 0)
+            Audio.TRAIN_STOP.play();
 
         for (const item of this.furnaceItems) if (item.burning) item.burn(accelerate);
     }
