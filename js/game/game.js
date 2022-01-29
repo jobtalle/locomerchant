@@ -1,6 +1,7 @@
 import {Scene} from "./scene/scene.js";
 import {Transform} from "../math/transform.js";
 import {Vector} from "../math/vector.js";
+import {Sprites} from "./sprite/sprites.js";
 
 export class Game {
     static WIDTH = 1920;
@@ -8,6 +9,7 @@ export class Game {
 
     constructor(mouse) {
         this.mouse = mouse;
+        this.sprites = new Sprites();
         this.scene = new Scene(mouse, Game.WIDTH, Game.HEIGHT);
         this.transform = null;
     }

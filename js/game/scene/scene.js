@@ -3,6 +3,8 @@ import {Vector} from "../../math/vector.js";
 import {Item} from "./item/item.js";
 import {Locomotive} from "./train/locomotive.js";
 import {Scenery} from "./scenery/scenery.js";
+import {Sprites} from "../sprite/sprites.js";
+import {ItemCoal} from "./item/itemCoal.js";
 
 export class Scene {
     static TAIL = 3000;
@@ -129,14 +131,11 @@ export class Scene {
 
     initialize() {
         for (let i = 0; i < 3; ++i) {
-            const item = new Item(
+            const item = new ItemCoal(
                 this.engine,
                 new Vector(
                     this.locomotive.body.position.x - 30 + 60 * Math.random(),
-                    this.locomotive.body.position.y - i * 30),
-                50,
-                50,
-                25);
+                    this.locomotive.body.position.y - i * 30));
 
             item.burning = true;
 
@@ -146,14 +145,11 @@ export class Scene {
         const initial = 4;
 
         for (let i = 0; i < initial; ++i)
-            this.items.push(new Item(
+            this.items.push(new ItemCoal(
                 this.engine,
                 new Vector(
                     this.wagonB.body.position.x - 100 + 200 * i / (initial - 1),
-                    this.wagonB.body.position.y - this.wagonB.height),
-                50,
-                50,
-                25));
+                    this.wagonB.body.position.y - this.wagonB.height)));
 
         this.scenery.initialize();
     }

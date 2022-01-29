@@ -4,21 +4,36 @@ export class Item {
     static BURN_RATE = .01;
     static BURN_RATE_EXTRA = .015;
 
-    constructor(engine, position, width, height, fuel = 15, fuelDensity = 1) {
+    constructor(engine, position, sprites, width, height, fuel = 15, fuelDensity = 1, shape = "rectangle") {
         this.engine = engine;
         this.width = width;
+        this.sprites = sprites;
         this.height = height;
         this.fuel = fuel;
+        this.fuelInitial = fuel;
         this.fuelDensity = fuelDensity;
         this.burning = false;
         this.burnable = fuel !== 0;
         this.locomotive = null;
 
-        this.body = Matter.Bodies.rectangle(position.x, position.y, width, height, {
-            collisionFilter: {
-                category: 2
-            }
-        });
+        switch (shape) {
+            case "circle":
+                this.body = Matter.Bodies.circle(position.x, position.y, (width + height) * .25, {
+                    collisionFilter: {
+                        category: 2
+                    }
+                });
+
+                break;
+            case "rectangle":
+                this.body = Matter.Bodies.rectangle(position.x, position.y, width, height, {
+                    collisionFilter: {
+                        category: 2
+                    }
+                });
+
+                break;
+        }
 
         Matter.Composite.add(engine.world, [this.body]);
     }
@@ -53,12 +68,15 @@ export class Item {
             Utils.lerp(this.body.positionPrev.x, this.body.position.x, time),
             Utils.lerp(this.body.positionPrev.y, this.body.position.y, time));
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
-        context.translate(this.width * -.5, this.height * -.5);
 
         context.fillStyle = this.burning ? "#f00" : "#9a4d4d";
-        context.beginPath();
-        context.rect(0, 0, this.width, this.height);
-        context.fill();
+
+        let sprite = this.sprites[0];
+
+        if (this.burning)
+            sprite = this.sprites[1 + Math.floor((1 - this.fuel / this.fuelInitial) * (this.sprites.length - 1))];
+
+        sprite.draw(context, this.width * -.5, this.height * -.5);
 
         context.restore();
     }
