@@ -18,11 +18,21 @@ body {
 }
 
 #distance {
+    margin-top: 6px;
     position: absolute;
     width: 200px;
     height: 60px;
     left: 50%;
     margin-left: -100px;
     text-align: center;
+    font-size: 64px;
+}
+
+#money {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    right: 20px;
+    text-align: right;
     font-size: 64px;
 }

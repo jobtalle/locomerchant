@@ -226,6 +226,7 @@ export class Scene {
         this.distance += this.locomotive.velocity;
 
         document.getElementById("distance").innerText = Math.round(this.distance / Scene.PIXELS_PER_METER) + "m";
+        document.getElementById("money").innerText = "$" + this.money;
     }
 
     render(context, time) {
