@@ -167,7 +167,7 @@ export class Locomotive {
         const brakeStrength = .005;
         const brakeBase = .04;
         const accelerate = 1 - Math.min(1, -this.leverAngle / (Math.PI * .5));
-        const brake = Math.max(0, (-this.leverAngle - Math.PI * .5) / (Math.PI * .25));
+        const brake = Math.max(0, (-this.leverAngle - Math.PI * .5) / (Math.PI * .25) - .1) / .9;
         const velocityPrevious = this.velocity;
 
         this.velocity *= friction;
@@ -296,9 +296,9 @@ export class Locomotive {
         const beamLength = 176;
         const beamX = this.wheelDriveLeft.position.x + Math.sin(beamRotation) * beamRadius;
         const beamY = this.wheelDriveLeft.position.y - Math.cos(beamRotation) * beamRadius;
-        const h = beamRadius - Math.cos(beamRotation) * beamRadius;
+        const h = Math.cos(beamRotation) * beamRadius;
         const beam2Length = 110;
-        const beam2Angle = -Math.asin(h / beam2Length);
+        const beam2Angle = Math.asin(h / beam2Length);
         const beamDerivativePrevious = this.beamDerivative;
 
         this.beamDerivative = Math.cos(beamRotation);
@@ -324,6 +324,6 @@ export class Locomotive {
         Sprites.LOCOMOTIVE_CYLINDER.draw(
             context,
             this.wheelSmallRight.position.x - 120,
-            this.wheelSmallRight.position.y - 103);
+            this.wheelDriveLeft.position.y - 38);
     }
 }
