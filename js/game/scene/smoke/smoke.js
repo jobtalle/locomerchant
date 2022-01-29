@@ -13,8 +13,7 @@ export class Smoke {
 
     move(delta) {
         for (const point of this.points) {
-            // point.position.x -= delta * .25;
-            // point.position.y -= delta * .15;
+            point.velocity.x -= delta * .01;
         }
     }
 
@@ -30,8 +29,8 @@ export class Smoke {
             const up = -Math.max(velocity * .35, 4);
             const angle = Math.atan2(velocity, up) - Math.PI * .5;
             const side = heat * .25;
-            const sl = side * Math.pow(Math.random(), .96);
-            const sr = side * Math.pow(Math.random(), .96);
+            const sl = side * Math.pow(Math.random(), .18);
+            const sr = side * Math.pow(Math.random(), .18);
 
             this.points.push(
                 new SmokePoint(this.origin.copy(),
