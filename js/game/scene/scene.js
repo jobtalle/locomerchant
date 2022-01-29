@@ -19,7 +19,7 @@ export class Scene {
         this.engine = Matter.Engine.create();
         this.wagonA = new Wagon(this.engine, new Vector(width - 1450, Scene.TRACKS_Y), 400, 150);
         this.wagonB = new Wagon(this.engine, new Vector(width - 950, Scene.TRACKS_Y), 400, 150);
-        this.locomotive = new Locomotive(this.engine, new Vector(width - 250, Scene.TRACKS_Y), 600, 200);
+        this.locomotive = new Locomotive(this.engine, new Vector(width - 200, Scene.TRACKS_Y), 700, 200);
         this.items = [];
         this.itemDragging = null;
         this.pulling = 0;

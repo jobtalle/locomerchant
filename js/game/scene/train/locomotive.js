@@ -15,7 +15,7 @@ export class Locomotive {
     static FURNACE_WIDTH = 120;
     static LEVER_LENGTH = 100;
     static LEVER_WIDTH = 40;
-    static LEVER_X = 50;
+    static LEVER_X = 100;
     static HEAT_MAX = 25;
 
     constructor(engine, position, width, height) {
@@ -188,7 +188,7 @@ export class Locomotive {
             if (this.brakePrevious === 0)
                 Sounds.WHEELS_BRAKE.play();
 
-            Sounds.WHEELS_BRAKE.setVolume(brake * brake);
+            Sounds.WHEELS_BRAKE.setVolume(brake * brake * brake);
         }
         else
             Sounds.WHEELS_BRAKE.stop();
@@ -238,7 +238,7 @@ export class Locomotive {
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
         context.translate(this.width * -.5 - this.centerShift.x, this.height * -.5 - this.centerShift.y);
 
-        Sprites.LOCOMOTIVE.draw(context, -60, -225);
+        Sprites.LOCOMOTIVE.draw(context, -10, -225);
 
         context.save();
         context.translate(this.leverPosition.x, this.leverPosition.y);
