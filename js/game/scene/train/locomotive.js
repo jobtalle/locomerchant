@@ -56,6 +56,7 @@ export class Locomotive {
         this.heatTarget = this.heat;
         this.velocity = 0;
         this.brakePrevious = 0;
+        this.beamDerivative = 0;
 
         const parts = [
             this.furnace = Matter.Bodies.rectangle(
@@ -298,6 +299,12 @@ export class Locomotive {
         const h = beamRadius - Math.cos(beamRotation) * beamRadius;
         const beam2Length = 110;
         const beam2Angle = -Math.asin(h / beam2Length);
+        const beamDerivativePrevious = this.beamDerivative;
+
+        this.beamDerivative = Math.cos(beamRotation);
+
+        if (Math.sign(beamDerivativePrevious) === 1 && Math.sign(this.beamDerivative) === -1)
+            Sounds.ENGINE_PUFF.play();
 
         Sprites.LOCOMOTIVE_BEAM.draw(context, beamX - 13, beamY - 11);
 
@@ -317,6 +324,6 @@ export class Locomotive {
         Sprites.LOCOMOTIVE_CYLINDER.draw(
             context,
             this.wheelSmallRight.position.x - 120,
-            this.wheelSmallRight.position.y - 105);
+            this.wheelSmallRight.position.y - 103);
     }
 }
