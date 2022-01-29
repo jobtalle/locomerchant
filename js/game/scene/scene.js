@@ -5,6 +5,7 @@ import {Locomotive} from "./train/locomotive.js";
 import {Scenery} from "./scenery/scenery.js";
 import {Sprites} from "../sprite/sprites.js";
 import {ItemCoal} from "./item/itemCoal.js";
+import {ItemLog} from "./item/itemLog.js";
 
 export class Scene {
     static TAIL = 3000;
@@ -150,6 +151,14 @@ export class Scene {
                 new Vector(
                     this.wagonB.body.position.x - 100 + 200 * i / (initial - 1),
                     this.wagonB.body.position.y - this.wagonB.height)));
+
+
+        for (let i = 0; i < initial; ++i)
+            this.items.push(new ItemLog(
+                this.engine,
+                new Vector(
+                    this.wagonA.body.position.x - 100 + 200 * i / (initial - 1),
+                    this.wagonA.body.position.y - this.wagonB.height)));
 
         this.scenery.initialize();
     }
