@@ -27,7 +27,9 @@ export class Wheel {
         context.translate(this.position.x, this.position.y);
         context.rotate(Utils.lerp(this.rotationPrevious, this.rotation, time));
 
-        this.sprite.draw(context, -this.radius, -this.radius);
+        const speed = Math.min(.999999, (this.rotation - this.rotationPrevious) / 1.2);
+
+        this.sprite[Math.floor(this.sprite.length * speed)].draw(context, -this.radius, -this.radius);
 
         context.restore();
     }

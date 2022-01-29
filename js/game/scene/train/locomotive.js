@@ -168,7 +168,7 @@ export class Locomotive {
         const velocityPrevious = this.velocity;
 
         this.velocity *= friction;
-        this.velocity += Math.pow(this.heat, .8) * .02 * accelerate;
+        this.velocity += Math.pow(this.heat, .7) * .02 * accelerate;
         this.velocity = Math.max(0, this.velocity - (this.velocity * brakeStrength + brakeBase) * brake * brake);
 
         if (this.velocity === 0 && velocityPrevious !== 0) {

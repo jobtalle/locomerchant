@@ -5,20 +5,21 @@ import {Scenery} from "./scenery/scenery.js";
 import {ItemCoal} from "./item/itemCoal.js";
 import {ItemLog} from "./item/itemLog.js";
 import {Sounds} from "../audio/sounds.js";
+import {ItemTwig} from "./item/itemTwig.js";
 
 export class Scene {
     static TAIL = 3000;
     static TRACKS_Y = 850;
     static DESTROY_UNDER = 200;
     static DESTROY_ABOVE = 1500;
-    static DESTROY_LEFT = 2000;
+    static DESTROY_LEFT = 1000;
 
     constructor(mouse, width, height) {
         this.width = width;
         this.height = height;
         this.engine = Matter.Engine.create();
         this.wagonA = new Wagon(this.engine, new Vector(width - 1450, Scene.TRACKS_Y), 400, 150);
-        this.wagonB = new Wagon(this.engine, new Vector(width - 950, Scene.TRACKS_Y), 400, 150);
+        this.wagonB = new Wagon(this.engine, new Vector(width - 980, Scene.TRACKS_Y), 400, 150);
         this.locomotive = new Locomotive(this.engine, new Vector(width - 200, Scene.TRACKS_Y), 700, 200);
         this.items = [];
         this.itemDragging = null;
@@ -154,12 +155,20 @@ export class Scene {
                     this.wagonB.body.position.y - this.wagonB.height)));
 
 
-        for (let i = 0; i < initial; ++i)
-            this.items.push(new ItemLog(
-                this.engine,
-                new Vector(
-                    this.wagonA.body.position.x - 100 + 200 * i / (initial - 1),
-                    this.wagonA.body.position.y - this.wagonB.height)));
+        for (let i = 0; i < initial; ++i) {
+            if (i & 1)
+                this.items.push(new ItemLog(
+                    this.engine,
+                    new Vector(
+                        this.wagonA.body.position.x - 100 + 200 * i / (initial - 1),
+                        this.wagonA.body.position.y - this.wagonB.height)));
+            else
+                this.items.push(new ItemTwig(
+                    this.engine,
+                    new Vector(
+                        this.wagonA.body.position.x - 100 + 200 * i / (initial - 1),
+                        this.wagonA.body.position.y - this.wagonB.height)));
+        }
 
         this.scenery.initialize();
     }
