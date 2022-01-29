@@ -176,8 +176,10 @@ export class Locomotive {
         }
 
         if (this.velocity > 0) {
-            if (velocityPrevious === 0)
+            if (velocityPrevious === 0) {
                 Sounds.WHEELS_ACCELERATE.play();
+                Sounds.TRAIN_STOP.play();
+            }
 
             Sounds.WHEELS_ACCELERATE.setVolume(Math.min(1, this.velocity / 15));
         }
