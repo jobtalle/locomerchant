@@ -12,6 +12,7 @@ export class Scene {
     static DESTROY_UNDER = 200;
     static DESTROY_ABOVE = 1500;
     static DESTROY_LEFT = 1000;
+    static PIXELS_PER_METER = 100;
 
     constructor(mouse, width, height) {
         this.width = width;
@@ -24,6 +25,8 @@ export class Scene {
         this.itemDragging = null;
         this.pulling = 0;
         this.scenery = new SceneryForest(width, height);
+        this.money = 50;
+        this.distance = 0;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -219,6 +222,10 @@ export class Scene {
         this.locomotive.move(this.locomotive.velocity);
         this.locomotive.accelerate(acceleration);
         this.move(this.locomotive.velocity);
+
+        this.distance += this.locomotive.velocity;
+
+        document.getElementById("distance").innerText = Math.round(this.distance / Scene.PIXELS_PER_METER) + "m";
     }
 
     render(context, time) {
@@ -235,8 +242,8 @@ export class Scene {
         this.wagonB.render(context, time);
         this.locomotive.render(context, time);
 
-        this.itemDragging?.render(context, time);
-
         this.scenery.renderForeground(context, time);
+
+        this.itemDragging?.render(context, time);
     }
 }

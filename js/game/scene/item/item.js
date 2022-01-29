@@ -1,11 +1,19 @@
 import {Utils} from "../../../math/utils.js";
-import {Sounds} from "../../audio/sounds.js";
 
 export class Item {
     static BURN_RATE = .003;
     static BURN_RATE_EXTRA = .015;
 
-    constructor(engine, position, sprites, width, height, fuel = 15, fuelDensity = 1, shape = "rectangle") {
+    constructor(
+        engine,
+        position,
+        sprites,
+        width,
+        height,
+        fuel = 15,
+        fuelDensity = 1,
+        shape = "rectangle",
+        sleeping = false) {
         this.engine = engine;
         this.width = width;
         this.sprites = sprites;
@@ -35,6 +43,8 @@ export class Item {
 
                 break;
         }
+
+        this.body.isSleeping = sleeping;
 
         Matter.Composite.add(engine.world, [this.body]);
     }

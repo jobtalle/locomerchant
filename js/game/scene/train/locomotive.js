@@ -269,9 +269,9 @@ export class Locomotive {
         const heatGradient = context.createLinearGradient(0, 380 - 225, 0, 250 - 225);
         const heat = Math.min(1, Utils.lerp(this.heatPrevious, this.heat, time) / Locomotive.HEAT_MAX);
 
-        heatGradient.addColorStop(0, "hsl(50, " + (heat * 100) + "%, 50%)");
-        heatGradient.addColorStop(heat, "hsl(0, " + (Math.pow(heat, .3) * 100) + "%, 50%)");
-        heatGradient.addColorStop(1, "#545454");
+        heatGradient.addColorStop(0, "hsl(50, " + (heat * 80) + "%, 50%)");
+        heatGradient.addColorStop(heat, "hsl(0, " + (Math.pow(heat, .3) * 80) + "%, 50%)");
+        heatGradient.addColorStop(1, "#313131");
 
         context.fillStyle = heatGradient;
         context.beginPath();
@@ -303,24 +303,6 @@ export class Locomotive {
         context.fill();
 
         context.restore();
-
-        // context.save();
-        // context.translate(this.width * .8, this.height * .5);
-        //
-        // context.fillStyle = "#b69a3d";
-        // context.beginPath();
-        // context.arc(0, 0, Locomotive.LEVER_LENGTH * .8, -Math.PI, 0);
-        // context.fill();
-        //
-        // context.rotate(-Math.PI + Math.PI * Utils.lerp(this.heatPrevious, this.heat, time) / Locomotive.HEAT_MAX);
-        //
-        // context.fillStyle = "#d33333";
-        // context.beginPath();
-        // context.rect(0, -Locomotive.LEVER_WIDTH * .25, Locomotive.LEVER_LENGTH * .8, Locomotive.LEVER_WIDTH * .5);
-        // context.fill();
-        //
-        // context.restore();
-
         context.restore();
 
         this.wheelDriveLeft.render(context, time);
