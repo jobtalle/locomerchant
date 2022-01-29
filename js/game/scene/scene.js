@@ -226,6 +226,7 @@ export class Scene {
 
         this.wagonA.renderBackground(context, time);
         this.wagonB.renderBackground(context, time);
+        this.locomotive.renderBackground(context, time);
 
         for (const item of this.items)
             item.render(context, time);

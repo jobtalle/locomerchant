@@ -258,6 +258,29 @@ export class Locomotive {
         this.updateVelocity();
     }
 
+    renderBackground(context, time) {
+        context.save();
+        context.translate(
+            Utils.lerp(this.body.positionPrev.x, this.body.position.x, time),
+            Utils.lerp(this.body.positionPrev.y, this.body.position.y, time));
+        context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
+        context.translate(this.width * -.5 - this.centerShift.x, this.height * -.5 - this.centerShift.y);
+
+        const heatGradient = context.createLinearGradient(0, 380 - 225, 0, 250 - 225);
+        const heat = Utils.lerp(this.heatPrevious, this.heat, time) / Locomotive.HEAT_MAX;
+
+        heatGradient.addColorStop(0, "#f3e829");
+        heatGradient.addColorStop(heat, "#fc2525");
+        heatGradient.addColorStop(Math.pow(heat, .05), "#545454");
+
+        context.fillStyle = heatGradient;
+        context.beginPath();
+        context.rect(290, 250 - 225, 300, 380 - 225);
+        context.fill();
+
+        context.restore();
+    }
+
     render(context, time) {
         this.smoke.render(context, time);
 
