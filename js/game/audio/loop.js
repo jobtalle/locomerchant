@@ -2,7 +2,6 @@ export class Loop {
     constructor(source) {
         this.howl = new Howl({
             src: [source],
-            html5: true,
             loop: true,
             volume: 0
         });
