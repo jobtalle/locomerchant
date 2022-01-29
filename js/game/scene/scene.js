@@ -2,7 +2,7 @@ import {Wagon} from "./train/wagon.js";
 import {Vector} from "../../math/vector.js";
 import {Item} from "./item/item.js";
 import {Locomotive} from "./train/locomotive.js";
-import {LayerSpawner} from "./layer/layerSpawner.js";
+import {Scenery} from "./scenery/scenery.js";
 
 export class Scene {
     static TAIL = 3000;
@@ -21,9 +21,7 @@ export class Scene {
         this.items = [];
         this.itemDragging = null;
         this.pulling = 0;
-
-        this.layerSpawner = new LayerSpawner();
-        this.layersBack = [];
+        this.scenery = new Scenery(width, height);
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -156,13 +154,12 @@ export class Scene {
                 50,
                 50,
                 25));
+
+        this.scenery.initialize();
     }
 
     move(delta) {
-        this.layersBack.push(...this.layerSpawner.move(delta, this.width, this.height));
-
-        for (const layer of this.layersBack)
-            layer.move(delta);
+        this.scenery.move(delta);
     }
 
     findItem(body) {
@@ -176,12 +173,7 @@ export class Scene {
     update(delta) {
         Matter.Engine.update(this.engine, delta);
 
-        for (let layer = this.layersBack.length; layer-- > 0;) {
-            if (this.layersBack[layer].x + this.layersBack[layer].width < -Scene.DESTROY_LEFT)
-                this.layersBack.splice(layer, 1);
-            else
-                this.layersBack[layer].update();
-        }
+        this.scenery.update();
 
         this.wagonA.update();
         this.wagonB.update();
@@ -208,8 +200,7 @@ export class Scene {
         context.fillStyle = "rgb(181,190,201)";
         context.fillRect(0, 0, this.width, this.height);
 
-        for (let layer = 0, layerCount = this.layersBack.length; layer < layerCount; ++layer)
-            this.layersBack[layer].render(context, time);
+        this.scenery.renderBackground(context, time);
 
         for (const item of this.items)
             item.render(context, time);
@@ -225,5 +216,7 @@ export class Scene {
         context.fill();
 
         this.itemDragging?.render(context, time);
+
+        this.scenery.renderForeground(context, time);
     }
 }
