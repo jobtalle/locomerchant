@@ -99,14 +99,7 @@ export class Wagon {
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
         context.translate(this.width * -.5 - this.centerShift.x, this.height * -.5 - this.centerShift.y);
 
-        Sprites.WAGON_CARRIAGE.draw(context, 0, 0);
-
-        context.fillStyle = "#fff";
-        context.beginPath();
-        context.rect(0, this.height - Wagon.WALL, this.width, Wagon.WALL);
-        context.rect(0, 0, Wagon.WALL, this.height);
-        context.rect(this.width - Wagon.WALL, 0, Wagon.WALL, this.height);
-        context.fill();
+        Sprites.WAGON_CARRIAGE.draw(context, -22, -16);
 
         context.restore();
 
