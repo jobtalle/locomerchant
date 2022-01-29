@@ -167,7 +167,7 @@ export class Locomotive {
 
         this.velocity *= friction;
         this.velocity += Math.pow(this.heat, .8) * .02 * accelerate;
-        this.velocity = Math.max(0, this.velocity - (this.velocity * brakeStrength + brakeBase) * brake);
+        this.velocity = Math.max(0, this.velocity - (this.velocity * brakeStrength + brakeBase) * brake * brake);
 
         if (this.velocity === 0 && velocityPrevious !== 0) {
             Sounds.TRAIN_STOP.play();
@@ -188,7 +188,7 @@ export class Locomotive {
             if (this.brakePrevious === 0)
                 Sounds.WHEELS_BRAKE.play();
 
-            Sounds.WHEELS_BRAKE.setVolume(brake * brake * brake);
+            Sounds.WHEELS_BRAKE.setVolume(Math.min(1, this.velocity / 15) * brake * brake);
         }
         else
             Sounds.WHEELS_BRAKE.stop();
