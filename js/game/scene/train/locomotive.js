@@ -119,6 +119,10 @@ export class Locomotive {
         this.leverAngle = this.leverAngleTarget = Math.PI * -.5;
     }
 
+    accelerate(delta) {
+
+    }
+
     furnaceBurning() {
         for (const item of this.furnaceItems) if (item.burning)
             return true;

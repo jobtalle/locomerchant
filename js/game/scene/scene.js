@@ -173,11 +173,17 @@ export class Scene {
     update(delta) {
         Matter.Engine.update(this.engine, delta);
 
+        let acceleration = -this.locomotive.velocity;
+
         this.scenery.update();
 
         this.wagonA.update();
         this.wagonB.update();
         this.locomotive.update();
+
+        acceleration += this.locomotive.velocity;
+
+        const accelerationForce = new Vector(acceleration * -.004, 0);
 
         this.itemDragging?.update();
 
@@ -188,11 +194,14 @@ export class Scene {
                 this.items[item].destroy();
                 this.items.splice(item, 1);
             }
+            else
+                Matter.Body.applyForce(this.items[item].body, this.items[item].body.position, accelerationForce);
         }
 
         this.wagonA.move(this.locomotive.velocity);
         this.wagonB.move(this.locomotive.velocity);
         this.locomotive.move(this.locomotive.velocity);
+        this.locomotive.accelerate(acceleration);
         this.move(this.locomotive.velocity);
     }
 

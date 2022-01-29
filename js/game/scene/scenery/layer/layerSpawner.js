@@ -12,7 +12,7 @@ export class LayerSpawner {
         while (this.countdown < 0) {
             this.countdown += this.interval;
 
-            const h = 300 + Math.random() * 300;
+            const h = 150 + Math.random() * 300;
 
             return [new Layer(x, height - h, 400, h)];
         }
