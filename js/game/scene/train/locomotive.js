@@ -17,6 +17,7 @@ export class Locomotive {
     static LEVER_WIDTH = 40;
     static LEVER_X = 100;
     static HEAT_MAX = 25;
+    static TRACK_SPACING = 1200;
 
     constructor(engine, position, width, height) {
         const bodyPosition = new Vector(
@@ -25,6 +26,7 @@ export class Locomotive {
 
         this.width = width;
         this.height = height;
+        this.track = Locomotive.TRACK_SPACING;
         this.wheelDriveLeft = new Wheel(
             new Vector(position.x - width + 1.5 * Locomotive.WHEEL_RADIUS_DRIVE, position.y - Locomotive.WHEEL_RADIUS_DRIVE),
             Locomotive.WHEEL_RADIUS_DRIVE,
@@ -230,6 +232,12 @@ export class Locomotive {
 
             if (burning)
                 this.heatTarget += item.body.mass * item.fuelDensity;
+        }
+
+        if ((this.track -= this.velocity) < 0) {
+            this.track += Locomotive.TRACK_SPACING;
+
+            Sounds.TRACK_TRANSITION.play();
         }
 
         this.updateVelocity();

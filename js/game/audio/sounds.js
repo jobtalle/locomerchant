@@ -19,4 +19,12 @@ export class Sounds {
     ]);
     static WHEELS_ACCELERATE = new Loop("audio/Wheels_Forward_LP.mp3");
     static WHEELS_BRAKE = new Loop("audio/Wheels_Break_LP.mp3");
+    static TRACK_TRANSITION = new SFX([
+        "audio/Wheels_TrackTransition-001.wav",
+        "audio/Wheels_TrackTransition-002.wav",
+        "audio/Wheels_TrackTransition-003.wav",
+        "audio/Wheels_TrackTransition-004.wav",
+        "audio/Wheels_TrackTransition-005.wav",
+        "audio/Wheels_TrackTransition-006.wav"
+    ]);
 }
