@@ -10,11 +10,11 @@ export class Locomotive {
     static SUSPENSION_HEIGHT = Wagon.SUSPENSION_HEIGHT;
     static SUSPENSION_STIFFNESS = .01;
     static SUSPENSION_DAMPING = .1;
-    static FLOOR = 30;
+    static FLOOR = 50;
     static FURNACE_WIDTH = 120;
     static LEVER_LENGTH = 100;
     static LEVER_WIDTH = 40;
-    static LEVER_X = 100;
+    static LEVER_X = 50;
     static HEAT_MAX = 25;
 
     constructor(engine, position, width, height) {
@@ -25,7 +25,7 @@ export class Locomotive {
         this.width = width;
         this.height = height;
         this.wheelDriveLeft = new Wheel(
-            new Vector(position.x - width + Locomotive.WHEEL_RADIUS_DRIVE, position.y - Locomotive.WHEEL_RADIUS_DRIVE),
+            new Vector(position.x - width + 1.5 * Locomotive.WHEEL_RADIUS_DRIVE, position.y - Locomotive.WHEEL_RADIUS_DRIVE),
             Locomotive.WHEEL_RADIUS_DRIVE,
             Sprites.WAGON_WHEEL);
         this.wheelDriveRight = new Wheel(
@@ -33,11 +33,11 @@ export class Locomotive {
             Locomotive.WHEEL_RADIUS_DRIVE,
             Sprites.WAGON_WHEEL);
         this.wheelSmallLeft = new Wheel(
-            new Vector(position.x - 4 * Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
+            new Vector(position.x - 5.5 * Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
             Locomotive.WHEEL_RADIUS_SMALL,
             Sprites.LOCOMOTIVE_WHEEL_SMALL);
         this.wheelSmallRight = new Wheel(
-            new Vector(position.x - Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
+            new Vector(position.x - 3.2 * Locomotive.WHEEL_RADIUS_SMALL, position.y - Locomotive.WHEEL_RADIUS_SMALL),
             Locomotive.WHEEL_RADIUS_SMALL,
             Sprites.LOCOMOTIVE_WHEEL_SMALL);
         this.boilerWidth = this.width * .5 - Locomotive.FURNACE_WIDTH * .5;
@@ -206,12 +206,7 @@ export class Locomotive {
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
         context.translate(this.width * -.5 - this.centerShift.x, this.height * -.5 - this.centerShift.y);
 
-        context.fillStyle = "#fff";
-        context.beginPath();
-        context.rect(0, this.height - Locomotive.FLOOR, this.width, Locomotive.FLOOR);
-        context.rect(this.width - this.boilerWidth, 0, this.boilerWidth, this.height - Locomotive.FLOOR);
-        context.rect(0, 0, this.boilerWidth, this.height - Locomotive.FLOOR);
-        context.fill();
+        Sprites.LOCOMOTIVE.draw(context, -60, -225);
 
         context.save();
         context.translate(this.leverPosition.x, this.leverPosition.y);

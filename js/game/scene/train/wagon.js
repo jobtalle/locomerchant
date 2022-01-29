@@ -91,6 +91,19 @@ export class Wagon {
         this.wheelRight.update();
     }
 
+    renderBackground(context, time) {
+        context.save();
+        context.translate(
+            Utils.lerp(this.body.positionPrev.x, this.body.position.x, time),
+            Utils.lerp(this.body.positionPrev.y, this.body.position.y, time));
+        context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
+        context.translate(this.width * -.5 - this.centerShift.x, this.height * -.5 - this.centerShift.y);
+
+        Sprites.WAGON_BACKBOARD.draw(context, -22, -16);
+
+        context.restore();
+    }
+
     render(context, time) {
         context.save();
         context.translate(

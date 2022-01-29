@@ -1,9 +1,7 @@
 import {Wagon} from "./train/wagon.js";
 import {Vector} from "../../math/vector.js";
-import {Item} from "./item/item.js";
 import {Locomotive} from "./train/locomotive.js";
 import {Scenery} from "./scenery/scenery.js";
-import {Sprites} from "../sprite/sprites.js";
 import {ItemCoal} from "./item/itemCoal.js";
 import {ItemLog} from "./item/itemLog.js";
 
@@ -215,6 +213,9 @@ export class Scene {
         context.fillRect(0, 0, this.width, this.height);
 
         this.scenery.renderBackground(context, time);
+
+        this.wagonA.renderBackground(context, time);
+        this.wagonB.renderBackground(context, time);
 
         for (const item of this.items)
             item.render(context, time);
