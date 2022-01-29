@@ -221,7 +221,12 @@ export class Locomotive {
         this.heatTarget = 0;
 
         for (const item of this.furnaceItems) {
+            const burningPrevious = item.burning;
+
             item.burning = item.burnable && burning;
+
+            if (item.burning !== burningPrevious)
+                Sounds.BURN.play();
 
             if (burning)
                 this.heatTarget += item.body.mass * item.fuelDensity;

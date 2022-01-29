@@ -42,9 +42,6 @@ export class Item {
     enterFurnace(locomotive) {
         this.locomotive = locomotive;
 
-        if (this.burnable)
-            Sounds.BURN.play();
-
         locomotive.furnaceItems.push(this);
     }
 
