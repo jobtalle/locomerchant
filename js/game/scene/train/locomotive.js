@@ -281,22 +281,22 @@ export class Locomotive {
 
         context.restore();
 
-        context.save();
-        context.translate(this.width * .8, this.height * .5);
-
-        context.fillStyle = "#b69a3d";
-        context.beginPath();
-        context.arc(0, 0, Locomotive.LEVER_LENGTH * .8, -Math.PI, 0);
-        context.fill();
-
-        context.rotate(-Math.PI + Math.PI * Utils.lerp(this.heatPrevious, this.heat, time) / Locomotive.HEAT_MAX);
-
-        context.fillStyle = "#d33333";
-        context.beginPath();
-        context.rect(0, -Locomotive.LEVER_WIDTH * .25, Locomotive.LEVER_LENGTH * .8, Locomotive.LEVER_WIDTH * .5);
-        context.fill();
-
-        context.restore();
+        // context.save();
+        // context.translate(this.width * .8, this.height * .5);
+        //
+        // context.fillStyle = "#b69a3d";
+        // context.beginPath();
+        // context.arc(0, 0, Locomotive.LEVER_LENGTH * .8, -Math.PI, 0);
+        // context.fill();
+        //
+        // context.rotate(-Math.PI + Math.PI * Utils.lerp(this.heatPrevious, this.heat, time) / Locomotive.HEAT_MAX);
+        //
+        // context.fillStyle = "#d33333";
+        // context.beginPath();
+        // context.rect(0, -Locomotive.LEVER_WIDTH * .25, Locomotive.LEVER_LENGTH * .8, Locomotive.LEVER_WIDTH * .5);
+        // context.fill();
+        //
+        // context.restore();
 
         context.restore();
 
