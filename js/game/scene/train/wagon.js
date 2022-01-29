@@ -99,7 +99,7 @@ export class Wagon {
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
         context.translate(this.width * -.5 - this.centerShift.x, this.height * -.5 - this.centerShift.y);
 
-        Sprites.WAGON_BACKBOARD.draw(context, -22, -16);
+        Sprites.WAGON_BACKBOARD.draw(context, 10, -5);
 
         context.restore();
     }
