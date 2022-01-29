@@ -3,7 +3,7 @@ import {Wagon} from "./wagon.js";
 import {Utils} from "../../../math/utils.js";
 import {Wheel} from "./wheel.js";
 import {Sprites} from "../../sprite/sprites.js";
-import {Audio} from "../../audio/audio.js";
+import {Sounds} from "../../audio/sounds.js";
 
 export class Locomotive {
     static WHEEL_RADIUS_DRIVE = Wagon.WHEEL_RADIUS;
@@ -166,7 +166,7 @@ export class Locomotive {
         this.velocity = Math.max(0, this.velocity - (this.velocity * brakeStrength + brakeBase) * brake);
 
         if (this.velocity === 0 && velocityPrevious !== 0)
-            Audio.TRAIN_STOP.play();
+            Sounds.TRAIN_STOP.play();
 
         for (const item of this.furnaceItems) if (item.burning) item.burn(accelerate);
     }

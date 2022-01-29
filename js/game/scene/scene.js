@@ -4,6 +4,7 @@ import {Locomotive} from "./train/locomotive.js";
 import {Scenery} from "./scenery/scenery.js";
 import {ItemCoal} from "./item/itemCoal.js";
 import {ItemLog} from "./item/itemLog.js";
+import {Sounds} from "../audio/sounds.js";
 
 export class Scene {
     static TAIL = 3000;
@@ -59,6 +60,8 @@ export class Scene {
         });
         Matter.Events.on(mouseConstraint, "startdrag", event => {
             event.body.collisionFilter.category = 0;
+
+            Sounds.GRAB.play();
 
             this.itemDragging = this.findItem(event.body);
             this.items.splice(this.items.indexOf(this.itemDragging), 1);

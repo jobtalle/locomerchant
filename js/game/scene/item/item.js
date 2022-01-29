@@ -1,4 +1,5 @@
 import {Utils} from "../../../math/utils.js";
+import {Sounds} from "../../audio/sounds.js";
 
 export class Item {
     static BURN_RATE = .003;
@@ -40,6 +41,9 @@ export class Item {
 
     enterFurnace(locomotive) {
         this.locomotive = locomotive;
+
+        if (this.burnable)
+            Sounds.BURN.play();
 
         locomotive.furnaceItems.push(this);
     }
