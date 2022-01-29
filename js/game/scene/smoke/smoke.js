@@ -2,8 +2,8 @@ import {SmokePoint} from "./smokePoint.js";
 import {Vector} from "../../../math/vector.js";
 
 export class Smoke {
-    static FREQUENCY = 10;
-    static MAX_POINTS = 30;
+    static FREQUENCY = 7;
+    static MAX_POINTS = 50;
 
     constructor(origin) {
         this.origin = origin;
@@ -13,8 +13,8 @@ export class Smoke {
 
     move(delta) {
         for (const point of this.points) {
-            point.position.x -= delta;
-            point.position.y -= delta * .3;
+            // point.position.x -= delta * .25;
+            // point.position.y -= delta * .15;
         }
     }
 
@@ -27,11 +27,11 @@ export class Smoke {
         if (--this.countdown === 0) {
             this.countdown = Smoke.FREQUENCY;
 
-            const up = -4;
-            const angle = Math.atan2(velocity * .01, up) - Math.PI * .5;
-            const side = heat * .5;
-            const sl = side * Math.pow(Math.random(), .88);
-            const sr = side * Math.pow(Math.random(), .88);
+            const up = -Math.max(velocity * .35, 4);
+            const angle = Math.atan2(velocity, up) - Math.PI * .5;
+            const side = heat * .25;
+            const sl = side * Math.pow(Math.random(), .96);
+            const sr = side * Math.pow(Math.random(), .96);
 
             this.points.push(
                 new SmokePoint(this.origin.copy(),
@@ -59,7 +59,7 @@ export class Smoke {
             this.origin.x, this.origin.y, 0,
             this.origin.x, this.origin.y, 700);
 
-        gradient.addColorStop(0, "#fff");
+        gradient.addColorStop(0, "rgba(255,255,255,0.76)");
         gradient.addColorStop(1, "rgba(255,255,255,0)");
 
         context.fillStyle = gradient;
