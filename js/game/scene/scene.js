@@ -8,7 +8,6 @@ import {ItemTwig} from "./item/itemTwig.js";
 import {SceneryForest} from "./scenery/sceneryForest.js";
 
 export class Scene {
-    static TAIL = 3000;
     static TRACKS_Y = 850;
     static DESTROY_UNDER = 200;
     static DESTROY_ABOVE = 1500;
@@ -223,10 +222,7 @@ export class Scene {
     }
 
     render(context, time) {
-        context.fillStyle = "rgb(181,190,201)";
-        context.fillRect(0, 0, this.width, this.height);
-
-        this.scenery.renderBackground(context, time);
+        this.scenery.renderBackground(context, time, this.width);
 
         this.wagonA.renderBackground(context, time);
         this.wagonB.renderBackground(context, time);

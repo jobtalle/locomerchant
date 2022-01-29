@@ -3,10 +3,11 @@ import {Scene} from "../scene.js";
 export class Scenery {
     static INITIALIZE_DELTA = 50;
 
-    constructor(width, height, spawners) {
+    constructor(width, height, background, spawners) {
         this.width = width;
         this.height = height;
         this.spawners = spawners;
+        this.background = background;
         this.layersBack = [];
         this.layersFront = [];
     }
@@ -59,7 +60,10 @@ export class Scenery {
         }
     }
 
-    renderBackground(context, time) {
+    renderBackground(context, time, width) {
+        this.background.draw(context, width - 1920, 0);
+        this.background.draw(context, width - (1920 << 1), 0);
+
         for (let layer = 0, layerCount = this.layersBack.length; layer < layerCount; ++layer)
             this.layersBack[layer].render(context, time);
     }
