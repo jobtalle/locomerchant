@@ -289,5 +289,34 @@ export class Locomotive {
         this.wheelDriveRight.render(context, time);
         this.wheelSmallLeft.render(context, time);
         this.wheelSmallRight.render(context, time);
+
+        const beamRadius = 30;
+        const beamRotation = Utils.lerp(this.wheelDriveLeft.rotationPrevious, this.wheelDriveLeft.rotation, time);
+        const beamLength = 176;
+        const beamX = this.wheelDriveLeft.position.x + Math.sin(beamRotation) * beamRadius;
+        const beamY = this.wheelDriveLeft.position.y - Math.cos(beamRotation) * beamRadius;
+        const h = beamRadius - Math.cos(beamRotation) * beamRadius;
+        const beam2Length = 110;
+        const beam2Angle = -Math.asin(h / beam2Length);
+
+        Sprites.LOCOMOTIVE_BEAM.draw(context, beamX - 13, beamY - 11);
+
+        context.save();
+        context.translate(beamX + beamLength, beamY);
+        context.rotate(beam2Angle);
+
+        Sprites.LOCOMOTIVE_BEAM_2.draw(
+            context, -15, -16);
+
+        context.restore();
+
+        Sprites.LOCOMOTIVE_BEAM_3.draw(
+            context,
+            beamX + beamLength + Math.cos(beam2Angle) * beam2Length - 14,
+            beamY + Math.sin(beam2Angle) * beam2Length - 14);
+        Sprites.LOCOMOTIVE_CYLINDER.draw(
+            context,
+            this.wheelSmallRight.position.x - 120,
+            this.wheelSmallRight.position.y - 105);
     }
 }
