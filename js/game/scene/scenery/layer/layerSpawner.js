@@ -1,22 +1,30 @@
 import {Layer} from "./layer.js";
+import {Utils} from "../../../../math/utils.js";
 
 export class LayerSpawner {
-    constructor(sprite, depth) {
-        this.interval = 1000 + 400 * Math.random();
-        this.countdown = 500 * Math.random();
+    constructor(sprite, width, height, depth, intervalMin = width - 1, intervalMax = intervalMin) {
+        this.intervalMin = intervalMin;
+        this.intervalMax = intervalMax;
+        this.countdown = this.makeInterval();
         this.sprite = sprite;
+        this.width = width;
+        this.height = height;
         this.depth = depth;
+    }
+
+    makeInterval() {
+        return Utils.lerp(this.intervalMin, this.intervalMax, Math.random());
     }
 
     move(delta, x, height) {
         this.countdown -= delta;
 
-        while (this.countdown < 0) {
-            this.countdown += this.interval;
+        if (this.countdown < 0) {
+            const shift = this.countdown;
 
-            const h = 150 + Math.random() * 300;
+            this.countdown += this.makeInterval();
 
-            return [new Layer(x, height - h, 400, h, this.sprite, this.depth)];
+            return [new Layer(x + shift, height - this.height, this.width, this.height, this.sprite, this.depth)];
         }
 
         return [];

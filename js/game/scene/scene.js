@@ -238,12 +238,6 @@ export class Scene {
         this.wagonB.render(context, time);
         this.locomotive.render(context, time);
 
-        context.fillStyle = "#8d7272";
-        context.lineWidth = 4;
-        context.beginPath();
-        context.rect(this.width - Scene.TAIL, Scene.TRACKS_Y, Scene.TAIL + this.width, this.height);
-        context.fill();
-
         this.itemDragging?.render(context, time);
 
         this.scenery.renderForeground(context, time);

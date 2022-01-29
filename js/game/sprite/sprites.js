@@ -47,4 +47,5 @@ export class Sprites {
     static LOCOMOTIVE_BEAM_2 = new Sprite("art/train/Train_engine_steam_system_2.png");
     static LOCOMOTIVE_BEAM_3 = new Sprite("art/train/Train_engine_steam_system_4.png");
     static LOCOMOTIVE_CYLINDER = new Sprite("art/train/Train_engine_steam_system_1.png");
+    static BIOME_EYVIND_GROUND = new Sprite("art/biomes/eyvind/Eyvind_layer3_Mainground.png");
 }

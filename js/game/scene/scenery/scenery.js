@@ -12,13 +12,19 @@ export class Scenery {
     }
 
     initialize() {
-        const moves = (this.width + Scene.DESTROY_LEFT) / Scenery.INITIALIZE_DELTA;
+        const moves = 500;
 
         for (let move = 0; move < moves; ++move)
             this.move(Scenery.INITIALIZE_DELTA);
     }
 
     move(delta) {
+        for (const layer of this.layersBack)
+            layer.move(delta);
+
+        for (const layer of this.layersFront)
+            layer.move(delta);
+
         const newLayers = [];
 
         for (const spawner of this.spawners)
@@ -35,12 +41,6 @@ export class Scenery {
             this.layersBack.sort((a, b) => a.depth - b.depth);
             this.layersFront.sort((a, b) => a.depth - b.depth);
         }
-
-        for (const layer of this.layersBack)
-            layer.move(delta);
-
-        for (const layer of this.layersFront)
-            layer.move(delta);
     }
 
     update() {

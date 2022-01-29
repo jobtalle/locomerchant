@@ -24,9 +24,6 @@ export class Layer {
     render(context, time) {
         const x = Utils.lerp(this.xPrevious, this.x, time);
 
-        context.fillStyle = "rgba(52,119,49,0.76)";
-        context.beginPath();
-        context.rect(x, this.y, this.width, this.height);
-        context.fill();
+        this.sprite.draw(context, x, this.y);
     }
 }
