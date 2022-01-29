@@ -267,11 +267,11 @@ export class Locomotive {
         context.translate(this.width * -.5 - this.centerShift.x, this.height * -.5 - this.centerShift.y);
 
         const heatGradient = context.createLinearGradient(0, 380 - 225, 0, 250 - 225);
-        const heat = Utils.lerp(this.heatPrevious, this.heat, time) / Locomotive.HEAT_MAX;
+        const heat = Math.min(1, Utils.lerp(this.heatPrevious, this.heat, time) / Locomotive.HEAT_MAX);
 
-        heatGradient.addColorStop(0, "#f3e829");
-        heatGradient.addColorStop(heat, "#fc2525");
-        heatGradient.addColorStop(Math.pow(heat, .05), "#545454");
+        heatGradient.addColorStop(0, "hsl(50, " + (heat * 100) + "%, 50%)");
+        heatGradient.addColorStop(heat, "hsl(0, " + (Math.pow(heat, .3) * 100) + "%, 50%)");
+        heatGradient.addColorStop(1, "#545454");
 
         context.fillStyle = heatGradient;
         context.beginPath();
