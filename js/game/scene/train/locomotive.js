@@ -4,6 +4,7 @@ import {Utils} from "../../../math/utils.js";
 import {Wheel} from "./wheel.js";
 import {Sprites} from "../../sprite/sprites.js";
 import {Sounds} from "../../audio/sounds.js";
+import {Smoke} from "../smoke/smoke.js";
 
 export class Locomotive {
     static WHEEL_RADIUS_DRIVE = 70.5;
@@ -57,6 +58,9 @@ export class Locomotive {
         this.velocity = 0;
         this.brakePrevious = 0;
         this.beamDerivative = 0;
+        this.smoke = new Smoke(new Vector(
+            this.wheelSmallLeft.position.x + 28,
+            this.wheelSmallLeft.position.y - 400));
 
         const parts = [
             this.furnace = Matter.Bodies.rectangle(
@@ -215,6 +219,7 @@ export class Locomotive {
         this.wheelDriveRight.update();
         this.wheelSmallLeft.update();
         this.wheelSmallRight.update();
+        this.smoke.update();
 
         this.leverAnglePrevious = this.leverAngle;
         this.leverAngle += (this.leverAngleTarget - this.leverAngle) * .7;
@@ -247,6 +252,8 @@ export class Locomotive {
     }
 
     render(context, time) {
+        this.smoke.render(context, time);
+
         context.save();
         context.translate(
             Utils.lerp(this.body.positionPrev.x, this.body.position.x, time),

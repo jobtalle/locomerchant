@@ -11,6 +11,13 @@ export class Vector {
         return this;
     }
 
+    add(other) {
+        this.x += other.x;
+        this.y += other.y;
+
+        return this;
+    }
+
     copy() {
         return new Vector(this.x, this.y);
     }
