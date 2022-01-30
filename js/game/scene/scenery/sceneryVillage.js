@@ -25,6 +25,7 @@ import {ItemCandy} from "../item/itemCandy.js";
 import {ItemLightbulb} from "../item/itemLightbulb.js";
 import {ItemBook} from "../item/itemBook.js";
 import {ItemLyra} from "../item/itemLyra.js";
+import {ItemCandyStick} from "../item/itemCandyStick.js";
 
 export class SceneryVillage extends Scenery {
     constructor(width, height, length) {
@@ -168,6 +169,7 @@ export class SceneryVillage extends Scenery {
                     new Buying(ItemLightbulb, 30),
                     new Buying(ItemBook, 30),
                     new Buying(ItemCandy, 14),
+                    new Buying(ItemCandyStick, 28),
                     new Buying(ItemLyra, 112)
                 ]
             ),

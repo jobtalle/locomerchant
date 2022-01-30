@@ -342,7 +342,7 @@ export class Scene {
         }
 
         if (this.scenery.move(delta)) {
-            const sellWidth = 1700;
+            const sellWidth = 1300;
             const sellY = 950;
             const sellItems = [];
 

@@ -13,6 +13,7 @@ import {ItemBread} from "../item/itemBread.js";
 import {ItemBaguette} from "../item/ItemBaguette.js";
 import {ItemWoodenToy} from "../item/itemWoodenToy.js";
 import {ItemBricks} from "../item/itemBricks.js";
+import {ItemCandyStick} from "../item/itemCandyStick.js";
 
 export class SceneryClouds extends Scenery {
     constructor(width, height, length) {
@@ -91,6 +92,13 @@ export class SceneryClouds extends Scenery {
                     1000,
                     5000),
                 new LayerSpawner(
+                    Sprites.BIOME_CLOUDS_3_7,
+                    291,
+                    159,
+                    .41,
+                    1000,
+                    5000),
+                new LayerSpawner(
                     Sprites.BIOME_CLOUDS_2_1,
                     1920,
                     230,
@@ -123,7 +131,7 @@ export class SceneryClouds extends Scenery {
                     new ForSale(ItemCandy, 10, 0, 3),
                     new ForSale(ItemLightbulb, 10, 0, 2),
                     new ForSale(ItemBook, 20, 0, 4),
-                    new ForSale(ItemCandy, 5, 0, 3),
+                    new ForSale(ItemCandyStick, 15, 0, 3),
                     new ForSale(ItemLyra, 50,0, 2)
                 ],
                 [
