@@ -2,6 +2,11 @@ import {Scenery} from "./scenery.js";
 import {Sprites} from "../../sprite/sprites.js";
 import {LayerSpawner} from "./layer/layerSpawner.js";
 import {Catalogue} from "./catalogue/catalogue.js";
+import {ForSale} from "./catalogue/forSale.js";
+import {ItemHaystack} from "../item/itemHaystack.js";
+import {ItemMilk} from "../item/itemMilk.js";
+import {ItemWine} from "../item/itemWine.js";
+import {ItemWatermelon} from "../item/itemWatermelon.js";
 
 export class SceneryCountry extends Scenery {
     constructor(width, height, length) {
@@ -114,7 +119,10 @@ export class SceneryCountry extends Scenery {
             ],
             new Catalogue(
                 [
-
+                    new ForSale(ItemHaystack, 5, 3, 4),
+                    new ForSale(ItemMilk, 10, 1, 3),
+                    new ForSale(ItemWine, 20, 1, 3),
+                    new ForSale(ItemWatermelon, 5, 3, 6)
                 ],
                 [
 

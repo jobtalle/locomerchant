@@ -267,7 +267,7 @@ export class Scene {
     }
 
     initialBiome() {
-        return new SceneryVillage(this.width, this.height, this.sceneryLength);
+        return new SceneryCountry(this.width, this.height, this.sceneryLength);
     }
 
     nextBiome() {

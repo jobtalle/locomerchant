@@ -123,10 +123,13 @@ export class Sprites {
     static BREAD = [new Sprite("art/items/A_Village_s_bread.png")];
     static BAGUETTE = [new Sprite("art/items/A_Village_s_baguette.png")];
 
+    static HAYSTACK = [new Sprite("art/items/A_Countryside_s_haystack.png")];
+    static MILK = [new Sprite("art/items/A_Countryside_s_milk.png")];
+    static WINE = [new Sprite("art/items/A_Countryside_s_wine.png")];
+    static WATERMELON = [new Sprite("art/items/A_Countryside_watermelon.png")];
+
     static BLUEBERRIES = [new Sprite("art/items/A_Eyvind_r_blueberries.png")];
     static MUSHROOM = [new Sprite("art/items/A_Eyvind_r_mushroom.png")];
     static PUMPKIN = [new Sprite("art/items/A_Eyvind_r_pumpkin.png")];
     static FLOWER = [new Sprite("art/items/A_Eyvind_s_Flower.png")];
-
-    static HAYSTACK = [new Sprite("art/items/A_Countryside_s_haystack.png")];
 }
