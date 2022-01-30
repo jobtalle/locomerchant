@@ -80,4 +80,6 @@ export class Sprites {
     static BIOME_EYVIND_LAYER_F1_D = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_4.png");
     static BIOME_EYVIND_LAYER_F1_E = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_5.png");
     static BIOME_EYVIND_LAYER_F1_F = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_6.png");
+
+    static TUNNEL = new Sprite("art/ui/Tunnel_0001.png");
 }

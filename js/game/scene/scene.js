@@ -11,6 +11,8 @@ import {PriceLabel} from "./priceLabel.js";
 import {Seller} from "./seller.js";
 import {Particles} from "./particles/particles.js";
 import {Particle} from "./particles/particle.js";
+import {Sprite} from "../sprite/sprite.js";
+import {Sprites} from "../sprite/sprites.js";
 
 export class Scene {
     static TRACKS_Y = 850;
@@ -37,6 +39,8 @@ export class Scene {
         this.itemsForSale = [];
         this.seller = null;
         this.particles = new Particles();
+        this.tunnelX = -1;
+        this.tunneling = false;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -207,6 +211,7 @@ export class Scene {
         this.locomotive.reset();
         this.seller?.destroy();
         this.seller = null;
+        this.tunneling = 0;
 
         this.initialize();
     }
@@ -254,8 +259,22 @@ export class Scene {
         this.scenery.initialize();
     }
 
+    nextBiome() {
+
+    }
+
     move(delta) {
         const sm = this.scenery.moved;
+
+        if (this.tunneling) {
+            const txp = this.tunnelX;
+            const t = 125;
+
+            this.tunnelX -= delta * 2;
+
+            if (txp > -t && this.tunnelX < -t)
+                this.nextBiome();
+        }
 
         if (this.scenery.move(delta)) {
             const sellWidth = 1700;
@@ -294,6 +313,11 @@ export class Scene {
 
         if (sm < this.scenery.pScale && this.scenery.moved > this.scenery.pScale) {
             this.seller = new Seller(this.engine, new Vector(this.width + 500, 970), this.scenery.catalogue.buying);
+        }
+
+        if (sm < this.scenery.length && this.scenery.moved > this.scenery.length) {
+            this.tunneling = true;
+            this.tunnelX = this.width;
         }
 
         if (this.seller && this.seller.body.position.x < -3000) {
@@ -403,5 +427,9 @@ export class Scene {
         this.scenery.renderForeground(context, time);
 
         this.itemDragging?.render(context, time);
+
+        if (this.tunneling) {
+            Sprites.TUNNEL.draw(context, this.tunnelX, 0);
+        }
     }
 }

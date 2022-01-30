@@ -14,11 +14,10 @@ export class Locomotive {
     static SUSPENSION_DAMPING = .07;
     static FLOOR = 50;
     static FURNACE_WIDTH = 120;
-    static LEVER_LENGTH = 100;
-    static LEVER_WIDTH = 40;
     static LEVER_X = 100;
     static HEAT_MAX = 25;
     static TRACK_SPACING = 1200;
+    static HEAT_INITIAL = 10;
 
     constructor(engine, position, width, height) {
         const bodyPosition = new Vector(
@@ -52,7 +51,7 @@ export class Locomotive {
         this.leverAngleTarget = this.leverAngle;
         this.leverPosition = new Vector(Locomotive.LEVER_X, this.height - Locomotive.FLOOR);
         this.furnaceItems = [];
-        this.heat = 10;
+        this.heat = Locomotive.HEAT_INITIAL;
         this.heatPrevious = this.heat;
         this.heatTarget = this.heat;
         this.velocity = 0;
@@ -140,7 +139,7 @@ export class Locomotive {
     reset() {
         this.furnaceItems = [];
         this.velocity = 0;
-        this.heat = 0;
+        this.heat = Locomotive.HEAT_INITIAL;
         this.leverAngle = this.leverAngleTarget = Math.PI * -.5;
 
         Sounds.WHEELS_ACCELERATE.stop();
