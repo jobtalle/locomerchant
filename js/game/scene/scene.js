@@ -268,7 +268,7 @@ export class Scene {
     }
 
     initialBiome() {
-        return new SceneryClouds(this.width, this.height, this.sceneryLength);
+        return new SceneryForest(this.width, this.height, this.sceneryLength);
     }
 
     nextBiome() {

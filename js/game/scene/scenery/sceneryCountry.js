@@ -11,6 +11,7 @@ import {Buying} from "./catalogue/buying.js";
 import {ItemBlueberries} from "../item/itemBlueberries.js";
 import {ItemBread} from "../item/itemBread.js";
 import {ItemBaguette} from "../item/ItemBaguette.js";
+import {ItemBricks} from "../item/itemBricks.js";
 
 export class SceneryCountry extends Scenery {
     constructor(width, height, length) {
@@ -130,7 +131,8 @@ export class SceneryCountry extends Scenery {
                 ],
                 [
                     new Buying(ItemBread, 25),
-                    new Buying(ItemBaguette, 25)
+                    new Buying(ItemBaguette, 25),
+                    new Buying(ItemBricks, 50)
                 ]
             ));
     }

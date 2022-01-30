@@ -8,6 +8,10 @@ import {ItemCandy} from "../item/itemCandy.js";
 import {ItemLightbulb} from "../item/itemLightbulb.js";
 import {ItemBook} from "../item/itemBook.js";
 import {ItemLyra} from "../item/itemLyra.js";
+import {Buying} from "./catalogue/buying.js";
+import {ItemBread} from "../item/itemBread.js";
+import {ItemBaguette} from "../item/ItemBaguette.js";
+import {ItemWoodenToy} from "../item/itemWoodenToy.js";
 
 export class SceneryClouds extends Scenery {
     constructor(width, height, length) {
@@ -122,7 +126,9 @@ export class SceneryClouds extends Scenery {
                     new ForSale(ItemLyra, 50,1, 2)
                 ],
                 [
-
+                    new Buying(ItemBread, 25),
+                    new Buying(ItemBaguette, 25),
+                    new Buying(ItemWoodenToy, 500)
                 ]
             ));
     }

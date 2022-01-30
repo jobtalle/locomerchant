@@ -20,6 +20,11 @@ import {ItemHaystack} from "../item/itemHaystack.js";
 import {ItemMilk} from "../item/itemMilk.js";
 import {ItemWatermelon} from "../item/itemWatermelon.js";
 import {ItemWine} from "../item/itemWine.js";
+import {ItemBall} from "../item/itemBall.js";
+import {ItemCandy} from "../item/itemCandy.js";
+import {ItemLightbulb} from "../item/itemLightbulb.js";
+import {ItemBook} from "../item/itemBook.js";
+import {ItemLyra} from "../item/itemLyra.js";
 
 export class SceneryVillage extends Scenery {
     constructor(width, height, length) {
@@ -143,7 +148,8 @@ export class SceneryVillage extends Scenery {
                     new ForSale(ItemWoodenToy, 100, 0, 2),
                     new ForSale(ItemBaguette, 10, 1, 6),
                     new ForSale(ItemBricks, 20, 2, 4),
-                    new ForSale(ItemBread, 10, 1, 6)
+                    new ForSale(ItemBread, 10, 1, 6),
+                    new ForSale(ItemCoal, 20, 1, 3)
                 ],
                 [
                     new Buying(ItemTwig, 7),
@@ -156,7 +162,13 @@ export class SceneryVillage extends Scenery {
                     new Buying(ItemHaystack, 10),
                     new Buying(ItemMilk, 20),
                     new Buying(ItemWine, 35),
-                    new Buying(ItemWatermelon, 12)
+                    new Buying(ItemWatermelon, 12),
+                    new Buying(ItemBall, 30),
+                    new Buying(ItemCandy, 25),
+                    new Buying(ItemLightbulb, 30),
+                    new Buying(ItemBook, 30),
+                    new Buying(ItemCandy, 15),
+                    new Buying(ItemLyra, 200)
                 ]
             ),
             Sounds.AMB_VILLAGE);
