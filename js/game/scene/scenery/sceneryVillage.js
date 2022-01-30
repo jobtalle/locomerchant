@@ -12,6 +12,14 @@ import {ItemWoodenToy} from "../item/itemWoodenToy.js";
 import {ItemBaguette} from "../item/ItemBaguette.js";
 import {ItemBricks} from "../item/itemBricks.js";
 import {ItemBread} from "../item/itemBread.js";
+import {ItemBlueberries} from "../item/itemBlueberries.js";
+import {ItemFlower} from "../item/itemFlower.js";
+import {ItemPumpkin} from "../item/itemPumpkin.js";
+import {ItemMushroom} from "../item/itemMushroom.js";
+import {ItemHaystack} from "../item/itemHaystack.js";
+import {ItemMilk} from "../item/itemMilk.js";
+import {ItemWatermelon} from "../item/itemWatermelon.js";
+import {ItemWine} from "../item/itemWine.js";
 
 export class SceneryVillage extends Scenery {
     constructor(width, height, length) {
@@ -140,7 +148,15 @@ export class SceneryVillage extends Scenery {
                 [
                     new Buying(ItemTwig, 7),
                     new Buying(ItemLog, 20),
-                    new Buying(ItemCoal, 35)
+                    new Buying(ItemCoal, 35),
+                    new Buying(ItemBlueberries, 30),
+                    new Buying(ItemFlower, 20),
+                    new Buying(ItemPumpkin, 30),
+                    new Buying(ItemMushroom, 10),
+                    new Buying(ItemHaystack, 10),
+                    new Buying(ItemMilk, 20),
+                    new Buying(ItemWine, 35),
+                    new Buying(ItemWatermelon, 12)
                 ]
             ),
             Sounds.AMB_VILLAGE);
