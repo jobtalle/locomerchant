@@ -127,11 +127,11 @@ export class Scene {
             if (item.label.price > this.money) {
                 item.label.afford = false;
                 item.body.isSleeping = true;
-                item.body.collisionFilter.group = -1;
+                item.body.collisionFilter.category = 4;
                 item.label.repaint();
             }
             else {
-                item.body.collisionFilter.group = 0;
+                item.body.collisionFilter.category = 2;
                 item.body.isSleeping = true;
                 item.label.afford = true;
                 item.label.repaint();
