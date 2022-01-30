@@ -49,7 +49,7 @@ export class Scene {
         this.tunnelX = -1;
         this.tunneling = false;
         this.music = new Music();
-        this.biomesSinceTown = 0;
+        this.biomesSinceTown = 2;
         this.lastChoice = 1;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
@@ -222,7 +222,7 @@ export class Scene {
         this.seller?.destroy();
         this.seller = null;
         this.tunneling = 0;
-        this.biomesSinceTown = 0;
+        this.biomesSinceTown = 2;
         this.lastChoice = 1;
 
         this.sceneryLength = 300 * Scene.PIXELS_PER_METER;

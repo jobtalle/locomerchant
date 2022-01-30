@@ -12,6 +12,7 @@ import {Buying} from "./catalogue/buying.js";
 import {ItemBread} from "../item/itemBread.js";
 import {ItemBaguette} from "../item/ItemBaguette.js";
 import {ItemWoodenToy} from "../item/itemWoodenToy.js";
+import {ItemBricks} from "../item/itemBricks.js";
 
 export class SceneryClouds extends Scenery {
     constructor(width, height, length) {
@@ -128,7 +129,8 @@ export class SceneryClouds extends Scenery {
                 [
                     new Buying(ItemBread, 25),
                     new Buying(ItemBaguette, 25),
-                    new Buying(ItemWoodenToy, 500)
+                    new Buying(ItemWoodenToy, 500),
+                    new Buying(ItemBricks, 50)
                 ]
             ));
     }

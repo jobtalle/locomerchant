@@ -14,6 +14,7 @@ import {ItemPumpkin} from "../item/itemPumpkin.js";
 import {ItemMushroom} from "../item/itemMushroom.js";
 import {ItemBread} from "../item/itemBread.js";
 import {ItemBricks} from "../item/itemBricks.js";
+import {ItemBaguette} from "../item/ItemBaguette.js";
 
 export class SceneryForest extends Scenery {
     constructor(width, height, length) {
@@ -132,6 +133,9 @@ export class SceneryForest extends Scenery {
             [
                 new Buying(ItemLog, 5),
                 new Buying(ItemCoal, 20),
+                new Buying(ItemBricks, 50),
+                new Buying(ItemBread, 25),
+                new Buying(ItemBaguette, 25),
                 new Buying(ItemBricks, 50)
             ]
         ),
