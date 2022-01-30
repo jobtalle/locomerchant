@@ -5,11 +5,12 @@ import {Sprites} from "../../sprite/sprites.js";
 export class Scenery {
     static INITIALIZE_DELTA = 50;
 
-    constructor(width, height, length, background, spawners) {
+    constructor(width, height, length, background, spawners, catalogue) {
         this.width = width;
         this.height = height;
         this.length = length;
         this.spawners = spawners;
+        this.catalogue = catalogue;
         this.background = background;
         this.layersBack = [];
         this.layersFront = [];
@@ -74,10 +75,6 @@ export class Scenery {
 
             exceptions.push(foreground);
             newLayers.push(foreground);
-
-            // const ground = new Layer(this.width, this.height - 261, 1920, 261, Sprites.STATION_GROUND, -.001);
-            // newLayers.push(ground);
-            // exceptions.push(ground);
         }
 
         if (newLayers.length > 0) {

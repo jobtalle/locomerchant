@@ -1,6 +1,12 @@
 import {Scenery} from "./scenery.js";
 import {LayerSpawner} from "./layer/layerSpawner.js";
 import {Sprites} from "../../sprite/sprites.js";
+import {Catalogue} from "./catalogue/catalogue.js";
+import {ForSale} from "./catalogue/forSale.js";
+import {ItemLog} from "../item/itemLog.js";
+import {ItemCoal} from "../item/itemCoal.js";
+import {Buying} from "./catalogue/buying.js";
+import {ItemTwig} from "../item/itemTwig.js";
 
 export class SceneryForest extends Scenery {
     constructor(width, height, length) {
@@ -105,6 +111,18 @@ export class SceneryForest extends Scenery {
                     128,
                     -.02,
                     200, 1000),
-        ]);
+        ],
+        new Catalogue(
+            [
+                new ForSale(ItemTwig, 5, 10, 20),
+                new ForSale(ItemLog, 10, 5, 15),
+                new ForSale(ItemCoal, 20, 3, 6)
+            ],
+            [
+                new Buying(ItemLog, 5),
+                new Buying(ItemCoal, 20),
+                new Buying()
+            ]
+        ));
     }
 }
