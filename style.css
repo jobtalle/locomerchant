@@ -24,14 +24,15 @@ body {
 }
 
 #distance {
-    margin-top: 6px;
+    background-image: url("art/ui/UI_kilometer.png");
+    padding-top: 51px;
     position: absolute;
-    width: 200px;
-    height: 60px;
+    width: 454px;
+    height: 115px;
     left: 50%;
-    margin-left: -100px;
+    margin-left: -227px;
     text-align: center;
-    font-size: 64px;
+    font-size: 46px;
     user-select: none;
 }
 
