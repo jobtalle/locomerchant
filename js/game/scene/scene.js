@@ -23,7 +23,7 @@ export class Scene {
     static DESTROY_ABOVE = 1500;
     static DESTROY_LEFT = 1000;
     static PIXELS_PER_METER = 100;
-    static MONEY_INITIAL = 50;
+    static MONEY_INITIAL = 150;
     static BIOME_SCALING = 1.2;
 
     constructor(mouse, width, height) {
@@ -277,7 +277,7 @@ export class Scene {
         this.sceneryLength *= Scene.BIOME_SCALING;
 
 
-        const choice = Math.floor(Math.pow(Math.random(), 1.3) * 4);
+        const choice = Math.floor(Math.pow(Math.random(), 1.1) * 4);
 
         switch (choice) {
             default:
