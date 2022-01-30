@@ -70,6 +70,11 @@ export class Scenery {
                 newLayers.push(new Layer(this.width + 756 * i * d, this.height - 1057, 756, 1057, Sprites.STATION_BEAM, d));
             }
 
+            const foreground = new Layer(this.width + 500, this.height - 298, 2378, 298, Sprites.STATION_FOREGROUND, -.1);
+
+            exceptions.push(foreground);
+            newLayers.push(foreground);
+
             // const ground = new Layer(this.width, this.height - 261, 1920, 261, Sprites.STATION_GROUND, -.001);
             // newLayers.push(ground);
             // exceptions.push(ground);
