@@ -78,8 +78,6 @@ export class Item {
             Utils.lerp(this.body.positionPrev.y, this.body.position.y, time));
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
 
-        context.fillStyle = this.burning ? "#f00" : "#9a4d4d";
-
         let sprite = this.sprites[0];
 
         if (this.burning)
