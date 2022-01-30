@@ -3,6 +3,7 @@ export class Loop {
         this.howl = new Howl({
             src: [source],
             loop: true,
+            preload: true,
             volume: 0
         });
     }
