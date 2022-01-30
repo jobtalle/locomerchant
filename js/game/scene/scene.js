@@ -7,6 +7,7 @@ import {Sounds} from "../audio/sounds.js";
 import {ItemTwig} from "./item/itemTwig.js";
 import {SceneryForest} from "./scenery/sceneryForest.js";
 import {Utils} from "../../math/utils.js";
+import {PriceLabel} from "./priceLabel.js";
 
 export class Scene {
     static TRACKS_Y = 850;
@@ -176,7 +177,7 @@ export class Scene {
     move(delta) {
         if (this.scenery.move(delta)) {
             const sellWidth = 1500;
-            const sellY = 900;
+            const sellY = 950;
             const sellItems = [];
 
             for (const selling of this.scenery.catalogue.selling) {
@@ -187,7 +188,7 @@ export class Scene {
             }
 
             for (let i = 0; i < sellItems.length; ++i) {
-                const x = 32 + this.width + i * sellWidth / (sellItems.length - 1);
+                const x = 32 + this.width + sellWidth * (1 - i / (sellItems.length - 1));
                 const c = sellItems[i].f;
                 const item = new c(this.engine, new Vector(x, sellY));
 
@@ -195,6 +196,8 @@ export class Scene {
 
                 this.items.push(item);
                 this.itemsForSale.push(item);
+
+                item.label = new PriceLabel(sellItems[i].price);
             }
         }
 

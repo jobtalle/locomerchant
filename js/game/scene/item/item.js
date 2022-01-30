@@ -23,6 +23,7 @@ export class Item {
         this.burning = false;
         this.burnable = fuel !== 0;
         this.locomotive = null;
+        this.label = null;
 
         switch (shape) {
             case "circle":
@@ -85,6 +86,8 @@ export class Item {
             sprite = this.sprites[1 + Math.floor((1 - this.fuel / this.fuelInitial) * (this.sprites.length - 1))];
 
         sprite.draw(context, this.width * -.5, this.height * -.5);
+
+        this.label?.draw(context, 0, 0);
 
         context.restore();
     }
