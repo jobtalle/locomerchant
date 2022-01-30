@@ -76,7 +76,8 @@ export class Scene {
                 this.money -= this.itemDragging.label.price;
                 this.itemDragging.label = null;
             }
-            this.itemsForSale.splice(this.itemsForSale.indexOf(this.itemDragging), 1);
+            if (this.itemsForSale.indexOf(this.itemDragging) !== -1)
+                this.itemsForSale.splice(this.itemsForSale.indexOf(this.itemDragging), 1);
             this.items.splice(this.items.indexOf(this.itemDragging), 1);
 
             this.updateForSale();
