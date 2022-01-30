@@ -21,7 +21,7 @@ export class PriceLabel {
         context.fill();
 
         context.fillStyle = "black";
-        context.font = "40px Times New Roman";
+        context.font = "40px pica";
         context.fillText("$" + price, PriceLabel.HEIGHT * .5, PriceLabel.HEIGHT * .5 + 10);
     }
 

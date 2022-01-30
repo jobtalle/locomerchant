@@ -1,5 +1,11 @@
+@font-face {
+    font-family: "pica";
+    src: url("font/IMFellDWPica-Regular.ttf");
+}
+
 body {
     margin: 0;
+    font-family: pica;
 }
 
 #wrapper {
