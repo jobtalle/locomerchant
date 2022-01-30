@@ -7,6 +7,7 @@ export class PriceLabel {
         this.canvas.width = PriceLabel.WIDTH;
         this.canvas.height = PriceLabel.HEIGHT;
         this.angle = Math.random() * Math.PI * -.35;
+        this.price = price;
 
         const context = this.canvas.getContext("2d");
 

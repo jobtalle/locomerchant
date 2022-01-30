@@ -72,6 +72,10 @@ export class Scene {
             Sounds.GRAB.play();
 
             this.itemDragging = this.findItem(event.body);
+            if (this.itemDragging.label) {
+                this.money -= this.itemDragging.label.price;
+                this.itemDragging.label = null;
+            }
             this.itemsForSale.splice(this.itemsForSale.indexOf(this.itemDragging), 1);
             this.items.splice(this.items.indexOf(this.itemDragging), 1);
 
