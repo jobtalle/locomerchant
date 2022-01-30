@@ -25,6 +25,9 @@ export class Scene {
     static PIXELS_PER_METER = 100;
     static MONEY_INITIAL = 150;
     static BIOME_SCALING = 1.1;
+    static WAGON_RIGHT = new Vector(190, 60);
+    static WAGON_LEFT = new Vector(-190, 60);
+    static LOCOMOTIVE_LEFT = new Vector(-320, 110);
 
     constructor(mouse, width, height) {
         this.width = width;
@@ -465,6 +468,35 @@ export class Scene {
 
     render(context, time) {
         this.scenery.renderBackground(context, time, this.width);
+
+        const wax = Utils.lerp(this.wagonA.body.positionPrev.x, this.wagonA.body.position.x, time);
+        const way = Utils.lerp(this.wagonA.body.positionPrev.y, this.wagonA.body.position.y, time);
+        const waa = -Utils.lerp(this.wagonA.body.anglePrev, this.wagonA.body.angle, time);
+        const wbx = Utils.lerp(this.wagonB.body.positionPrev.x, this.wagonB.body.position.x, time);
+        const wby = Utils.lerp(this.wagonB.body.positionPrev.y, this.wagonB.body.position.y, time);
+        const wba = -Utils.lerp(this.wagonB.body.anglePrev, this.wagonB.body.angle, time);
+        const lx = Utils.lerp(this.locomotive.body.positionPrev.x, this.locomotive.body.position.x, time);
+        const ly = Utils.lerp(this.locomotive.body.positionPrev.y, this.locomotive.body.position.y, time);
+        const la = -Utils.lerp(this.locomotive.body.anglePrev, this.locomotive.body.angle, time);
+
+        context.beginPath();
+        context.lineWidth = 12;
+        context.strokeStyle = "#443124";
+        context.moveTo(
+            wax + Math.cos(waa) * Scene.WAGON_RIGHT.x + Math.sin(waa) * Scene.WAGON_RIGHT.y,
+            way - Math.sin(waa) * Scene.WAGON_RIGHT.x + Math.cos(waa) * Scene.WAGON_RIGHT.y);
+        context.lineTo(
+            wbx + Math.cos(wba) * Scene.WAGON_LEFT.x + Math.sin(wba) * Scene.WAGON_LEFT.y,
+            wby - Math.sin(wba) * Scene.WAGON_LEFT.x + Math.cos(wba) * Scene.WAGON_LEFT.y);
+        context.stroke();
+        context.beginPath();
+        context.moveTo(
+            wbx + Math.cos(wba) * Scene.WAGON_RIGHT.x + Math.sin(wba) * Scene.WAGON_RIGHT.y,
+            wby - Math.sin(wba) * Scene.WAGON_RIGHT.x + Math.cos(wba) * Scene.WAGON_RIGHT.y);
+        context.lineTo(
+            lx + Math.cos(la) * Scene.LOCOMOTIVE_LEFT.x + Math.sin(la) * Scene.LOCOMOTIVE_LEFT.y,
+            ly - Math.sin(la) * Scene.LOCOMOTIVE_LEFT.x + Math.cos(la) * Scene.LOCOMOTIVE_LEFT.y);
+        context.stroke();
 
         this.wagonA.renderBackground(context, time);
         this.wagonB.renderBackground(context, time);
