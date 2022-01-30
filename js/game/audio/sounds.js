@@ -35,4 +35,11 @@ export class Sounds {
         "audio/Smoke_Puff-005.wav",
         "audio/Smoke_Puff-005.wav"
     ]);
+    static BUY = new SFX([
+        "audio/Buy-001.wav",
+        "audio/Buy-002.wav",
+        "audio/Buy-003.wav",
+        "audio/Buy-004.wav",
+        "audio/Buy-005.wav"
+    ]);
 }
