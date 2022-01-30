@@ -1,15 +1,23 @@
 import {Scene} from "../scene.js";
+import {Layer} from "./layer/layer.js";
+import {Sprites} from "../../sprite/sprites.js";
 
 export class Scenery {
     static INITIALIZE_DELTA = 50;
 
-    constructor(width, height, background, spawners) {
+    constructor(width, height, length, background, spawners) {
         this.width = width;
         this.height = height;
+        this.length = length;
         this.spawners = spawners;
         this.background = background;
         this.layersBack = [];
         this.layersFront = [];
+        this.moved = 0;
+        this.pStation = this.length * .5;
+        this.pSign100 = this.pStation - 100 * Scene.PIXELS_PER_METER;
+        this.pSign200 = this.pStation - 200 * Scene.PIXELS_PER_METER;
+        this.pSign500 = this.pStation - 500 * Scene.PIXELS_PER_METER;
     }
 
     initialize() {
@@ -17,9 +25,15 @@ export class Scenery {
 
         for (let move = 0; move < moves; ++move)
             this.move(Scenery.INITIALIZE_DELTA);
+
+        this.moved = 0;
     }
 
     move(delta) {
+        const previous = this.moved;
+
+        this.moved += delta;
+
         for (const layer of this.layersBack)
             layer.move(delta);
 
@@ -30,6 +44,18 @@ export class Scenery {
 
         for (const spawner of this.spawners)
             newLayers.push(...spawner.move(delta, this.width, this.height));
+
+        if (previous < this.pSign500 && this.moved > this.pSign500)
+            newLayers.push(new Layer(this.width, this.height - 724, 284, 724,
+                Sprites.STATION_SIGN_500, -.2));
+
+        if (previous < this.pSign200 && this.moved > this.pSign200)
+            newLayers.push(new Layer(this.width, this.height - 724, 284, 724,
+                Sprites.STATION_SIGN_200, -.2));
+
+        if (previous < this.pSign100 && this.moved > this.pSign100)
+            newLayers.push(new Layer(this.width, this.height - 724, 284, 724,
+                Sprites.STATION_SIGN_100, -.2));
 
         if (newLayers.length > 0) {
             for (const layer of newLayers) {

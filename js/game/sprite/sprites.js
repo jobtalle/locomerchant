@@ -1,6 +1,23 @@
 import {Sprite} from "./sprite.js";
 
 export class Sprites {
+    static WAGON_WHEEL = [
+        new Sprite("art/train/Train_wagon_wheel_open_1.png"),
+        new Sprite("art/train/Train_wagon_wheel_open_2.png")];
+    static LOCOMOTIVE_WHEEL_BIG = [
+        new Sprite("art/train/Train_engine_bigwheel_1.png"),
+        new Sprite("art/train/Train_engine_bigwheel_2.png")];
+    static WAGON_CARRIAGE = new Sprite("art/train/Train_wagon_carriage_1.png");
+    static WAGON_BACKBOARD = new Sprite("art/train/Train_wagon_backboard_1.png");
+    static LOCOMOTIVE = new Sprite("art/train/Train_engine_Main_1.png");
+    static LOCOMOTIVE_WHEEL_SMALL = [
+        new Sprite("art/train/Train_engine_smallwheel_1.png"),
+        new Sprite("art/train/Train_engine_smallwheel_2.png")];
+    static LOCOMOTIVE_BEAM = new Sprite("art/train/Train_engine_steam_system_3.png");
+    static LOCOMOTIVE_BEAM_2 = new Sprite("art/train/Train_engine_steam_system_2.png");
+    static LOCOMOTIVE_BEAM_3 = new Sprite("art/train/Train_engine_steam_system_4.png");
+    static LOCOMOTIVE_CYLINDER = new Sprite("art/train/Train_engine_steam_system_1.png");
+
     static COAL = [
         new Sprite("art/items/A_Common_r_coal_01.png"),
         new Sprite("art/items/A_Common_r_coal_02.png"),
@@ -31,22 +48,11 @@ export class Sprites {
         new Sprite("art/items/A_Common_s_twig_07.png"),
         new Sprite("art/items/A_Common_s_twig_08.png"),
         new Sprite("art/items/A_Common_s_twig_09.png")];
-    static WAGON_WHEEL = [
-        new Sprite("art/train/Train_wagon_wheel_open_1.png"),
-        new Sprite("art/train/Train_wagon_wheel_open_2.png")];
-    static LOCOMOTIVE_WHEEL_BIG = [
-        new Sprite("art/train/Train_engine_bigwheel_1.png"),
-        new Sprite("art/train/Train_engine_bigwheel_2.png")];
-    static WAGON_CARRIAGE = new Sprite("art/train/Train_wagon_carriage_1.png");
-    static WAGON_BACKBOARD = new Sprite("art/train/Train_wagon_backboard_1.png");
-    static LOCOMOTIVE = new Sprite("art/train/Train_engine_Main_1.png");
-    static LOCOMOTIVE_WHEEL_SMALL = [
-        new Sprite("art/train/Train_engine_smallwheel_1.png"),
-        new Sprite("art/train/Train_engine_smallwheel_2.png")];
-    static LOCOMOTIVE_BEAM = new Sprite("art/train/Train_engine_steam_system_3.png");
-    static LOCOMOTIVE_BEAM_2 = new Sprite("art/train/Train_engine_steam_system_2.png");
-    static LOCOMOTIVE_BEAM_3 = new Sprite("art/train/Train_engine_steam_system_4.png");
-    static LOCOMOTIVE_CYLINDER = new Sprite("art/train/Train_engine_steam_system_1.png");
+
+    static STATION_SIGN_100 = new Sprite("art/station/UI_0000_100m.png");
+    static STATION_SIGN_200 = new Sprite("art/station/UI_0001_200m.png");
+    static STATION_SIGN_500 = new Sprite("art/station/UI_0002_500m.png");
+
     static BIOME_EYVIND_BACKGROUND = new Sprite("art/biomes/eyvind/Eyvind_Layer7_BG.png");
     static BIOME_EYVIND_LAYER_B1 = [
         new Sprite("art/biomes/eyvind/Eyvind_layer4_Grass1.png"),

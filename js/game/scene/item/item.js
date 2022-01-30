@@ -1,8 +1,8 @@
 import {Utils} from "../../../math/utils.js";
 
 export class Item {
-    static BURN_RATE = .003;
-    static BURN_RATE_EXTRA = .015;
+    static BURN_RATE = .005;
+    static BURN_RATE_EXTRA = .005;
 
     constructor(
         engine,

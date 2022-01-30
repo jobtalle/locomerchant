@@ -24,7 +24,8 @@ export class Scene {
         this.items = [];
         this.itemDragging = null;
         this.pulling = 0;
-        this.scenery = new SceneryForest(width, height);
+        this.sceneryLength = 1100 * Scene.PIXELS_PER_METER;
+        this.scenery = new SceneryForest(width, height, this.sceneryLength);
         this.money = 50;
         this.distance = 0;
 

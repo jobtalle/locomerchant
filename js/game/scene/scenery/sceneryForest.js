@@ -3,10 +3,11 @@ import {LayerSpawner} from "./layer/layerSpawner.js";
 import {Sprites} from "../../sprite/sprites.js";
 
 export class SceneryForest extends Scenery {
-    constructor(width, height) {
+    constructor(width, height, length) {
         super(
             width,
             height,
+            length,
             Sprites.BIOME_EYVIND_BACKGROUND,
             [
                 new LayerSpawner(
