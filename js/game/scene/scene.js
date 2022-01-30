@@ -279,20 +279,20 @@ export class Scene {
         this.sceneryLength *= Scene.BIOME_SCALING;
 
 
-        const choice = Math.floor(Math.pow(Math.random(), 1.1) * 4);
+        const choice = Math.floor(Math.pow(Math.random(), 1.2) * 4);
 
         switch (choice) {
             default:
             case 0:
-                this.scenery = new SceneryForest(this.width, this.height, this.sceneryLength);
+                this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
 
                 break;
             case 1:
-                this.scenery = new SceneryCountry(this.width, this.height, this.sceneryLength);
+                this.scenery = new SceneryForest(this.width, this.height, this.sceneryLength);
 
                 break;
             case 2:
-                this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
+                this.scenery = new SceneryCountry(this.width, this.height, this.sceneryLength);
 
                 break;
             case 3:
