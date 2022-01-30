@@ -52,7 +52,7 @@ export class Locomotive {
         this.leverAngleTarget = this.leverAngle;
         this.leverPosition = new Vector(Locomotive.LEVER_X, this.height - Locomotive.FLOOR);
         this.furnaceItems = [];
-        this.heat = 0;
+        this.heat = 10;
         this.heatPrevious = this.heat;
         this.heatTarget = this.heat;
         this.velocity = 0;

@@ -52,6 +52,8 @@ export class Sprites {
     static STATION_SIGN_100 = new Sprite("art/station/UI_0000_100m.png");
     static STATION_SIGN_200 = new Sprite("art/station/UI_0001_200m.png");
     static STATION_SIGN_500 = new Sprite("art/station/UI_0002_500m.png");
+    static STATION_HOUSE = new Sprite("art/station/Trainstation_Layer6_House.png");
+    static STATION_BEAM = new Sprite("art/station/Trainstation_Layer5_Pole.png");
 
     static BIOME_EYVIND_BACKGROUND = new Sprite("art/biomes/eyvind/Eyvind_Layer7_BG.png");
     static BIOME_EYVIND_LAYER_B1 = [

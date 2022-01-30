@@ -13,6 +13,7 @@ export class Scene {
     static DESTROY_ABOVE = 1500;
     static DESTROY_LEFT = 1000;
     static PIXELS_PER_METER = 100;
+    static MONEY_INITIAL = 200;
 
     constructor(mouse, width, height) {
         this.width = width;
@@ -24,9 +25,9 @@ export class Scene {
         this.items = [];
         this.itemDragging = null;
         this.pulling = 0;
-        this.sceneryLength = 1100 * Scene.PIXELS_PER_METER;
+        this.sceneryLength = 100 * Scene.PIXELS_PER_METER;
         this.scenery = new SceneryForest(width, height, this.sceneryLength);
-        this.money = 50;
+        this.money = Scene.MONEY_INITIAL;
         this.distance = 0;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
@@ -129,6 +130,8 @@ export class Scene {
             item.destroy();
 
         this.items = [];
+        this.distance = 0;
+        this.money = Scene.MONEY_INITIAL;
 
         this.locomotive.reset();
 

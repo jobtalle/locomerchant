@@ -18,6 +18,8 @@ export class Scenery {
         this.pSign100 = this.pStation - 100 * Scene.PIXELS_PER_METER;
         this.pSign200 = this.pStation - 200 * Scene.PIXELS_PER_METER;
         this.pSign500 = this.pStation - 500 * Scene.PIXELS_PER_METER;
+        this.stationWidth = 3000;
+        this.stationClearance = 300;
     }
 
     initialize() {
@@ -57,11 +59,27 @@ export class Scenery {
             newLayers.push(new Layer(this.width, this.height - 724, 284, 724,
                 Sprites.STATION_SIGN_100, -.2));
 
+        const exceptions = [];
+
+        if (previous < this.pStation && this.moved > this.pStation) {
+            newLayers.push(new Layer(this.width, 0, 1326, 1080, Sprites.STATION_HOUSE, .88));
+
+            for (let i = 0; i < 4; ++i) {
+                const d = .96;
+
+                newLayers.push(new Layer(this.width + 756 * i * d, this.height - 1057, 756, 1057, Sprites.STATION_BEAM, d));
+            }
+
+            // const ground = new Layer(this.width, this.height - 261, 1920, 261, Sprites.STATION_GROUND, -.001);
+            // newLayers.push(ground);
+            // exceptions.push(ground);
+        }
+
         if (newLayers.length > 0) {
             for (const layer of newLayers) {
                 if (layer.depth >= 0)
                     this.layersBack.push(layer);
-                else
+                else if (exceptions.indexOf(layer) !== -1 || this.moved < this.pStation - this.stationClearance || this.moved > this.pStation + this.stationWidth)
                     this.layersFront.push(layer);
             }
 
