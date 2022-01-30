@@ -49,7 +49,7 @@ export class Scene {
         this.tunnelX = -1;
         this.tunneling = false;
         this.music = new Music();
-        this.biomesSinceTown = 10;
+        this.biomesSinceTown = 0;
         this.lastChoice = -1;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
@@ -222,7 +222,8 @@ export class Scene {
         this.seller?.destroy();
         this.seller = null;
         this.tunneling = 0;
-        this.biomesSinceTown = 10;
+        this.biomesSinceTown = 0;
+        this.lastChoice = -1;
 
         this.sceneryLength = 300 * Scene.PIXELS_PER_METER;
         this.scenery = this.initialBiome();
@@ -291,7 +292,7 @@ export class Scene {
             this.lastChoice = 0;
         }
         else {
-            let choice = -2;
+            let choice = Math.floor(Math.pow(Math.random(), 1.1) * 4);
 
             while (choice === this.lastChoice)
                 choice = Math.floor(Math.pow(Math.random(), 1.1) * 4);
