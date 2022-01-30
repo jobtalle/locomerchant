@@ -293,7 +293,7 @@ export class Scene {
         else {
             let choice = -2;
 
-            while (choice !== this.lastChoice)
+            while (choice === this.lastChoice)
                 choice = Math.floor(Math.pow(Math.random(), 1.1) * 4);
 
             this.lastChoice = choice;
