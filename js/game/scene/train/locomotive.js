@@ -295,14 +295,13 @@ export class Locomotive {
 
         context.save();
         context.translate(this.leverPosition.x, this.leverPosition.y);
-        context.rotate(Utils.lerp(this.leverAnglePrevious, this.leverAngle, time));
+        context.rotate(Utils.lerp(this.leverAnglePrevious, this.leverAngle, time) + Math.PI * .5);
 
-        context.fillStyle = "#3a8c5f";
-        context.beginPath();
-        context.rect(0, -Locomotive.LEVER_WIDTH * .5, Locomotive.LEVER_LENGTH, Locomotive.LEVER_WIDTH);
-        context.fill();
+        Sprites.LOCOMOTIVE_LEVER_2.draw(context, -26, -126);
 
         context.restore();
+
+        Sprites.LOCOMOTIVE_LEVER_1.draw(context, this.leverPosition.x - 50, this.leverPosition.y - 45);
         context.restore();
 
         this.wheelDriveLeft.render(context, time);

@@ -25,10 +25,11 @@ body {
 
 #distance {
     background-image: url("art/ui/UI_kilometer.png");
-    padding-top: 51px;
+    color: #4D3527;
+    padding-top: 48px;
     position: absolute;
     width: 454px;
-    height: 115px;
+    height: 118px;
     left: 50%;
     margin-left: -227px;
     text-align: center;
@@ -37,6 +38,7 @@ body {
 }
 
 #money {
+    color: #4D3527;
     position: absolute;
     width: 200px;
     height: 60px;
