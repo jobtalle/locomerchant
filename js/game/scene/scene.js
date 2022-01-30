@@ -284,7 +284,7 @@ export class Scene {
 
         this.sceneryLength *= Scene.BIOME_SCALING;
 
-        if (++this.biomesSinceTown > 3 && this.lastChoice !== 0) {
+        if (this.biomesSinceTown > 3 && this.lastChoice !== 0) {
             this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
 
             this.biomesSinceTown = 0;
@@ -307,14 +307,17 @@ export class Scene {
                     break;
                 case 1:
                     this.scenery = new SceneryForest(this.width, this.height, this.sceneryLength);
+                    ++this.biomesSinceTown;
 
                     break;
                 case 2:
                     this.scenery = new SceneryCountry(this.width, this.height, this.sceneryLength);
+                    ++this.biomesSinceTown;
 
                     break;
                 case 3:
                     this.scenery = new SceneryClouds(this.width, this.height, this.sceneryLength);
+                    ++this.biomesSinceTown;
 
                     break;
             }
