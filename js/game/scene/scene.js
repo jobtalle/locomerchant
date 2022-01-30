@@ -8,6 +8,7 @@ import {ItemTwig} from "./item/itemTwig.js";
 import {SceneryForest} from "./scenery/sceneryForest.js";
 import {Utils} from "../../math/utils.js";
 import {PriceLabel} from "./priceLabel.js";
+import {Seller} from "./seller.js";
 
 export class Scene {
     static TRACKS_Y = 850;
@@ -32,6 +33,7 @@ export class Scene {
         this.money = Scene.MONEY_INITIAL;
         this.distance = 0;
         this.itemsForSale = [];
+        this.seller = null;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -81,6 +83,8 @@ export class Scene {
                 this.itemsForSale.splice(this.itemsForSale.indexOf(this.itemDragging), 1);
             this.items.splice(this.items.indexOf(this.itemDragging), 1);
 
+            this.seller?.removeItem(this.itemDragging);
+
             this.updateForSale();
 
             if (this.itemDragging.locomotive)
@@ -104,6 +108,18 @@ export class Scene {
                     item = this.findItem(pairs[pair].bodyA);
 
                 item?.enterFurnace(this.locomotive);
+
+                if (this.seller) {
+                    item = null;
+
+                    if (pairs[pair].bodyA === this.seller.body)
+                        item = this.findItem(pairs[pair].bodyB);
+                    else if (pairs[pair].bodyB === this.seller.body)
+                        item = this.findItem(pairs[pair].bodyA);
+
+                    if (item)
+                        this.seller.addItem(item);
+                }
             }
         });
         Matter.Events.on(this.engine, "collisionEnd", event => {
@@ -118,6 +134,18 @@ export class Scene {
                     item = this.findItem(pairs[pair].bodyA);
 
                 item?.leaveFurnace();
+
+                if (this.seller) {
+                    item = null;
+
+                    if (pairs[pair].bodyA === this.seller.body)
+                        item = this.findItem(pairs[pair].bodyB);
+                    else if (pairs[pair].bodyB === this.seller.body)
+                        item = this.findItem(pairs[pair].bodyA);
+
+                    if (item)
+                        this.seller.removeItem(item);
+                }
             }
         });
 
@@ -200,6 +228,8 @@ export class Scene {
     }
 
     move(delta) {
+        const sm = this.scenery.moved;
+
         if (this.scenery.move(delta)) {
             const sellWidth = 1700;
             const sellY = 950;
@@ -232,6 +262,17 @@ export class Scene {
             Matter.Body.setPosition(item.body, new Vector(item.body.position.x - delta, item.body.position.y));
             item.body.positionPrev.x = xp;
         }
+
+        this.seller?.move(delta);
+
+        if (sm < this.scenery.pScale && this.scenery.moved > this.scenery.pScale) {
+            this.seller = new Seller(this.engine, new Vector(this.width + 500, 1030), this.scenery.catalogue.buying);
+        }
+
+        if (this.seller && this.seller.body.position.x < -3000) {
+            this.seller.destroy();
+            this.seller = null;
+        }
     }
 
     findItem(body) {
@@ -252,6 +293,7 @@ export class Scene {
         this.wagonA.update();
         this.wagonB.update();
         this.locomotive.update();
+        this.seller?.update();
 
         acceleration += this.locomotive.velocity;
 
@@ -268,6 +310,8 @@ export class Scene {
 
                 if (saleIndex !== -1)
                     this.itemsForSale.splice(saleIndex, 1);
+
+                this.seller?.removeItem(this.items[item]);
 
                 this.items[item].destroy();
                 this.items.splice(item, 1);
@@ -301,6 +345,8 @@ export class Scene {
         this.wagonA.render(context, time);
         this.wagonB.render(context, time);
         this.locomotive.render(context, time);
+
+        this.seller?.render(context, time);
 
         this.scenery.renderForeground(context, time);
 
