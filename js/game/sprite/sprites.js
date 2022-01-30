@@ -149,4 +149,11 @@ export class Sprites {
     static MUSHROOM = [new Sprite("art/items/A_Eyvind_r_mushroom.png")];
     static PUMPKIN = [new Sprite("art/items/A_Eyvind_r_pumpkin.png")];
     static FLOWER = [new Sprite("art/items/A_Eyvind_s_Flower.png")];
+
+    static BALL = [new Sprite("art/items/A_clouds_r_ball.png")];
+    static CANDY = [new Sprite("art/items/A_clouds_r_Candy.png")];
+    static LIGHTBULB = [new Sprite("art/items/A_clouds_r_lightbulb.png")];
+    static BOOK = [new Sprite("art/items/A_clouds_s_Book.png")];
+    static CANDYSTICK = [new Sprite("art/items/A_clouds_s_candy-stick.png")];
+    static LYRA = [new Sprite("art/items/A_Clouds_s_Lyra.png")];
 }

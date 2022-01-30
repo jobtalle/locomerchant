@@ -2,6 +2,12 @@ import {Scenery} from "./scenery.js";
 import {Sprites} from "../../sprite/sprites.js";
 import {LayerSpawner} from "./layer/layerSpawner.js";
 import {Catalogue} from "./catalogue/catalogue.js";
+import {ForSale} from "./catalogue/forSale.js";
+import {ItemBall} from "../item/itemBall.js";
+import {ItemCandy} from "../item/itemCandy.js";
+import {ItemLightbulb} from "../item/itemLightbulb.js";
+import {ItemBook} from "../item/itemBook.js";
+import {ItemLyra} from "../item/itemLyra.js";
 
 export class SceneryClouds extends Scenery {
     constructor(width, height, length) {
@@ -108,7 +114,12 @@ export class SceneryClouds extends Scenery {
             ],
             new Catalogue(
                 [
-
+                    new ForSale(ItemBall, 10, 0, 3),
+                    new ForSale(ItemCandy, 10, 0, 3),
+                    new ForSale(ItemLightbulb, 10, 0, 2),
+                    new ForSale(ItemBook, 20, 2, 4),
+                    new ForSale(ItemCandy, 5, 2, 3),
+                    new ForSale(ItemLyra, 50,1, 2)
                 ],
                 [
 
