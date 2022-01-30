@@ -24,7 +24,7 @@ export class Scene {
     static DESTROY_LEFT = 1000;
     static PIXELS_PER_METER = 100;
     static MONEY_INITIAL = 150;
-    static BIOME_SCALING = 1.2;
+    static BIOME_SCALING = 1.1;
 
     constructor(mouse, width, height) {
         this.width = width;
@@ -46,6 +46,7 @@ export class Scene {
         this.tunnelX = -1;
         this.tunneling = false;
         this.music = new Music();
+        this.biomesSinceTown = 0;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -278,29 +279,34 @@ export class Scene {
 
         this.sceneryLength *= Scene.BIOME_SCALING;
 
+        if (++this.biomesSinceTown > 3) {
+            this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
 
-        const choice = Math.floor(Math.pow(Math.random(), 1.2) * 4);
-
-        switch (choice) {
-            default:
-            case 0:
-                this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
-
-                break;
-            case 1:
-                this.scenery = new SceneryForest(this.width, this.height, this.sceneryLength);
-
-                break;
-            case 2:
-                this.scenery = new SceneryCountry(this.width, this.height, this.sceneryLength);
-
-                break;
-            case 3:
-                this.scenery = new SceneryClouds(this.width, this.height, this.sceneryLength);
-
-                break;
+            this.biomesSinceTown = 0;
         }
+        else {
+            const choice = Math.floor(Math.pow(Math.random(), 1.2) * 4);
 
+            switch (choice) {
+                default:
+                case 0:
+                    this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
+
+                    break;
+                case 1:
+                    this.scenery = new SceneryForest(this.width, this.height, this.sceneryLength);
+
+                    break;
+                case 2:
+                    this.scenery = new SceneryCountry(this.width, this.height, this.sceneryLength);
+
+                    break;
+                case 3:
+                    this.scenery = new SceneryClouds(this.width, this.height, this.sceneryLength);
+
+                    break;
+            }
+        }
 
         this.scenery.initialize();
     }
