@@ -71,6 +71,7 @@ export class Scene {
             Sounds.GRAB.play();
 
             this.itemDragging = this.findItem(event.body);
+            this.itemsForSale.splice(this.itemsForSale.indexOf(this.itemDragging), 1);
             this.items.splice(this.items.indexOf(this.itemDragging), 1);
 
             if (this.itemDragging.locomotive)
@@ -196,6 +197,13 @@ export class Scene {
                 this.itemsForSale.push(item);
             }
         }
+
+        for (const item of this.itemsForSale) {
+            const xp = item.body.position.x;
+
+            Matter.Body.setPosition(item.body, new Vector(item.body.position.x - delta, item.body.position.y));
+            item.body.positionPrev.x = xp;
+        }
     }
 
     findItem(body) {
@@ -226,7 +234,13 @@ export class Scene {
         for (let item = this.items.length; item-- > 0;) {
             if (this.items[item].update() ||
                 this.items[item].body.position.y > this.height + Scene.DESTROY_UNDER ||
-                this.items[item].body.position.y < -Scene.DESTROY_ABOVE) {
+                this.items[item].body.position.y < -Scene.DESTROY_ABOVE ||
+                this.items[item].body.position.x < -3000) {
+                const saleIndex = this.itemsForSale.indexOf(this.items[item]);
+
+                if (saleIndex !== -1)
+                    this.itemsForSale.splice(saleIndex, 1);
+
                 this.items[item].destroy();
                 this.items.splice(item, 1);
             }
