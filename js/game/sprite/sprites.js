@@ -127,5 +127,6 @@ export class Sprites {
     static MUSHROOM = [new Sprite("art/items/A_Eyvind_r_mushroom.png")];
     static PUMPKIN = [new Sprite("art/items/A_Eyvind_r_pumpkin.png")];
     static FLOWER = [new Sprite("art/items/A_Eyvind_s_Flower.png")];
-    static HAYSTACK = [new Sprite("art/items/A_Eyvind_s_haystack.png")];
+
+    static HAYSTACK = [new Sprite("art/items/A_Countryside_s_haystack.png")];
 }
