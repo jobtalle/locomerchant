@@ -260,7 +260,8 @@ export class Scene {
     }
 
     nextBiome() {
-
+        this.scenery = new SceneryForest(this.width, this.height, 1000 * Scene.PIXELS_PER_METER);
+        this.scenery.initialize();
     }
 
     move(delta) {
