@@ -38,11 +38,13 @@ body {
 }
 
 #money {
+    background-image: url("art/ui/UI_Money-Counter.png");
     color: #4D3527;
     position: absolute;
-    width: 200px;
-    height: 60px;
-    right: 20px;
+    padding-right: 195px;
+    width: 105px;
+    height: 79px;
+    right: 0;
     text-align: right;
     font-size: 64px;
     user-select: none;

@@ -150,7 +150,7 @@ export class Locomotive {
     accelerate(delta) {
         this.headAngleSpeed *= .9;
         this.headAngleSpeed -= this.headAngle * .05;
-        this.headAngleSpeed -= delta * .05;
+        this.headAngleSpeed -= delta * .025;
     }
 
     furnaceBurning() {
