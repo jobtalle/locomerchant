@@ -1,5 +1,5 @@
 export class PriceLabel {
-    static WIDTH = 90;
+    static WIDTH = 120;
     static HEIGHT = 40;
 
     constructor(price, afford) {

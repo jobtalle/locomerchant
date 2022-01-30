@@ -99,10 +99,33 @@ export class Sprites {
     static BIOME_VILLAGE_7_1 = new Sprite("art/biomes/village/Layer7_01.png");
     static BIOME_VILLAGE_8_1 = new Sprite("art/biomes/village/Layer8_01.png");
 
+    static BIOME_COUNTRY_1_1 = new Sprite("art/biomes/country/Layer1_01.png");
+    static BIOME_COUNTRY_1_2 = new Sprite("art/biomes/country/Layer1_02.png");
+    static BIOME_COUNTRY_2_1 = new Sprite("art/biomes/country/Layer2_01.png");
+    static BIOME_COUNTRY_3_1 = new Sprite("art/biomes/country/Layer3_01.png");
+    static BIOME_COUNTRY_4_1 = new Sprite("art/biomes/country/Layer4_01.png");
+    static BIOME_COUNTRY_5_1 = new Sprite("art/biomes/country/Layer5_01.png");
+    static BIOME_COUNTRY_5_2 = new Sprite("art/biomes/country/Layer5_02.png");
+    static BIOME_COUNTRY_5_3 = new Sprite("art/biomes/country/Layer5_03.png");
+    static BIOME_COUNTRY_5_4 = new Sprite("art/biomes/country/Layer5_04.png");
+    static BIOME_COUNTRY_6_1 = new Sprite("art/biomes/country/Layer6_01.png");
+    static BIOME_COUNTRY_6_2 = new Sprite("art/biomes/country/Layer6_02.png");
+    static BIOME_COUNTRY_7_1 = new Sprite("art/biomes/country/Layer7_01.png");
+    static BIOME_COUNTRY_8_1 = new Sprite("art/biomes/country/Layer8_01.png");
+    static BIOME_COUNTRY_8_2 = new Sprite("art/biomes/country/Layer8_02.png");
+    static BIOME_COUNTRY_8_3 = new Sprite("art/biomes/country/Layer8_03.png");
+    static BIOME_COUNTRY_9_1 = new Sprite("art/biomes/country/Layer9_01.png");
+
     static TUNNEL = new Sprite("art/ui/Tunnel_0001.png");
 
     static WOODEN_TOY = [new Sprite("art/items/A_Village_s_Wooden-Toy.png")];
     static BRICKS = [new Sprite("art/items/A_Village_s_bricks.png")];
     static BREAD = [new Sprite("art/items/A_Village_s_bread.png")];
     static BAGUETTE = [new Sprite("art/items/A_Village_s_baguette.png")];
+
+    static BLUEBERRIES = [new Sprite("art/items/A_Eyvind_r_blueberries.png")];
+    static MUSHROOM = [new Sprite("art/items/A_Eyvind_r_mushroom.png")];
+    static PUMPKIN = [new Sprite("art/items/A_Eyvind_r_pumpkin.png")];
+    static FLOWER = [new Sprite("art/items/A_Eyvind_s_Flower.png")];
+    static HAYSTACK = [new Sprite("art/items/A_Eyvind_s_haystack.png")];
 }

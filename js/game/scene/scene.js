@@ -14,6 +14,7 @@ import {Particle} from "./particles/particle.js";
 import {Sprites} from "../sprite/sprites.js";
 import {SceneryVillage} from "./scenery/sceneryVillage.js";
 import {Music} from "../music.js";
+import {SceneryCountry} from "./scenery/sceneryCountry.js";
 
 export class Scene {
     static TRACKS_Y = 850;
@@ -35,7 +36,7 @@ export class Scene {
         this.itemDragging = null;
         this.pulling = 0;
         this.sceneryLength = 300 * Scene.PIXELS_PER_METER;
-        this.scenery = new SceneryVillage(width, height, this.sceneryLength);
+        this.scenery = this.initialBiome();
         this.money = Scene.MONEY_INITIAL;
         this.distance = 0;
         this.itemsForSale = [];
@@ -217,7 +218,7 @@ export class Scene {
         this.tunneling = 0;
 
         this.sceneryLength = 300 * Scene.PIXELS_PER_METER;
-        this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
+        this.scenery = this.initialBiome();
 
         this.initialize();
     }
@@ -265,12 +266,29 @@ export class Scene {
         this.scenery.initialize();
     }
 
+    initialBiome() {
+        return new SceneryCountry(this.width, this.height, this.sceneryLength);
+    }
+
     nextBiome() {
         this.scenery.destroy();
 
         this.sceneryLength *= Scene.BIOME_SCALING;
 
-        this.scenery = new SceneryForest(this.width, this.height, this.sceneryLength);
+
+        const choice = Math.floor(Math.pow(Math.random(), 2) * 4);
+
+        switch (choice) {
+            default:
+            case 0:
+                this.scenery = new SceneryForest(this.width, this.height, this.sceneryLength);
+
+                break;
+            case 1:
+                this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
+        }
+
+
         this.scenery.initialize();
     }
 
