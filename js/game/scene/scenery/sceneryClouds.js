@@ -122,9 +122,9 @@ export class SceneryClouds extends Scenery {
                     new ForSale(ItemBall, 10, 0, 3),
                     new ForSale(ItemCandy, 10, 0, 3),
                     new ForSale(ItemLightbulb, 10, 0, 2),
-                    new ForSale(ItemBook, 20, 2, 4),
-                    new ForSale(ItemCandy, 5, 2, 3),
-                    new ForSale(ItemLyra, 50,1, 2)
+                    new ForSale(ItemBook, 20, 0, 4),
+                    new ForSale(ItemCandy, 5, 0, 3),
+                    new ForSale(ItemLyra, 50,0, 2)
                 ],
                 [
                     new Buying(ItemBread, 25),

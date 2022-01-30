@@ -24,7 +24,7 @@ export class Scene {
     static DESTROY_LEFT = 1000;
     static PIXELS_PER_METER = 100;
     static MONEY_INITIAL = 150;
-    static BIOME_SCALING = 1.1;
+    static BIOME_SCALING = 1.05;
     static WAGON_RIGHT = new Vector(190, 60);
     static WAGON_LEFT = new Vector(-190, 60);
     static LOCOMOTIVE_LEFT = new Vector(-320, 110);
@@ -292,10 +292,11 @@ export class Scene {
             this.lastChoice = 0;
         }
         else {
-            let choice = Math.floor(Math.pow(Math.random(), 1.1) * 4);
+            const power = 1.25;
+            let choice = Math.floor(Math.pow(Math.random(), power) * 4);
 
             while (choice === this.lastChoice)
-                choice = Math.floor(Math.pow(Math.random(), 1.1) * 4);
+                choice = Math.floor(Math.pow(Math.random(), power) * 4);
 
             this.lastChoice = choice;
 

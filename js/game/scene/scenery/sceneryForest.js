@@ -122,17 +122,17 @@ export class SceneryForest extends Scenery {
         ],
         new Catalogue(
             [
-                new ForSale(ItemTwig, 5, 2, 3),
-                new ForSale(ItemLog, 10, 5, 15),
-                new ForSale(ItemCoal, 20, 3, 6),
+                new ForSale(ItemTwig, 5, 1, 3),
+                new ForSale(ItemLog, 10, 5, 1),
+                new ForSale(ItemCoal, 20, 4, 8),
                 new ForSale(ItemBlueberries, 10, 0, 2),
                 new ForSale(ItemFlower, 10, 0, 3),
                 new ForSale(ItemPumpkin, 15, 0, 3),
-                new ForSale(ItemMushroom, 5, 0, 4)
+                new ForSale(ItemMushroom, 5, 0, 3)
             ],
             [
                 new Buying(ItemLog, 5),
-                new Buying(ItemCoal, 20),
+                new Buying(ItemCoal, 25),
                 new Buying(ItemBricks, 50),
                 new Buying(ItemBread, 20),
                 new Buying(ItemBaguette, 20),
