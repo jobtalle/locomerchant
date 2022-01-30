@@ -15,6 +15,7 @@ import {Sprites} from "../sprite/sprites.js";
 import {SceneryVillage} from "./scenery/sceneryVillage.js";
 import {Music} from "../music.js";
 import {SceneryCountry} from "./scenery/sceneryCountry.js";
+import {SceneryClouds} from "./scenery/sceneryClouds.js";
 
 export class Scene {
     static TRACKS_Y = 850;
@@ -23,7 +24,7 @@ export class Scene {
     static DESTROY_LEFT = 1000;
     static PIXELS_PER_METER = 100;
     static MONEY_INITIAL = 50;
-    static BIOME_SCALING = 1.1;
+    static BIOME_SCALING = 1.2;
 
     constructor(mouse, width, height) {
         this.width = width;
@@ -290,6 +291,12 @@ export class Scene {
                 break;
             case 2:
                 this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
+
+                break;
+            case 3:
+                this.scenery = new SceneryClouds(this.width, this.height, this.sceneryLength);
+
+                break;
         }
 
 

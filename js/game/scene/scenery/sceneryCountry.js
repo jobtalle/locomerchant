@@ -7,6 +7,10 @@ import {ItemHaystack} from "../item/itemHaystack.js";
 import {ItemMilk} from "../item/itemMilk.js";
 import {ItemWine} from "../item/itemWine.js";
 import {ItemWatermelon} from "../item/itemWatermelon.js";
+import {Buying} from "./catalogue/buying.js";
+import {ItemBlueberries} from "../item/itemBlueberries.js";
+import {ItemBread} from "../item/itemBread.js";
+import {ItemBaguette} from "../item/ItemBaguette.js";
 
 export class SceneryCountry extends Scenery {
     constructor(width, height, length) {
@@ -125,7 +129,8 @@ export class SceneryCountry extends Scenery {
                     new ForSale(ItemWatermelon, 5, 3, 6)
                 ],
                 [
-
+                    new Buying(ItemBread, 25),
+                    new Buying(ItemBaguette, 25)
                 ]
             ));
     }

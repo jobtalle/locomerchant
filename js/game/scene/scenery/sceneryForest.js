@@ -12,6 +12,8 @@ import {ItemBlueberries} from "../item/itemBlueberries.js";
 import {ItemFlower} from "../item/itemFlower.js";
 import {ItemPumpkin} from "../item/itemPumpkin.js";
 import {ItemMushroom} from "../item/itemMushroom.js";
+import {ItemBread} from "../item/itemBread.js";
+import {ItemBricks} from "../item/itemBricks.js";
 
 export class SceneryForest extends Scenery {
     constructor(width, height, length) {
@@ -129,7 +131,8 @@ export class SceneryForest extends Scenery {
             ],
             [
                 new Buying(ItemLog, 5),
-                new Buying(ItemCoal, 20)
+                new Buying(ItemCoal, 20),
+                new Buying(ItemBricks, 50)
             ]
         ),
         Sounds.AMB_FOREST);

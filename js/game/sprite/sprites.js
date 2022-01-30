@@ -116,6 +116,23 @@ export class Sprites {
     static BIOME_COUNTRY_8_3 = new Sprite("art/biomes/country/Layer8_03.png");
     static BIOME_COUNTRY_9_1 = new Sprite("art/biomes/country/Layer9_01.png");
 
+    static BIOME_CLOUDS_1_1 = new Sprite("art/biomes/clouds/Layer1_01.png");
+    static BIOME_CLOUDS_1_2 = new Sprite("art/biomes/clouds/Layer1_02.png");
+    static BIOME_CLOUDS_1_3 = new Sprite("art/biomes/clouds/Layer1_03.png");
+    static BIOME_CLOUDS_2_1 = new Sprite("art/biomes/clouds/Layer2_01.png");
+    static BIOME_CLOUDS_3_1 = new Sprite("art/biomes/clouds/Layer3_01.png");
+    static BIOME_CLOUDS_3_2 = new Sprite("art/biomes/clouds/Layer3_02.png");
+    static BIOME_CLOUDS_3_3 = new Sprite("art/biomes/clouds/Layer3_03.png");
+    static BIOME_CLOUDS_3_4 = new Sprite("art/biomes/clouds/Layer3_04.png");
+    static BIOME_CLOUDS_3_5 = new Sprite("art/biomes/clouds/Layer3_05.png");
+    static BIOME_CLOUDS_3_6 = new Sprite("art/biomes/clouds/Layer3_06.png");
+    static BIOME_CLOUDS_3_7 = new Sprite("art/biomes/clouds/Layer3_07.png");
+    static BIOME_CLOUDS_4_1 = new Sprite("art/biomes/clouds/Layer4_01.png");
+    static BIOME_CLOUDS_5_1 = new Sprite("art/biomes/clouds/Layer5_01.png");
+    static BIOME_CLOUDS_6_1 = new Sprite("art/biomes/clouds/Layer6_01.png");
+    static BIOME_CLOUDS_6_2 = new Sprite("art/biomes/clouds/Layer6_02.png");
+    static BIOME_CLOUDS_7_1 = new Sprite("art/biomes/clouds/Layer7_01.png");
+
     static TUNNEL = new Sprite("art/ui/Tunnel_0001.png");
 
     static WOODEN_TOY = [new Sprite("art/items/A_Village_s_Wooden-Toy.png")];
