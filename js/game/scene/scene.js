@@ -327,7 +327,7 @@ export class Scene {
         for (let item = this.items.length; item-- > 0;) {
             if (this.items[item] === null) {
                 this.items.splice(item, 1);
-                console.log("catched");
+
                 continue;
             }
             if (this.items[item].update() ||

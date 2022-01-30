@@ -61,6 +61,9 @@ export class Locomotive {
         this.smoke = new Smoke(new Vector(
             this.wheelSmallLeft.position.x + 28,
             this.wheelSmallLeft.position.y - 430));
+        this.headAngle = 0;
+        this.headAnglePrevious = 0;
+        this.headAngleSpeed = 0;
 
         const parts = [
             this.furnace = Matter.Bodies.rectangle(
@@ -145,7 +148,9 @@ export class Locomotive {
     }
 
     accelerate(delta) {
-
+        this.headAngleSpeed *= .9;
+        this.headAngleSpeed -= this.headAngle * .05;
+        this.headAngleSpeed -= delta * .05;
     }
 
     furnaceBurning() {
@@ -222,6 +227,9 @@ export class Locomotive {
     }
 
     update() {
+        this.headAnglePrevious = this.headAngle;
+        this.headAngle += this.headAngleSpeed;
+
         this.wheelDriveLeft.update();
         this.wheelDriveRight.update();
         this.wheelSmallLeft.update();
@@ -302,6 +310,15 @@ export class Locomotive {
         context.restore();
 
         Sprites.LOCOMOTIVE_LEVER_1.draw(context, this.leverPosition.x - 50, this.leverPosition.y - 45);
+
+        context.save();
+        context.translate(30, 0);
+        context.rotate(Utils.lerp(this.headAnglePrevious, this.headAngle, time));
+
+        Sprites.LOCOMOTIVE_HEAD.draw(context, -33, -58);
+
+        context.restore();
+
         context.restore();
 
         this.wheelDriveLeft.render(context, time);

@@ -19,6 +19,7 @@ export class Sprites {
     static LOCOMOTIVE_CYLINDER = new Sprite("art/train/Train_engine_steam_system_1.png");
     static LOCOMOTIVE_LEVER_1 = new Sprite("art/train/Train_Lever_1.png");
     static LOCOMOTIVE_LEVER_2 = new Sprite("art/train/Train_Lever_2.png");
+    static LOCOMOTIVE_HEAD = new Sprite("art/train/Train_driverhead.png");
 
     static COAL = [
         new Sprite("art/items/A_Common_r_coal_01.png"),
