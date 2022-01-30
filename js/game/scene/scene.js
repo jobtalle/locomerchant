@@ -13,6 +13,7 @@ import {Particles} from "./particles/particles.js";
 import {Particle} from "./particles/particle.js";
 import {Sprites} from "../sprite/sprites.js";
 import {SceneryVillage} from "./scenery/sceneryVillage.js";
+import {Music} from "../music.js";
 
 export class Scene {
     static TRACKS_Y = 850;
@@ -42,6 +43,7 @@ export class Scene {
         this.particles = new Particles();
         this.tunnelX = -1;
         this.tunneling = false;
+        this.music = new Music();
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -339,6 +341,8 @@ export class Scene {
     }
 
     update(delta) {
+        this.music.setVelocity(this.locomotive.velocity);
+
         Matter.Engine.update(this.engine, delta);
 
         let acceleration = -this.locomotive.velocity;
