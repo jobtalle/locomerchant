@@ -201,6 +201,8 @@ export class Scene {
         this.money = Scene.MONEY_INITIAL;
 
         this.locomotive.reset();
+        this.seller?.destroy();
+        this.seller = null;
 
         this.initialize();
     }
@@ -323,6 +325,11 @@ export class Scene {
         this.itemDragging?.update();
 
         for (let item = this.items.length; item-- > 0;) {
+            if (this.items[item] === null) {
+                this.items.splice(item, 1);
+                console.log("catched");
+                continue;
+            }
             if (this.items[item].update() ||
                 this.items[item].body.position.y > this.height + Scene.DESTROY_UNDER ||
                 this.items[item].body.position.y < -Scene.DESTROY_ABOVE ||

@@ -9,7 +9,7 @@ export class Seller {
         this.buying = buying;
         this.body = Matter.Bodies.rectangle(position.x, position.y, 574, 46, {
             collisionFilter: {
-                category: 2
+                category: 4
             },
             isStatic: true
         });
