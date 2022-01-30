@@ -6,6 +6,7 @@ import {ItemLog} from "./item/itemLog.js";
 import {Sounds} from "../audio/sounds.js";
 import {ItemTwig} from "./item/itemTwig.js";
 import {SceneryForest} from "./scenery/sceneryForest.js";
+import {Utils} from "../../math/utils.js";
 
 export class Scene {
     static TRACKS_Y = 850;
@@ -25,10 +26,11 @@ export class Scene {
         this.items = [];
         this.itemDragging = null;
         this.pulling = 0;
-        this.sceneryLength = 100 * Scene.PIXELS_PER_METER;
+        this.sceneryLength = 50 * Scene.PIXELS_PER_METER;
         this.scenery = new SceneryForest(width, height, this.sceneryLength);
         this.money = Scene.MONEY_INITIAL;
         this.distance = 0;
+        this.itemsForSale = [];
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -110,17 +112,6 @@ export class Scene {
         });
 
         this.initialize();
-
-        // this.engineRenderer = Matter.Render.create({
-        //     element: document.getElementById("gui"),
-        //     engine: this.engine,
-        //     options: {
-        //         width: width,
-        //         height: height
-        //     }
-        // });
-        //
-        // Matter.Render.run(this.engineRenderer);
     }
 
     reset() {
@@ -182,7 +173,29 @@ export class Scene {
     }
 
     move(delta) {
-        this.scenery.move(delta);
+        if (this.scenery.move(delta)) {
+            const sellWidth = 1500;
+            const sellY = 900;
+            const sellItems = [];
+
+            for (const selling of this.scenery.catalogue.selling) {
+                const count = Math.round(Utils.lerp(selling.min, selling.max, Math.random()));
+
+                for (let i = 0; i < count; ++i)
+                    sellItems.push(selling);
+            }
+
+            for (let i = 0; i < sellItems.length; ++i) {
+                const x = 32 + this.width + i * sellWidth / (sellItems.length - 1);
+                const c = sellItems[i].f;
+                const item = new c(this.engine, new Vector(x, sellY));
+
+                item.body.isSleeping = true;
+
+                this.items.push(item);
+                this.itemsForSale.push(item);
+            }
+        }
     }
 
     findItem(body) {

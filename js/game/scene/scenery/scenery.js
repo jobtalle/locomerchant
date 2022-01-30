@@ -16,6 +16,7 @@ export class Scenery {
         this.layersFront = [];
         this.moved = 0;
         this.pStation = this.length * .5;
+        this.pItemsForSale = this.pStation + 100;
         this.pSign100 = this.pStation - 100 * Scene.PIXELS_PER_METER;
         this.pSign200 = this.pStation - 200 * Scene.PIXELS_PER_METER;
         this.pSign500 = this.pStation - 500 * Scene.PIXELS_PER_METER;
@@ -88,6 +89,8 @@ export class Scenery {
             this.layersBack.sort((a, b) => a.depth - b.depth);
             this.layersFront.sort((a, b) => b.depth - a.depth);
         }
+
+        return previous < this.pItemsForSale && this.moved > this.pItemsForSale;
     }
 
     update() {

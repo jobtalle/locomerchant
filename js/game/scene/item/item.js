@@ -12,8 +12,7 @@ export class Item {
         height,
         fuel = 15,
         fuelDensity = 1,
-        shape = "rectangle",
-        sleeping = false) {
+        shape = "rectangle") {
         this.engine = engine;
         this.width = width;
         this.sprites = sprites;
@@ -43,8 +42,6 @@ export class Item {
 
                 break;
         }
-
-        this.body.isSleeping = sleeping;
 
         Matter.Composite.add(engine.world, [this.body]);
     }
