@@ -49,3 +49,14 @@ body {
     font-size: 64px;
     user-select: none;
 }
+
+#restart {
+    background-image: url("art/ui/UI_Restart.png");
+    width: 599px;
+    height: 242px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    margin-top: 200px;
+    display: none;
+}

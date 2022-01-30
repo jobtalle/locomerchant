@@ -222,6 +222,8 @@ export class Scene {
         this.scenery = this.initialBiome();
 
         this.initialize();
+
+        document.getElementById("restart").style.display = "none";
     }
 
     initialize() {
@@ -448,6 +450,9 @@ export class Scene {
 
         document.getElementById("distance").innerText = Math.round(this.distance / Scene.PIXELS_PER_METER) + "m";
         document.getElementById("money").innerText = "$" + this.money;
+
+        if (this.locomotive.velocity < 5 && !this.locomotive.furnaceBurning())
+            document.getElementById("restart").style.display = "block";
     }
 
     render(context, time) {

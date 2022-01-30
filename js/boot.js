@@ -15,10 +15,7 @@ export function boot(canvas, gui, fps) {
         game.resize(canvas.width, canvas.height);
     })();
 
-    window.addEventListener("keydown", event => {
-        if (event.key === " ")
-            game.reset();
-    });
+    document.getElementById("restart").onclick = () => game.reset();
 
     const updateRate = 1 / fps;
     let lastTime = performance.now();
