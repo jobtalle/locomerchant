@@ -9,6 +9,8 @@ import {SceneryForest} from "./scenery/sceneryForest.js";
 import {Utils} from "../../math/utils.js";
 import {PriceLabel} from "./priceLabel.js";
 import {Seller} from "./seller.js";
+import {Particles} from "./particles/particles.js";
+import {Particle} from "./particles/particle.js";
 
 export class Scene {
     static TRACKS_Y = 850;
@@ -34,6 +36,7 @@ export class Scene {
         this.distance = 0;
         this.itemsForSale = [];
         this.seller = null;
+        this.particles = new Particles();
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -334,8 +337,24 @@ export class Scene {
                 this.items[item].destroy();
                 this.items.splice(item, 1);
             }
-            else
+            else {
                 Matter.Body.applyForce(this.items[item].body, this.items[item].body.position, accelerationForce);
+
+                if (this.items[item].burning && Math.random() < .4)
+                    this.particles.add(new Particle(
+                        new Vector(
+                            (Math.random() - .5) * this.items[item].width,
+                            (Math.random() - .5) * this.items[item].height).rotate(-this.items[item].body.angle).add(
+                                new Vector(
+                                    this.items[item].body.position.x,
+                                    this.items[item].body.position.y)),
+                        new Vector((Math.random() * 2 - 1) * .1, Math.random() * -5),
+                        16 * Math.random() + 8,
+                        "#e7600d",
+                        .4,
+                        .05 + Math.random() * .05
+                    ));
+            }
         }
 
         this.wagonA.move(this.locomotive.velocity);
@@ -343,6 +362,8 @@ export class Scene {
         this.locomotive.move(this.locomotive.velocity);
         this.locomotive.accelerate(acceleration);
         this.move(this.locomotive.velocity);
+
+        this.particles.update();
 
         this.distance += this.locomotive.velocity;
 
@@ -359,6 +380,8 @@ export class Scene {
 
         for (const item of this.items)
             item.render(context, time);
+
+        this.particles.render(context, time);
 
         this.wagonA.render(context, time);
         this.wagonB.render(context, time);
