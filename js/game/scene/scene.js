@@ -11,8 +11,8 @@ import {PriceLabel} from "./priceLabel.js";
 import {Seller} from "./seller.js";
 import {Particles} from "./particles/particles.js";
 import {Particle} from "./particles/particle.js";
-import {Sprite} from "../sprite/sprite.js";
 import {Sprites} from "../sprite/sprites.js";
+import {SceneryVillage} from "./scenery/sceneryVillage.js";
 
 export class Scene {
     static TRACKS_Y = 850;
@@ -21,6 +21,7 @@ export class Scene {
     static DESTROY_LEFT = 1000;
     static PIXELS_PER_METER = 100;
     static MONEY_INITIAL = 50;
+    static BIOME_SCALING = 1.1;
 
     constructor(mouse, width, height) {
         this.width = width;
@@ -32,8 +33,8 @@ export class Scene {
         this.items = [];
         this.itemDragging = null;
         this.pulling = 0;
-        this.sceneryLength = 50 * Scene.PIXELS_PER_METER;
-        this.scenery = new SceneryForest(width, height, this.sceneryLength);
+        this.sceneryLength = 300 * Scene.PIXELS_PER_METER;
+        this.scenery = new SceneryVillage(width, height, this.sceneryLength);
         this.money = Scene.MONEY_INITIAL;
         this.distance = 0;
         this.itemsForSale = [];
@@ -260,7 +261,9 @@ export class Scene {
     }
 
     nextBiome() {
-        this.scenery = new SceneryForest(this.width, this.height, 1000 * Scene.PIXELS_PER_METER);
+        this.sceneryLength *= Scene.BIOME_SCALING;
+
+        this.scenery = new SceneryForest(this.width, this.height, this.sceneryLength);
         this.scenery.initialize();
     }
 

@@ -81,5 +81,23 @@ export class Sprites {
     static BIOME_EYVIND_LAYER_F1_E = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_5.png");
     static BIOME_EYVIND_LAYER_F1_F = new Sprite("art/biomes/eyvind/Eyvind_layer2_grass_6.png");
 
+    static BIOME_VILLAGE_1_1 = new Sprite("art/biomes/village/Layer1_01.png");
+    static BIOME_VILLAGE_1_2 = new Sprite("art/biomes/village/Layer1_02.png");
+    static BIOME_VILLAGE_2_1 = new Sprite("art/biomes/village/Layer2_01.png");
+    static BIOME_VILLAGE_3_1 = new Sprite("art/biomes/village/Layer3_01.png");
+    static BIOME_VILLAGE_4_1 = new Sprite("art/biomes/village/Layer4_01.png");
+    static BIOME_VILLAGE_4_2 = new Sprite("art/biomes/village/Layer4_02.png");
+    static BIOME_VILLAGE_4_3 = new Sprite("art/biomes/village/Layer4_03.png");
+    static BIOME_VILLAGE_4_4 = new Sprite("art/biomes/village/Layer4_04.png");
+    static BIOME_VILLAGE_4_5 = new Sprite("art/biomes/village/Layer4_05.png");
+    static BIOME_VILLAGE_5_1 = new Sprite("art/biomes/village/Layer5_01.png");
+    static BIOME_VILLAGE_5_2 = new Sprite("art/biomes/village/Layer5_02.png");
+    static BIOME_VILLAGE_5_3 = new Sprite("art/biomes/village/Layer5_03.png");
+    static BIOME_VILLAGE_5_4 = new Sprite("art/biomes/village/Layer5_04.png");
+    static BIOME_VILLAGE_6_1 = new Sprite("art/biomes/village/Layer6_01.png");
+    static BIOME_VILLAGE_6_2 = new Sprite("art/biomes/village/Layer6_02.png");
+    static BIOME_VILLAGE_7_1 = new Sprite("art/biomes/village/Layer7_01.png");
+    static BIOME_VILLAGE_8_1 = new Sprite("art/biomes/village/Layer8_01.png");
+
     static TUNNEL = new Sprite("art/ui/Tunnel_0001.png");
 }

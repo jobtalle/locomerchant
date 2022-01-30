@@ -26,7 +26,7 @@ export class Scenery {
     }
 
     initialize() {
-        const moves = 500;
+        const moves = 1000;
 
         for (let move = 0; move < moves; ++move)
             this.move(Scenery.INITIALIZE_DELTA);
