@@ -24,7 +24,7 @@ export class Scene {
     static DESTROY_LEFT = 1000;
     static PIXELS_PER_METER = 100;
     static MONEY_INITIAL = 150;
-    static BIOME_SCALING = 1.05;
+    static BIOME_SCALING = 1.1;
     static WAGON_RIGHT = new Vector(190, 60);
     static WAGON_LEFT = new Vector(-190, 60);
     static LOCOMOTIVE_LEFT = new Vector(-320, 110);
