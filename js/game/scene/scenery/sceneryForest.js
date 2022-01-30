@@ -7,6 +7,7 @@ import {ItemLog} from "../item/itemLog.js";
 import {ItemCoal} from "../item/itemCoal.js";
 import {Buying} from "./catalogue/buying.js";
 import {ItemTwig} from "../item/itemTwig.js";
+import {Sounds} from "../../audio/sounds.js";
 
 export class SceneryForest extends Scenery {
     constructor(width, height, length) {
@@ -122,6 +123,7 @@ export class SceneryForest extends Scenery {
                 new Buying(ItemLog, 5),
                 new Buying(ItemCoal, 20)
             ]
-        ));
+        ),
+        Sounds.AMB_FOREST);
     }
 }

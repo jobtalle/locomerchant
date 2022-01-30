@@ -9,7 +9,7 @@ export class Music {
 
     setVelocity(velocity) {
         Sounds.MUSIC_0.setVolume(Math.min(1, velocity / 20));
-        Sounds.MUSIC_1.setVolume(Math.max(0, Math.min(1, (velocity - 30) / 30)));
-        Sounds.MUSIC_2.setVolume(Math.max(0, Math.min(1, (velocity - 50) / 30)));
+        Sounds.MUSIC_1.setVolume(Math.sqrt(Math.max(0, Math.min(1, (velocity - 30) / 30))));
+        Sounds.MUSIC_2.setVolume(Math.sqrt(Math.max(0, Math.min(1, (velocity - 50) / 30))));
     }
 }

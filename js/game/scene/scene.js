@@ -263,6 +263,8 @@ export class Scene {
     }
 
     nextBiome() {
+        this.scenery.destroy();
+
         this.sceneryLength *= Scene.BIOME_SCALING;
 
         this.scenery = new SceneryForest(this.width, this.height, this.sceneryLength);

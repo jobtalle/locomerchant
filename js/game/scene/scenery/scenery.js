@@ -5,7 +5,7 @@ import {Sprites} from "../../sprite/sprites.js";
 export class Scenery {
     static INITIALIZE_DELTA = 50;
 
-    constructor(width, height, length, background, spawners, catalogue) {
+    constructor(width, height, length, background, spawners, catalogue, ambient) {
         this.width = width;
         this.height = height;
         this.length = length;
@@ -23,6 +23,7 @@ export class Scenery {
         this.pSign500 = this.pStation - 500 * Scene.PIXELS_PER_METER;
         this.stationWidth = 3000;
         this.stationClearance = 300;
+        this.ambient = ambient;
     }
 
     initialize() {
@@ -32,6 +33,9 @@ export class Scenery {
             this.move(Scenery.INITIALIZE_DELTA);
 
         this.moved = 0;
+
+        this.ambient.setVolume(1);
+        this.ambient.play();
     }
 
     move(delta) {
@@ -121,5 +125,9 @@ export class Scenery {
     renderForeground(context, time) {
         for (let layer = 0, layerCount = this.layersFront.length; layer < layerCount; ++layer)
             this.layersFront[layer].render(context, time);
+    }
+
+    destroy() {
+        this.ambient.stop();
     }
 }

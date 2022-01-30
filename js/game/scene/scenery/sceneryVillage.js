@@ -2,6 +2,7 @@ import {Scenery} from "./scenery.js";
 import {Sprites} from "../../sprite/sprites.js";
 import {Catalogue} from "./catalogue/catalogue.js";
 import {LayerSpawner} from "./layer/layerSpawner.js";
+import {Sounds} from "../../audio/sounds.js";
 
 export class SceneryVillage extends Scenery {
     constructor(width, height, length) {
@@ -127,6 +128,7 @@ export class SceneryVillage extends Scenery {
                 [
 
                 ]
-            ));
+            ),
+            Sounds.AMB_VILLAGE);
     }
 }
