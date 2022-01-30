@@ -101,7 +101,7 @@ export class SceneryCountry extends Scenery {
                     660,
                     163,
                     -.2,
-                    360),
+                    330),
                 new LayerSpawner(
                     Sprites.BIOME_COUNTRY_1_1,
                     483,

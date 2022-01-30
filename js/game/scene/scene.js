@@ -267,7 +267,7 @@ export class Scene {
     }
 
     initialBiome() {
-        return new SceneryCountry(this.width, this.height, this.sceneryLength);
+        return new SceneryForest(this.width, this.height, this.sceneryLength);
     }
 
     nextBiome() {
@@ -276,7 +276,7 @@ export class Scene {
         this.sceneryLength *= Scene.BIOME_SCALING;
 
 
-        const choice = Math.floor(Math.pow(Math.random(), 2) * 4);
+        const choice = Math.floor(Math.pow(Math.random(), 1.3) * 4);
 
         switch (choice) {
             default:

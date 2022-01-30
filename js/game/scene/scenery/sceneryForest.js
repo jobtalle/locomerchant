@@ -8,6 +8,10 @@ import {ItemCoal} from "../item/itemCoal.js";
 import {Buying} from "./catalogue/buying.js";
 import {ItemTwig} from "../item/itemTwig.js";
 import {Sounds} from "../../audio/sounds.js";
+import {ItemBlueberries} from "../item/itemBlueberries.js";
+import {ItemFlower} from "../item/itemFlower.js";
+import {ItemPumpkin} from "../item/itemPumpkin.js";
+import {ItemMushroom} from "../item/itemMushroom.js";
 
 export class SceneryForest extends Scenery {
     constructor(width, height, length) {
@@ -115,9 +119,13 @@ export class SceneryForest extends Scenery {
         ],
         new Catalogue(
             [
-                new ForSale(ItemTwig, 5, 10, 20),
+                new ForSale(ItemTwig, 5, 2, 3),
                 new ForSale(ItemLog, 10, 5, 15),
-                new ForSale(ItemCoal, 20, 3, 6)
+                new ForSale(ItemCoal, 20, 3, 6),
+                new ForSale(ItemBlueberries, 10, 0, 2),
+                new ForSale(ItemFlower, 10, 0, 3),
+                new ForSale(ItemPumpkin, 15, 0, 3),
+                new ForSale(ItemMushroom, 5, 0, 4)
             ],
             [
                 new Buying(ItemLog, 5),
