@@ -120,8 +120,7 @@ export class SceneryForest extends Scenery {
             ],
             [
                 new Buying(ItemLog, 5),
-                new Buying(ItemCoal, 20),
-                new Buying()
+                new Buying(ItemCoal, 20)
             ]
         ));
     }

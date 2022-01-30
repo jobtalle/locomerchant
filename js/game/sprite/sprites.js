@@ -57,6 +57,7 @@ export class Sprites {
     static STATION_FOREGROUND = new Sprite("art/station/Trainstation_Layer2_foreground.png");
 
     static SCALE_PLATE = new Sprite("art/station/Trainstation_Layer1_scales_02.png");
+    static SCALE_STRUCTURE = new Sprite("art/station/Trainstation_Scale.png");
 
     static BIOME_EYVIND_BACKGROUND = new Sprite("art/biomes/eyvind/Eyvind_Layer7_BG.png");
     static BIOME_EYVIND_LAYER_B1 = [

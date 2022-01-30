@@ -42,4 +42,5 @@ export class Sounds {
         "audio/Buy-004.wav",
         "audio/Buy-005.wav"
     ]);
+    static SELL = new SFX(["audio/Sell.wav"]);
 }

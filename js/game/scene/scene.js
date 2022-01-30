@@ -52,6 +52,12 @@ export class Scene {
 
                 mouseConstraint.collisionFilter.mask = 0x04;
             }
+
+            if (this.seller) {
+                if (event.mouse.position.y > this.seller.body.position.y &&
+                    Math.abs(event.mouse.position.x - this.seller.body.position.x) < 200)
+                    this.seller.sell(this);
+            }
         });
         Matter.Events.on(mouseConstraint, "mousemove", event => {
             switch (this.pulling) {
@@ -59,6 +65,15 @@ export class Scene {
                     this.locomotive.pullLever(event.mouse.position);
 
                     break;
+            }
+
+            if (this.seller) {
+                if (event.mouse.position.y > this.seller.body.position.y &&
+                    Math.abs(event.mouse.position.x - this.seller.body.position.x) < 200) {
+                    document.body.style.cursor = "pointer";
+                }
+                else
+                    document.body.style.cursor = "auto";
             }
         });
         Matter.Events.on(mouseConstraint, "mouseup", () => {
@@ -74,21 +89,24 @@ export class Scene {
             Sounds.GRAB.play();
 
             this.itemDragging = this.findItem(event.body);
-            if (this.itemDragging.label) {
-                this.money -= this.itemDragging.label.price;
-                this.itemDragging.label = null;
-                Sounds.BUY.play();
+
+            if (this.itemDragging) {
+                if (this.itemDragging.label) {
+                    this.money -= this.itemDragging.label.price;
+                    this.itemDragging.label = null;
+                    Sounds.BUY.play();
+                }
+                if (this.itemsForSale.indexOf(this.itemDragging) !== -1)
+                    this.itemsForSale.splice(this.itemsForSale.indexOf(this.itemDragging), 1);
+                this.items.splice(this.items.indexOf(this.itemDragging), 1);
+
+                this.seller?.removeItem(this.itemDragging);
+
+                this.updateForSale();
+
+                if (this.itemDragging.locomotive)
+                    this.itemDragging.leaveFurnace();
             }
-            if (this.itemsForSale.indexOf(this.itemDragging) !== -1)
-                this.itemsForSale.splice(this.itemsForSale.indexOf(this.itemDragging), 1);
-            this.items.splice(this.items.indexOf(this.itemDragging), 1);
-
-            this.seller?.removeItem(this.itemDragging);
-
-            this.updateForSale();
-
-            if (this.itemDragging.locomotive)
-                this.itemDragging.leaveFurnace();
         });
         Matter.Events.on(mouseConstraint, "enddrag", event => {
             event.body.collisionFilter.category = 2;
@@ -266,7 +284,7 @@ export class Scene {
         this.seller?.move(delta);
 
         if (sm < this.scenery.pScale && this.scenery.moved > this.scenery.pScale) {
-            this.seller = new Seller(this.engine, new Vector(this.width + 500, 1030), this.scenery.catalogue.buying);
+            this.seller = new Seller(this.engine, new Vector(this.width + 500, 970), this.scenery.catalogue.buying);
         }
 
         if (this.seller && this.seller.body.position.x < -3000) {

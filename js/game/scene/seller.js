@@ -1,6 +1,7 @@
 import {Sprites} from "../sprite/sprites.js";
 import {Utils} from "../../math/utils.js";
 import {Vector} from "../../math/vector.js";
+import {Sounds} from "../audio/sounds.js";
 
 export class Seller {
     constructor(engine, position, buying) {
@@ -19,6 +20,24 @@ export class Seller {
         Matter.Composite.add(engine.world, [this.body]);
     }
 
+    sell(scene) {
+        if (this.price !== 0) {
+            scene.money += this.price;
+
+            for (const item of this.items) {
+                scene.items.splice(scene.items.indexOf(item), 1);
+
+                item.destroy();
+            }
+
+            this.items = [];
+
+            this.updatePrice();
+
+            Sounds.SELL.play();
+        }
+    }
+
     getPrice(item) {
         for (const buying of this.buying)
             if (item instanceof buying.f)
@@ -31,10 +50,9 @@ export class Seller {
         this.price = 0;
 
         for (const item of this.items) {
-            this.price += this.getPrice(item);
+            if (!item.burning)
+                this.price += this.getPrice(item);
         }
-
-        console.log(this.price);
     }
 
     addItem(item) {
@@ -70,7 +88,13 @@ export class Seller {
             Utils.lerp(this.body.positionPrev.y, this.body.position.y, time));
         context.rotate(Utils.lerp(this.body.anglePrev, this.body.angle, time));
 
+        Sprites.SCALE_STRUCTURE.draw(context, -574 * .5 - 49, -46 * .7);
         Sprites.SCALE_PLATE.draw(context, -574 * .5, -46 * .7);
+
+        context.font = "50px Times New Roman";
+        context.textAlign = "center";
+        context.fillStyle = "black";
+        context.fillText("$" + this.price, 0, 85);
 
         context.restore();
     }
