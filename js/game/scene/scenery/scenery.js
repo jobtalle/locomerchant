@@ -5,7 +5,7 @@ import {Sprites} from "../../sprite/sprites.js";
 export class Scenery {
     static INITIALIZE_DELTA = 50;
 
-    constructor(width, height, length, background, spawners, catalogue, ambient) {
+    constructor(width, height, length, background, spawners, catalogue, ambient = null) {
         this.width = width;
         this.height = height;
         this.length = length;
@@ -34,8 +34,8 @@ export class Scenery {
 
         this.moved = 0;
 
-        this.ambient.setVolume(1);
-        this.ambient.play();
+        this.ambient?.setVolume(1);
+        this.ambient?.play();
     }
 
     move(delta) {
@@ -128,6 +128,6 @@ export class Scenery {
     }
 
     destroy() {
-        this.ambient.stop();
+        this.ambient?.stop();
     }
 }

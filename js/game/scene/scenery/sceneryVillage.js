@@ -3,6 +3,15 @@ import {Sprites} from "../../sprite/sprites.js";
 import {Catalogue} from "./catalogue/catalogue.js";
 import {LayerSpawner} from "./layer/layerSpawner.js";
 import {Sounds} from "../../audio/sounds.js";
+import {Buying} from "./catalogue/buying.js";
+import {ItemTwig} from "../item/itemTwig.js";
+import {ItemLog} from "../item/itemLog.js";
+import {ItemCoal} from "../item/itemCoal.js";
+import {ForSale} from "./catalogue/forSale.js";
+import {ItemWoodenToy} from "../item/itemWoodenToy.js";
+import {ItemBaguette} from "../item/ItemBaguette.js";
+import {ItemBricks} from "../item/itemBricks.js";
+import {ItemBread} from "../item/itemBread.js";
 
 export class SceneryVillage extends Scenery {
     constructor(width, height, length) {
@@ -123,10 +132,15 @@ export class SceneryVillage extends Scenery {
             ],
             new Catalogue(
                 [
-
+                    new ForSale(ItemWoodenToy, 100, 0, 2),
+                    new ForSale(ItemBaguette, 10, 4, 6),
+                    new ForSale(ItemBricks, 20, 6, 10),
+                    new ForSale(ItemBread, 10, 4, 6)
                 ],
                 [
-
+                    new Buying(ItemTwig, 7),
+                    new Buying(ItemLog, 20),
+                    new Buying(ItemCoal, 35)
                 ]
             ),
             Sounds.AMB_VILLAGE);

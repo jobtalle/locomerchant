@@ -100,4 +100,9 @@ export class Sprites {
     static BIOME_VILLAGE_8_1 = new Sprite("art/biomes/village/Layer8_01.png");
 
     static TUNNEL = new Sprite("art/ui/Tunnel_0001.png");
+
+    static WOODEN_TOY = [new Sprite("art/items/A_Village_s_Wooden-Toy.png")];
+    static BRICKS = [new Sprite("art/items/A_Village_s_bricks.png")];
+    static BREAD = [new Sprite("art/items/A_Village_s_bread.png")];
+    static BAGUETTE = [new Sprite("art/items/A_Village_s_baguette.png")];
 }
