@@ -45,9 +45,6 @@ export class Sounds {
     static SELL = new SFX(["audio/Sell.wav"]);
     static LEVER_GRAB = new SFX(["audio/Lever_Grab.wav"]);
     static LEVER_RELEASE = new SFX(["audio/Lever_Release.wav"]);
-    static MUSIC_0 = new Loop("audio/MX_Base_LP.mp3");
-    static MUSIC_1 = new Loop("audio/MX_Cruising_LP.mp3");
-    static MUSIC_2 = new Loop("audio/MX_Speeding_LP.mp3");
     static AMB_FOREST = new Loop("audio/Biome_Forest_LP.mp3");
     static AMB_VILLAGE = new Loop("audio/Biome_Village_LP.mp3");
 }
