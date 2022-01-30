@@ -216,6 +216,9 @@ export class Scene {
         this.seller = null;
         this.tunneling = 0;
 
+        this.sceneryLength = 300 * Scene.PIXELS_PER_METER;
+        this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
+
         this.initialize();
     }
 
@@ -306,7 +309,7 @@ export class Scene {
                 this.items.push(item);
                 this.itemsForSale.push(item);
 
-                item.label = new PriceLabel(sellItems[i].price, sellItems[i].price <= this.money);
+                item.label = new PriceLabel(sellItems[i].price, true);
             }
         }
 
@@ -316,6 +319,8 @@ export class Scene {
             Matter.Body.setPosition(item.body, new Vector(item.body.position.x - delta, item.body.position.y));
             item.body.positionPrev.x = xp;
         }
+
+        this.updateForSale();
 
         this.seller?.move(delta);
 
