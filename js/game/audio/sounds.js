@@ -43,4 +43,6 @@ export class Sounds {
         "audio/Buy-005.wav"
     ]);
     static SELL = new SFX(["audio/Sell.wav"]);
+    static LEVER_GRAB = new SFX(["audio/Lever_Grab.wav"]);
+    static LEVER_RELEASE = new SFX(["audio/Lever_Release.wav"]);
 }

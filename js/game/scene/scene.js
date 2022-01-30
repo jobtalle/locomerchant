@@ -53,6 +53,8 @@ export class Scene {
             if (Matter.Query.point([this.locomotive.cabin], event.mouse.position).length) {
                 this.pulling = 1;
 
+                Sounds.LEVER_GRAB.play();
+
                 mouseConstraint.collisionFilter.mask = 0x04;
             }
 
@@ -82,6 +84,8 @@ export class Scene {
         Matter.Events.on(mouseConstraint, "mouseup", () => {
             if (this.pulling) {
                 mouseConstraint.collisionFilter.mask = 0x02;
+
+                Sounds.LEVER_RELEASE.play();
 
                 this.pulling = 0;
             }
