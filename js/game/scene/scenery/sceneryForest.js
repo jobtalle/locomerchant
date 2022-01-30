@@ -134,9 +134,9 @@ export class SceneryForest extends Scenery {
                 new Buying(ItemLog, 5),
                 new Buying(ItemCoal, 20),
                 new Buying(ItemBricks, 50),
-                new Buying(ItemBread, 25),
-                new Buying(ItemBaguette, 25),
-                new Buying(ItemBricks, 50)
+                new Buying(ItemBread, 20),
+                new Buying(ItemBaguette, 20),
+                new Buying(ItemBricks, 40)
             ]
         ),
         Sounds.AMB_FOREST);

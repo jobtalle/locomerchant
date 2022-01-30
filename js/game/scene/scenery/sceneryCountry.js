@@ -130,9 +130,9 @@ export class SceneryCountry extends Scenery {
                     new ForSale(ItemWatermelon, 5, 3, 6)
                 ],
                 [
-                    new Buying(ItemBread, 25),
-                    new Buying(ItemBaguette, 25),
-                    new Buying(ItemBricks, 50)
+                    new Buying(ItemBread, 20),
+                    new Buying(ItemBaguette, 20),
+                    new Buying(ItemBricks, 40)
                 ]
             ));
     }

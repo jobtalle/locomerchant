@@ -56,15 +56,15 @@ export class Scenery {
 
         if (previous < this.pSign500 && this.moved > this.pSign500)
             newLayers.push(new Layer(this.width, this.height - 724, 284, 724,
-                Sprites.STATION_SIGN_500, -.2));
+                Sprites.STATION_SIGN_500, -.05));
 
         if (previous < this.pSign200 && this.moved > this.pSign200)
             newLayers.push(new Layer(this.width, this.height - 724, 284, 724,
-                Sprites.STATION_SIGN_200, -.2));
+                Sprites.STATION_SIGN_200, -.05));
 
         if (previous < this.pSign100 && this.moved > this.pSign100)
             newLayers.push(new Layer(this.width, this.height - 724, 284, 724,
-                Sprites.STATION_SIGN_100, -.2));
+                Sprites.STATION_SIGN_100, -.05));
 
         const exceptions = [];
 

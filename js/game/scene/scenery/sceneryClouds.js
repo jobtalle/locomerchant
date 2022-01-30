@@ -129,8 +129,8 @@ export class SceneryClouds extends Scenery {
                 [
                     new Buying(ItemBread, 25),
                     new Buying(ItemBaguette, 25),
-                    new Buying(ItemWoodenToy, 500),
-                    new Buying(ItemBricks, 50)
+                    new Buying(ItemWoodenToy, 300),
+                    new Buying(ItemBricks, 40)
                 ]
             ));
     }
