@@ -2,13 +2,18 @@ export class PriceLabel {
     static WIDTH = 90;
     static HEIGHT = 40;
 
-    constructor(price) {
+    constructor(price, afford) {
         this.canvas = document.createElement("canvas");
         this.canvas.width = PriceLabel.WIDTH;
         this.canvas.height = PriceLabel.HEIGHT;
         this.angle = Math.random() * Math.PI * -.35;
         this.price = price;
+        this.afford = afford;
 
+        this.repaint();
+    }
+
+    repaint() {
         const context = this.canvas.getContext("2d");
 
         context.fillStyle = "#c9a990";
@@ -21,9 +26,9 @@ export class PriceLabel {
         context.closePath();
         context.fill();
 
-        context.fillStyle = "black";
+        context.fillStyle = this.afford ? "black" : "red";
         context.font = "40px pica";
-        context.fillText("$" + price, PriceLabel.HEIGHT * .5, PriceLabel.HEIGHT * .5 + 10);
+        context.fillText("$" + this.price, PriceLabel.HEIGHT * .5, PriceLabel.HEIGHT * .5 + 10);
     }
 
     draw(context, x, y) {

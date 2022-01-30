@@ -15,7 +15,7 @@ export class Scene {
     static DESTROY_ABOVE = 1500;
     static DESTROY_LEFT = 1000;
     static PIXELS_PER_METER = 100;
-    static MONEY_INITIAL = 200;
+    static MONEY_INITIAL = 50;
 
     constructor(mouse, width, height) {
         this.width = width;
@@ -79,6 +79,8 @@ export class Scene {
             this.itemsForSale.splice(this.itemsForSale.indexOf(this.itemDragging), 1);
             this.items.splice(this.items.indexOf(this.itemDragging), 1);
 
+            this.updateForSale();
+
             if (this.itemDragging.locomotive)
                 this.itemDragging.leaveFurnace();
         });
@@ -118,6 +120,23 @@ export class Scene {
         });
 
         this.initialize();
+    }
+
+    updateForSale() {
+        for (const item of this.itemsForSale) {
+            if (item.label.price > this.money) {
+                item.label.afford = false;
+                item.body.isSleeping = true;
+                item.body.collisionFilter.group = -1;
+                item.label.repaint();
+            }
+            else {
+                item.body.collisionFilter.group = 0;
+                item.body.isSleeping = true;
+                item.label.afford = true;
+                item.label.repaint();
+            }
+        }
     }
 
     reset() {
@@ -180,7 +199,7 @@ export class Scene {
 
     move(delta) {
         if (this.scenery.move(delta)) {
-            const sellWidth = 1500;
+            const sellWidth = 1700;
             const sellY = 950;
             const sellItems = [];
 
@@ -194,14 +213,14 @@ export class Scene {
             for (let i = 0; i < sellItems.length; ++i) {
                 const x = 32 + this.width + sellWidth * (1 - i / (sellItems.length - 1));
                 const c = sellItems[i].f;
-                const item = new c(this.engine, new Vector(x, sellY));
+                const item = new c(this.engine, new Vector(x, sellY + (i & 1) * 25));
 
                 item.body.isSleeping = true;
 
                 this.items.push(item);
                 this.itemsForSale.push(item);
 
-                item.label = new PriceLabel(sellItems[i].price);
+                item.label = new PriceLabel(sellItems[i].price, sellItems[i].price <= this.money);
             }
         }
 
