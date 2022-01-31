@@ -131,8 +131,8 @@ export class SceneryForest extends Scenery {
                 new ForSale(ItemMushroom, 5, 0, 3)
             ],
             [
-                new Buying(ItemLog, 5),
-                new Buying(ItemCoal, 25),
+                new Buying(ItemLog, 3),
+                new Buying(ItemCoal, 18),
                 new Buying(ItemBricks, 50),
                 new Buying(ItemBread, 20),
                 new Buying(ItemBaguette, 20),
