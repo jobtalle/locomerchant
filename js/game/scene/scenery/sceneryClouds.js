@@ -14,6 +14,7 @@ import {ItemBaguette} from "../item/ItemBaguette.js";
 import {ItemWoodenToy} from "../item/itemWoodenToy.js";
 import {ItemBricks} from "../item/itemBricks.js";
 import {ItemCandyStick} from "../item/itemCandyStick.js";
+import {ItemCoal} from "../item/itemCoal.js";
 
 export class SceneryClouds extends Scenery {
     constructor(width, height, length) {
@@ -127,6 +128,7 @@ export class SceneryClouds extends Scenery {
             ],
             new Catalogue(
                 [
+                    new ForSale(ItemCoal, 40, 1, 3),
                     new ForSale(ItemBall, 10, 0, 3),
                     new ForSale(ItemCandy, 10, 0, 3),
                     new ForSale(ItemLightbulb, 10, 0, 2),

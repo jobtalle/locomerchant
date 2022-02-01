@@ -146,11 +146,11 @@ export class SceneryVillage extends Scenery {
             ],
             new Catalogue(
                 [
+                    new ForSale(ItemCoal, 35, 0, 2),
                     new ForSale(ItemWoodenToy, 100, 0, 2),
                     new ForSale(ItemBaguette, 10, 1, 6),
                     new ForSale(ItemBricks, 20, 2, 4),
-                    new ForSale(ItemBread, 10, 1, 4),
-                    new ForSale(ItemCoal, 35, 1, 3)
+                    new ForSale(ItemBread, 10, 1, 4)
                 ],
                 [
                     new Buying(ItemTwig, 7),
