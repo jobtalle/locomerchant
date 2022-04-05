@@ -52,6 +52,7 @@ export class Scene {
         this.biomesSinceTown = 2;
         this.lastChoice = 1;
         this.tutoralEnded = false;
+        this.triggerTown = true;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -286,11 +287,12 @@ export class Scene {
 
         this.sceneryLength *= Scene.BIOME_SCALING;
 
-        if (this.biomesSinceTown > 3 && this.lastChoice !== 0) {
+        if (this.triggerTown || (this.biomesSinceTown > 3 && this.lastChoice !== 0)) {
             this.scenery = new SceneryVillage(this.width, this.height, this.sceneryLength);
 
             this.biomesSinceTown = 0;
             this.lastChoice = 0;
+            this.triggerTown = false;
         }
         else {
             const power = 1.25;
@@ -542,8 +544,7 @@ export class Scene {
 
         this.itemDragging?.render(context, time);
 
-        if (this.tunneling) {
+        if (this.tunneling)
             Sprites.TUNNEL.draw(context, this.tunnelX, 0);
-        }
     }
 }
