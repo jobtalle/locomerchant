@@ -63,6 +63,11 @@ export class Locomotive {
         this.headAngle = 0;
         this.headAnglePrevious = 0;
         this.headAngleSpeed = 0;
+        this.leverUsed = false;
+        this.brakesUsed = false;
+        this.shouldBrake = false;
+        this.highlight = false;
+        this.highlightCount = 1;
 
         const parts = [
             this.furnace = Matter.Bodies.rectangle(
@@ -134,6 +139,8 @@ export class Locomotive {
 
     initialize() {
         this.smoke.initialize();
+
+        document.getElementById("tutorial-lever").classList.add("visible");
     }
 
     reset() {
@@ -141,6 +148,10 @@ export class Locomotive {
         this.velocity = 0;
         this.heat = Locomotive.HEAT_INITIAL;
         this.leverAngle = this.leverAngleTarget = Math.PI * -.5;
+
+        document.getElementById("tutorial-lever").classList.remove("visible");
+        document.getElementById("tutorial-brake").classList.remove("visible");
+        document.getElementById("tutorial-end").classList.remove("visible");
 
         Sounds.WHEELS_ACCELERATE.stop();
         Sounds.WHEELS_BRAKE.stop();
@@ -174,6 +185,23 @@ export class Locomotive {
             angle = Math.PI * -.75;
 
         this.leverAngleTarget = angle;
+
+        if (!this.leverUsed && angle > Math.PI * -.5) {
+            this.leverUsed = true;
+
+            document.getElementById("tutorial-lever").classList.remove("visible");
+        }
+
+        if (!this.brakesUsed && this.shouldBrake && angle < Math.PI * -.5) {
+            this.brakesUsed = true;
+
+            document.getElementById("tutorial-brake").classList.remove("visible");
+
+            setTimeout(() => {
+                if (this.brakesUsed && this.leverUsed)
+                    document.getElementById("tutorial-end").classList.add("visible");
+            }, 5000);
+        }
     }
 
     updateVelocity() {
@@ -228,6 +256,11 @@ export class Locomotive {
     update() {
         this.headAnglePrevious = this.headAngle;
         this.headAngle += this.headAngleSpeed;
+
+        if (--this.highlightCount === 0) {
+            this.highlightCount = 15;
+            this.highlight = !this.highlight;
+        }
 
         this.wheelDriveLeft.update();
         this.wheelDriveRight.update();
@@ -304,7 +337,10 @@ export class Locomotive {
         context.translate(this.leverPosition.x, this.leverPosition.y);
         context.rotate(Utils.lerp(this.leverAnglePrevious, this.leverAngle, time) + Math.PI * .5);
 
-        Sprites.LOCOMOTIVE_LEVER_2.draw(context, -26, -126);
+        if (this.highlight && (!this.leverUsed || (!this.brakesUsed && this.shouldBrake)))
+            Sprites.LOCOMOTIVE_LEVER_2_HIGHLIGHT.draw(context, -26, -126);
+        else
+            Sprites.LOCOMOTIVE_LEVER_2.draw(context, -26, -126);
 
         context.restore();
 

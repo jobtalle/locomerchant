@@ -51,6 +51,7 @@ export class Scene {
         this.music = new Music();
         this.biomesSinceTown = 2;
         this.lastChoice = 1;
+        this.tutoralEnded = false;
 
         const mouseConstraint = Matter.MouseConstraint.create(this.engine, {
             mouse: mouse,
@@ -470,6 +471,18 @@ export class Scene {
         this.particles.update();
 
         this.distance += this.locomotive.velocity;
+
+        if (!this.locomotive.shouldBrake && this.distance > 10000) {
+            document.getElementById("tutorial-brake").classList.add("visible");
+
+            this.locomotive.shouldBrake = true;
+        }
+
+        if (!this.tutoralEnded && this.distance > 20000) {
+            this.tutoralEnded = true;
+
+            document.getElementById("tutorial-end").classList.remove("visible");
+        }
 
         document.getElementById("distance").innerText = Math.round(this.distance / Scene.PIXELS_PER_METER) + "m";
         document.getElementById("money").innerText = "$" + this.money;
